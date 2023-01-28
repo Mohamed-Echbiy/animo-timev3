@@ -1,12 +1,35 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require("tailwindcss/colors");
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-    './app/**/*.{js,ts,jsx,tsx}',
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: colors.yellow,
+        secondary: colors.red,
+      },
+      maxWidth: {
+        "8xl": "1520px",
+      },
+      spacing: {
+        section: "3rem",
+      },
+      fontSize: {
+        subHead: "1.3rem",
+      },
+      backdropFilter: {
+        none: "none",
+        blur: "blur(20px)",
+      },
+      boxShadow: {
+        primary: "0 8px 8px 0px ",
+      },
+    },
   },
-  plugins: [],
-}
+  plugins: [require("tailwindcss-filters")],
+};
