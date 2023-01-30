@@ -7,8 +7,6 @@ import "swiper/css";
 import RecentEpCard from "./RecentEpCard";
 
 function RecentEpisodes({ data }: { data: [recent_episodes] }) {
-  console.log(data);
-
   return (
     <main className="recent_episodes_container">
       <h2 className="recent_episodes_title  text-subHead mb-4 mt-section uppercase">

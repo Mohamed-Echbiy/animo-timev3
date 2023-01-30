@@ -16,7 +16,7 @@
 .Swiper-Container .swiper-button-next,
 .Swiper-Container .swiper-button-prev {
   position: absolute;
-  top: 20px;
+  top: 32px;
   z-index: 40;
   cursor: pointer;
   display: flex;

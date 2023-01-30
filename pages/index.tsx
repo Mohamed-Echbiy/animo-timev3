@@ -43,7 +43,7 @@ export const getStaticProps = async () => {
   const req = await fetch(`${process.env.API}trending?perPage=4`);
   const res = await req.json();
   const data = await res.results;
-  const reqEp = await fetch(`${process.env.API}recent-episodes?perPage=6`);
+  const reqEp = await fetch(`${process.env.API}recent-episodes?perPage=9`);
   const resEp = await reqEp.json();
   const dataEp = await resEp.results;
   const reqPastYear = await fetch(
@@ -52,7 +52,7 @@ export const getStaticProps = async () => {
   const resPastYear = await reqPastYear.json();
   const dataPastYear = await resPastYear.results;
   const reqUpcoming = await fetch(
-    `${process.env.API}advance-search?status=NOT_YET_RELEASED"`
+    `${process.env.API}advanced-search?status=NOT_YET_RELEASED&perPage=14`
   );
   const resUpcoming = await reqUpcoming.json();
   const dataUpcoming = await resUpcoming.results;

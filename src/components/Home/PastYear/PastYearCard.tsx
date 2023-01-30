@@ -19,7 +19,7 @@ function PastYearCard({ data }: { data: anime }) {
           </span>
         </div>
       </Link>
-      <p className=" hidden hover:scale-110 ease-in duration-300 md:flex text-base items-center gap-2 absolute z-20 w-12 h-12 -top-7 right-2 bg-gray-900 text-slate-50 p-2 box-content rounded-full outline outline-yellow-500">
+      <p className=" hidden hover:scale-110 ease-in duration-300 md:flex text-base items-center gap-2 absolute z-20 w-12 h-12 -top-7 right-2 bg-gray-900 text-slate-50 p-3 box-content rounded-full outline outline-yellow-500">
         {(data.rating / 10).toPrecision(2)}
         <span className="h-4 w-4  text-primary-400">
           <StarIconMini />
