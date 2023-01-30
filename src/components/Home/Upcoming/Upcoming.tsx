@@ -18,7 +18,7 @@ function Upcoming({ data }: { data: [anime] }) {
       whileInView={{ opacity: 1 }}
       transition={{ delay: 0.5 }}
     >
-      <h3 className="uppercase text-subHead ">Upcoming</h3>
+      <h3 className="uppercase text-subHead">Upcoming</h3>
       <Swiper
         className="Swiper-Container"
         modules={[Navigation]}

@@ -22,8 +22,10 @@ function RecentEpCard({ data }: { data: recent_episodes }) {
         alt={data.title.userPreferred}
         fill={true}
         className="rounded-xl"
-        priority={true}
-        sizes="(max-width:420px) 150px , (max-width: 820) 280px, (max-width: 1200px) 300px"
+        quality={65}
+        sizes="(max-width: 768px) 50vw,
+              (max-width: 995px) 33vw,
+              25vw"
       />
       <div className="absolute text-cardSm sm:text-xs xl:text-sm flex items-center flex-col justify-between p-1 md:p-4 z-10 h-fit w-full left-0 bottom-0 bg-gray-900 backdrop-blur-md bg-opacity-70">
         <div className="anime-detail my-3">

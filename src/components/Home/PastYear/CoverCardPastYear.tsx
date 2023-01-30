@@ -14,6 +14,8 @@ export const CoverCardPastYear = ({ anime1 }: { anime1: anime }) => {
           alt={anime1.title.userPreferred}
           fill
           className="rounded-lg"
+          sizes="100vw"
+          quality={65}
         />
         <div className="details z-10 absolute w-full bg-gradient-to-r from-gray-900 to-transparent h-full">
           <FlexIt

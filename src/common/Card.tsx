@@ -18,7 +18,9 @@ function Card({ data }: { data: trending }) {
         src={data.image}
         alt={data.title.english}
         fill={true}
-        sizes="(max-width:420px) 150px , (max-width: 820) 280px, (max-width: 1200px) 300px"
+        sizes="(max-width: 768px) 50vw,
+              (max-width: 995px) 33vw,
+              25vw"
         priority={true}
       />
       <div
@@ -33,7 +35,7 @@ function Card({ data }: { data: trending }) {
         <FlexIt justify="between" items="center">
           <span>{title}</span>
           <p className="hidden md:flex items-center gap-2">
-            {data.rating / 10}
+            {(data.rating / 10).toPrecision(2)}
             <span className="h-4 w-4 text-primary-400">
               <StarIconMini />
             </span>
