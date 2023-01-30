@@ -20,7 +20,8 @@ module.exports = {
         section: "3rem",
       },
       fontSize: {
-        subHead: "1.3rem",
+        subHead: "1.6rem",
+        cardSm: "7px",
       },
       backdropFilter: {
         none: "none",

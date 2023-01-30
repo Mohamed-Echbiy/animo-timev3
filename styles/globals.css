@@ -2,18 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.cdnfonts.com/css/instagram-sans-2");
+@import url("https://fonts.googleapis.com/css2?family=Overpass&display=swap");
 
 * {
-  font-family: "Instagram Sans", sans-serif;
+  font-family: "Overpass", sans-serif;
   outline: none;
   border: none;
   margin: 0;
   padding: 0;
   list-style: none;
 }
-h1,
-h2,
-h3 {
-  font-family: "Instagram Sans Headline", sans-serif;
+
+.Swiper-Container .swiper-button-next,
+.Swiper-Container .swiper-button-prev {
+  position: absolute;
+  top: 20px;
+  z-index: 40;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 5px;
+  color: #1c1917;
+  font-weight: 700;
+}
+.Swiper-Container .swiper-button-prev {
+  right: 50px;
+  left: auto;
+}
+.Swiper-Container .swiper-button-next::after,
+.Swiper-Container .swiper-button-prev::after {
+  font-size: 16px;
+  z-index: 40;
+}
+
+.description_pastYear::-webkit-scrollbar {
+  display: none;
 }

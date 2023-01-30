@@ -29,7 +29,7 @@ function Card({ data }: { data: trending }) {
       >
         <HeartFillIcon />
       </div>
-      <div className="absolute  transition-all duration-500 ease-in-out p-4 z-10 h-[17%] w-full left-0 bottom-0  bg-gray-900 backdrop-blur-sm bg-opacity-80">
+      <div className="absolute transition-all duration-500 text-cardSm sm:text-xs xl:text-sm ease-in-out p-4 z-10 md:h-fit w-full left-0 -bottom-1  bg-gray-900 backdrop-blur-sm bg-opacity-80">
         <FlexIt justify="between" items="center">
           <span>{title}</span>
           <p className="hidden md:flex items-center gap-2">

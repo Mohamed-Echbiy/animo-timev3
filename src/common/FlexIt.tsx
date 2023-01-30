@@ -5,6 +5,7 @@ interface flexItTypes {
   flex?: string;
   items?: string;
   gap?: string;
+  warp?: string;
   children?: React.ReactNode;
   className?: string;
 }
@@ -14,12 +15,13 @@ function FlexIt({
   flex = "row",
   items = "center",
   gap = "2",
+  warp = "no-wrap",
   children,
   className,
 }: flexItTypes) {
   return (
     <div
-      className={` flex justify-${justify} items-${items} flex-${flex} gap-${gap} ${className}`}
+      className={` flex flex-${warp} justify-${justify} items-${items} flex-${flex} gap-${gap} ${className}`}
     >
       {children}
     </div>
