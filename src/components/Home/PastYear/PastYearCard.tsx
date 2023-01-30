@@ -28,10 +28,11 @@ function PastYearCard({ data }: { data: anime }) {
       <div className=" relative group min-w-[150px]  aspect-[.7]  flex-grow overflow-hidden rounded-xl text-xs lg:text-sm text-white shadow-primary shadow-gray-500">
         <Image
           src={data.image}
+          quality={65}
           alt={data.title.english}
           fill={true}
-          sizes="(max-width:420px) 150px , (max-width: 820) 280px, (max-width: 1200px) 300px"
-          priority={true}
+          sizes="(max-width: 768px) 50vw,
+             33vw"
         />
 
         <div className="absolute transition-all duration-500 text-cardSm md:text-xs xl:text-sm ease-in-out p-4 z-10 md:h-fit w-full left-0 bottom-0  bg-gray-900 backdrop-blur-sm bg-opacity-80">
