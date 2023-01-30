@@ -5,13 +5,19 @@ import { CoverCardPastYear } from "../PastYear/CoverCardPastYear";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
+import { motion } from "framer-motion";
 
 function Upcoming({ data }: { data: [anime] }) {
   const filtredData = data.filter((e) => e.cover);
   //   console.log(filtredData);
 
   return (
-    <main className="upcoming_anime mt-section">
+    <motion.main
+      className="upcoming_anime mt-section"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ delay: 0.5 }}
+    >
       <h3 className="uppercase text-subHead ">Upcoming</h3>
       <Swiper
         className="Swiper-Container"
@@ -28,7 +34,7 @@ function Upcoming({ data }: { data: [anime] }) {
           </SwiperSlide>
         ))}
       </Swiper>
-    </main>
+    </motion.main>
   );
 }
 

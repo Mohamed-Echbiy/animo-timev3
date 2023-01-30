@@ -5,10 +5,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 // import "swiper/css/navigation";
 import RecentEpCard from "./RecentEpCard";
+import { motion } from "framer-motion";
 
 function RecentEpisodes({ data }: { data: [recent_episodes] }) {
   return (
-    <main className="recent_episodes_container">
+    <motion.main
+      className="recent_episodes_container"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ delay: 0.5 }}
+    >
       <h2 className="recent_episodes_title  text-subHead mb-4 mt-section uppercase">
         Recent Episodes
       </h2>
@@ -35,7 +41,7 @@ function RecentEpisodes({ data }: { data: [recent_episodes] }) {
           </SwiperSlide>
         ))}
       </Swiper>
-    </main>
+    </motion.main>
   );
 }
 

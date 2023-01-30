@@ -16,13 +16,19 @@ import {
 } from "../../../common/Icons";
 import PastYearCard from "./PastYearCard";
 import { CoverCardPastYear } from "./CoverCardPastYear";
+import { motion } from "framer-motion";
 
 function PastYear({ data }: { data: [anime] }) {
   //here we got exactly 3 anime objects
   const [anime1]: anime[] = data;
 
   return (
-    <main className="top_past_year relative overflow-hidden">
+    <motion.main
+      className="top_past_year relative overflow-hidden"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ delay: 0.5 }}
+    >
       <h3 className=" text-subHead uppercase mb-4 mt-section">
         Best Last Year
       </h3>
@@ -59,7 +65,7 @@ function PastYear({ data }: { data: [anime] }) {
           <StarIconMini />
         </span>
       </div>
-    </main>
+    </motion.main>
   );
 }
 
