@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "firebase": "^9.16.0",
     "framer-motion": "^8.5.4",
     "next": "latest",
     "react": "18.2.0",

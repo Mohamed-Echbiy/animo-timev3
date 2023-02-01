@@ -1,4 +1,3 @@
-import type { NextPage } from "next";
 import Head from "next/head";
 import Navbar from "../src/common/NavBar/Navbar";
 import HeroSection from "../src/components/Home/HeroSection";
@@ -8,6 +7,7 @@ import { anime } from "../types/anime";
 import { recent_episodes } from "../types/recent_episodes";
 import { trending } from "../types/trending";
 import Upcoming from "../src/components/Home/Upcoming/Upcoming";
+import { useEffect, useState } from "react";
 
 const Home = ({
   data,
@@ -20,6 +20,12 @@ const Home = ({
   dataPastYear: [anime];
   dataUpcoming: [anime];
 }) => {
+  const [seNav, setShowNav] = useState(false);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setShowNav(true);
+    }
+  }, []);
   return (
     <div className=" min-h-screen bg-slate-200 ">
       <Head>
@@ -27,7 +33,7 @@ const Home = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className=" max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative">
-        <Navbar />
+        {seNav && <Navbar />}
         <HeroSection data={data} />
         <RecentEpisodes data={dataEp} />
         <PastYear data={dataPastYear} />
@@ -64,6 +70,6 @@ export const getStaticProps = async () => {
       dataPastYear,
       dataUpcoming,
     },
-    revalidate: 43200,
+    // revalidate: 43200,
   };
 };

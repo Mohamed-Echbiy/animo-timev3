@@ -1,36 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import FlexIt from "./FlexIt";
-import { HeartFillIcon, HeartIcon, StarIconMini } from "./Icons";
+import { StarIconMini } from "./Icons";
 import { trending } from "../../types/trending";
+import Link from "next/link";
+import Heart from "./NavBar/Heart";
 
 function Card({ data }: { data: trending }) {
   const title: string =
-    data.title.english.length > 27
-      ? `${data.title.english.slice(0, 28)}...`
-      : data.title.english;
+    data.title.userPreferred.length > 27
+      ? `${data.title.userPreferred.slice(0, 28)}...`
+      : data.title.userPreferred;
   const genres: string[] =
     data.genres.length > 4 ? data.genres.slice(0, 4) : data.genres;
-  const [isItFill, setHeart] = useState<Boolean>(false);
+
   return (
     <div className=" relative group min-w-[150px]  aspect-[.7]  flex-grow overflow-hidden rounded-xl text-xs lg:text-sm text-white shadow-primary shadow-gray-500">
-      <Image
-        src={data.image}
-        alt={data.title.english}
-        fill={true}
-        sizes="(max-width: 768px) 50vw,
+      <Link href={`/detail/${data.id}`} title={data.title.userPreferred}>
+        <Image
+          src={data.image}
+          alt={data.title.userPreferred}
+          fill={true}
+          sizes="(max-width: 768px) 50vw,
               (max-width: 995px) 33vw,
               25vw"
-        priority={true}
-      />
-      <div
-        className={`icon w-7 h-7 z-10 absolute top-3 right-3 hover:text-secondary-600  ${
-          isItFill ? "text-secondary-500" : "opacity-70"
-        }`}
-        onClick={() => setHeart((pre) => !pre)}
-      >
-        <HeartFillIcon />
-      </div>
+          priority={true}
+        />
+      </Link>
+      <Heart data={data} />
       <div className="absolute transition-all duration-500 text-cardSm sm:text-xs xl:text-sm ease-in-out p-4 z-10 md:h-fit w-full left-0 -bottom-1  bg-gray-900 backdrop-blur-sm bg-opacity-80">
         <FlexIt justify="between" items="center">
           <span>{title}</span>
