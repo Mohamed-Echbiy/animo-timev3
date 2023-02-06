@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { recent_episodes } from "../../../../types/recent_episodes";
 import { PlayIcon, TvIcon } from "../../../common/Icons";
+import Heart from "../../../common/NavBar/Heart";
 
 function RecentEpCard({ data }: { data: recent_episodes }) {
   return (
@@ -43,6 +44,7 @@ function RecentEpCard({ data }: { data: recent_episodes }) {
           </p>
         </div>
       </div>
+      <Heart data={data} />
     </div>
   );
 }

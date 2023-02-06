@@ -20,7 +20,8 @@ const Home = ({
   dataPastYear: [anime];
   dataUpcoming: [anime];
 }) => {
-  const [seNav, setShowNav] = useState(false);
+  const [sesNav, setShowNav] = useState(false);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       setShowNav(true);
@@ -32,8 +33,9 @@ const Home = ({
         <title>AnimoTime</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <main className=" max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative">
-        {seNav && <Navbar />}
+        {sesNav && <Navbar />}
         <HeroSection data={data} />
         <RecentEpisodes data={dataEp} />
         <PastYear data={dataPastYear} />

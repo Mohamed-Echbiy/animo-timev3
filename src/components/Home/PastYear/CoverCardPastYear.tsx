@@ -4,11 +4,12 @@ import React from "react";
 import { anime } from "../../../../types/anime";
 import FlexIt from "../../../common/FlexIt";
 import { TvIcon, CheckMarkIcon, PlayIcon } from "../../../common/Icons";
+import Heart from "../../../common/NavBar/Heart";
 
 export const CoverCardPastYear = ({ anime1 }: { anime1: anime }) => {
   return (
     <>
-      <div className="pastYear-cover-anime w-full aspect-[9/5] md:aspect-[9/3] relative shadow-primary shadow-gray-700 rounded-lg">
+      <div className="pastYear-cover-anime w-full aspect-[9/5] md:aspect-[9/3] shadow-primary shadow-gray-700 rounded-lg relative">
         <Image
           src={anime1.cover}
           alt={anime1.title.userPreferred}
@@ -69,6 +70,7 @@ export const CoverCardPastYear = ({ anime1 }: { anime1: anime }) => {
             </Link>
           </FlexIt>
         </div>
+        <Heart data={anime1} />
       </div>
     </>
   );

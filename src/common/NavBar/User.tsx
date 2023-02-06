@@ -13,10 +13,13 @@ import {
   SignInIcon,
 } from "../Icons";
 import { userContext } from "../../../pages/_app";
+import Links from "./Links";
+import { useRouter } from "next/router";
 
 function User() {
   const [isBarOpen, setBar] = useState<Boolean>(false);
   const { userIn, setIsUserIn } = useContext(userContext);
+  const router = useRouter();
   const [userInfo, setUserInfo] = useState<string | null>(
     localStorage.getItem("info")
   );
@@ -25,7 +28,6 @@ function User() {
     localStorage.getItem("info") && setIsUserIn(true);
   }, [userIn]);
 
-  // const app = initFirebase();
   const provider = new GoogleAuthProvider();
   const auth = getAuth(app);
   const signIn = async () => {
@@ -41,17 +43,14 @@ function User() {
     };
     localStorage.setItem("info", JSON.stringify(userObject));
     setIsUserIn(true);
-    // window.location.reload();
-    // console.log(sendReq.user);
+    router.push("/");
   };
   const signOut = async () => {
     const SignOUT = await auth.signOut();
     localStorage.clear();
     setIsUserIn(false);
-    window.location.reload();
-    // console.log(SignOUT);
+    router.push("/");
   };
-  // console.log(isUserIn);
 
   return (
     <>
@@ -74,12 +73,17 @@ function User() {
           </div>
           {isBarOpen && (
             <div className="setting absolute z-50 bottom-[0%] translate-y-full py-3 px-2 left-0 w-full text-center flex flex-col gap-3 rounded items-start justify-center bg-white">
-              <li className="mt-2 flex items-center gap-2">
+              <Link
+                href={`/favorites/${
+                  JSON.parse(localStorage.getItem("info")!).id
+                }`}
+                className="mt-2 flex items-center gap-2"
+              >
                 <span className="h-5 w-5">
                   <HeartIcon />
                 </span>
                 <span>My favourite</span>
-              </li>
+              </Link>
               <li className="flex items-center gap-2">
                 <span className="h-5 w-5">
                   <SettingIcon />

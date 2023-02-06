@@ -9,8 +9,10 @@
     "firebase": "^9.16.0",
     "framer-motion": "^8.5.4",
     "next": "latest",
+    "nextjs-progressbar": "^0.0.16",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-query": "^3.39.3",
     "swiper": "^8.4.6",
     "tailwindcss-filters": "^3.0.0"
   },

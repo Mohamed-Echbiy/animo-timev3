@@ -4,12 +4,11 @@ import { anime } from "../../../../types/anime";
 import { CoverCardPastYear } from "../PastYear/CoverCardPastYear";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper";
+import { Autoplay, Navigation } from "swiper";
 import { motion } from "framer-motion";
 
 function Upcoming({ data }: { data: [anime] }) {
   const filtredData = data.filter((e) => e.cover);
-  //   console.log(filtredData);
 
   return (
     <motion.main
@@ -21,12 +20,15 @@ function Upcoming({ data }: { data: [anime] }) {
       <h3 className="uppercase text-subHead">Upcoming</h3>
       <Swiper
         className="Swiper-Container"
-        modules={[Navigation]}
+        modules={[Navigation, Autoplay]}
         style={{ paddingBottom: "50px", paddingTop: "80px" }}
         slidesPerView={1}
         grabCursor={true}
         spaceBetween={0}
         navigation={true}
+        autoplay={{
+          delay: 6500,
+        }}
       >
         {filtredData.map((e) => (
           <SwiperSlide key={e.cover}>

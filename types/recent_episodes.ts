@@ -12,4 +12,5 @@ export interface recent_episodes {
   episodeNumber: number;
   image: string;
   rating: number;
+  genres?: string[];
 }

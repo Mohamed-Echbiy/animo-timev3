@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useContext } from "react";
+import { userContext } from "../../../pages/_app";
 import { HomeIcon, TvIcon, MovieIcon, RandomIcon } from "../Icons";
 
 // tailwindcss variable

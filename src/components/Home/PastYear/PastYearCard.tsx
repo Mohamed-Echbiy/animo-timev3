@@ -4,10 +4,12 @@ import Image from "next/image";
 import { PlayIcon, StarIconMini } from "../../../common/Icons";
 import FlexIt from "../../../common/FlexIt";
 import Link from "next/link";
+import Heart from "../../../common/NavBar/Heart";
 
 function PastYearCard({ data }: { data: anime }) {
   return (
-    <div className="PastYearCard">
+    <div className="PastYearCard relative">
+      <Heart data={data} />
       <Link
         href={`/detail/${data.id}`}
         title={`watch ${data.title.userPreferred}`}
@@ -19,9 +21,9 @@ function PastYearCard({ data }: { data: anime }) {
           </span>
         </div>
       </Link>
-      <p className=" hidden hover:scale-110 ease-in duration-300 md:flex text-base items-center gap-2 absolute z-20 w-12 h-12 -top-7 right-2 bg-gray-900 text-slate-50 p-3 box-content rounded-full outline outline-yellow-500">
+      <p className=" hidden hover:scale-110 ease-in duration-300 md:flex text-base items-center gap-1 absolute z-20 w-12 h-12 -top-7 left-2 bg-gray-900 text-white p-2 box-content rounded-full outline outline-slate-200">
         {(data.rating / 10).toPrecision(2)}
-        <span className="h-4 w-4  text-primary-400">
+        <span className="h-4 w-4  text-primary-400 mb-[1px]">
           <StarIconMini />
         </span>
       </p>
