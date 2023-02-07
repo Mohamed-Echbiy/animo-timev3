@@ -7,7 +7,6 @@ import LoadingLink from "../src/common/LoadingLink";
 import SearchModel from "../src/common/SearchModel";
 import Spinner from "../src/common/Spinner";
 import Toast from "../src/common/Toast";
-import { useRouter } from "next/router";
 //
 export const userContext = createContext<
   | {
