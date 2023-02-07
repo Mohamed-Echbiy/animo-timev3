@@ -1,5 +1,5 @@
 export interface favorite {
-  title: string;
+  title: { userPreferred: string };
   image: string;
   rating: number;
   genres: string[];

@@ -9,14 +9,16 @@ import Heart from "../../common/NavBar/Heart";
 
 function FavoriteCard({ data }: { data: favorite }) {
   const title: string =
-    data.title.length > 27 ? `${data.title.slice(0, 28)}...` : data.title;
+    data.title.userPreferred.length > 27
+      ? `${data.title.userPreferred.slice(0, 28)}...`
+      : data.title.userPreferred;
 
   return (
     <div className="  relative group min-w-[150px]  aspect-[.7]   overflow-hidden rounded-xl text-xs lg:text-sm text-white shadow-primary shadow-gray-500">
-      <Link href={`/detail/${data.id}`} title={data.title}>
+      <Link href={`/detail/${data.id}`} title={data.title.userPreferred}>
         <Image
           src={data.image}
-          alt={data.title}
+          alt={data.title.userPreferred}
           fill={true}
           sizes="(max-width: 768px) 50vw,
               (max-width: 995px) 33vw,
