@@ -23,11 +23,7 @@ const fetchFavourite = async () => {
 
 //
 
-function Heart({
-  data,
-}: {
-  data: trending | anime | recent_episodes | favorite;
-}) {
+function Heart({ data }: { data: trending | anime }) {
   const [isItFill, setHeart] = useState<Boolean>(false);
   const [isUserIn, setIsUserIn] = useState<Boolean>(false);
   const [typeOfFavorite, setTypeFavorite] = useState<String>("plan to watch");
@@ -69,7 +65,6 @@ function Heart({
       id: data.id,
     };
     // this are params that used to define document and remove it
-
     const info = {
       by: JSON.parse(localStorage.getItem("info")!).id,
       id: data.id,

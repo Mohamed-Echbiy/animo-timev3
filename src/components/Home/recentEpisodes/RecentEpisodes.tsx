@@ -8,6 +8,7 @@ import RecentEpCard from "./RecentEpCard";
 import { motion } from "framer-motion";
 
 function RecentEpisodes({ data }: { data: [recent_episodes] }) {
+  console.log(data);
   return (
     <motion.main
       className="recent_episodes_container"
