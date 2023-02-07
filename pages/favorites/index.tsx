@@ -58,14 +58,15 @@ function index() {
           transition={{ delay: 0.4 }}
         >
           <h3 className="text-subHead uppercase w-full mb-12">My Favorites</h3>
-          {data.map((e: favorite, i: number) => (
-            <div
-              className={`min-w-[150px] w-1/4 md:w-1/5 sm:flex-grow max-w-[204px] md:max-w-[242px] lg:max-w-[261px] xl:max-w-[356px]`}
-              key={e.id + e._id + e.by}
-            >
-              <FavoriteCard data={e} />
-            </div>
-          ))}
+          {seeNav &&
+            data.map((e: favorite, i: number) => (
+              <div
+                className={`min-w-[150px] w-1/4 md:w-1/5 sm:flex-grow max-w-[204px] md:max-w-[242px] lg:max-w-[261px] xl:max-w-[356px]`}
+                key={e.id + e._id + e.by}
+              >
+                <FavoriteCard data={e} />
+              </div>
+            ))}
         </motion.div>
       </main>
     </div>
