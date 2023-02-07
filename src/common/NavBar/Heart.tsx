@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import { userContext } from "../../../pages/_app";
 import { anime } from "../../../types/anime";
 import { favorite } from "../../../types/favorites";
 import { recent_episodes } from "../../../types/recent_episodes";
@@ -30,6 +31,7 @@ function Heart({
   const [isItFill, setHeart] = useState<Boolean>(false);
   const [isUserIn, setIsUserIn] = useState<Boolean>(false);
   const [typeOfFavorite, setTypeFavorite] = useState<String>("plan to watch");
+  const { setSpinner, setToast } = useContext(userContext);
   //
 
   const { data: favorites, isLoading } = useQuery(
@@ -56,7 +58,7 @@ function Heart({
 
   if (isLoading) {
     // tell I create Loading component
-    return <>bobo</>;
+    return <></>;
   }
 
   //
@@ -80,12 +82,24 @@ function Heart({
     // this used to add document
 
     if (isItFill) {
+      setSpinner(true);
       await removeFavorite(body);
       setHeart(false);
+      setSpinner(false);
+      setToast(true);
+      setTimeout(() => {
+        setToast(false);
+      }, 5000);
     }
     if (!isItFill) {
+      setSpinner(true);
       await addToFavorites(info);
       setHeart(true);
+      await setSpinner(false);
+      await setToast(true);
+      setTimeout(() => {
+        setToast(false);
+      }, 5000);
     }
   };
 

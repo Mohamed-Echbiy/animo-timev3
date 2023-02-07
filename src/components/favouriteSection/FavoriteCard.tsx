@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { title } from "process";
 import React from "react";
-import { favorite } from "../../types/favorites";
-import FlexIt from "./FlexIt";
-import { StarIconMini } from "./Icons";
-import Heart from "./NavBar/Heart";
+import { favorite } from "../../../types/favorites";
+import FlexIt from "../../common/FlexIt";
+import { StarIconMini } from "../../common/Icons";
+import Heart from "../../common/NavBar/Heart";
 
 function FavoriteCard({ data }: { data: favorite }) {
   const title: string =

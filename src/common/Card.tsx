@@ -5,8 +5,9 @@ import { StarIconMini } from "./Icons";
 import { trending } from "../../types/trending";
 import Link from "next/link";
 import Heart from "./NavBar/Heart";
+import { anime } from "../../types/anime";
 
-function Card({ data }: { data: trending }) {
+function Card({ data }: { data: trending | anime }) {
   const title: string =
     data.title.userPreferred.length > 27
       ? `${data.title.userPreferred.slice(0, 28)}...`

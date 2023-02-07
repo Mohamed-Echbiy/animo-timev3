@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useContext, useState } from "react";
 import { useQuery } from "react-query";
 import { userContext } from "../../pages/_app";
@@ -17,7 +18,7 @@ function SearchModel() {
   const [searchValue, setSearch] = useState<String>("");
   const { setSearchModel, isSearchModel } = useContext(userContext);
   const { data, isLoading, refetch } = useQuery("popular", getPopular, {});
-  if (isLoading) <></>;
+
   console.log(data);
   return (
     <AnimatePresence>
@@ -36,26 +37,31 @@ function SearchModel() {
                 type="text"
                 name="search"
                 onChange={(e) => setSearch(e.target.value)}
-                className="border-2 border-primary-700 border-solid h-10 rounded-sm px-2  w-full  block m-auto"
+                className="border-2 border-gray-900 border-solid h-10 rounded-sm px-2  w-full  block m-auto"
                 placeholder="type here"
               />
               <span className=" absolute top-1/2 -translate-y-1/2 right-0 cursor-pointer">
-                <SearchIcon />
+                <Link
+                  href={`detail/${searchValue}`}
+                  title={`search for ${searchValue}`}
+                >
+                  <SearchIcon />
+                </Link>
               </span>
             </div>
-            <div className="previous_search flex justify-between gap-1 flex-col">
-              {data.map((e: anime, i: number) => (
-                <FlexIt key={i + 7887655546 * 10}>
-                  <div className="relative w-14">
-                    <Image
-                      src={e.image}
-                      alt={e.title.userPreferred}
-                      fill
-                      quality={20}
-                    />
-                  </div>
-                </FlexIt>
-              ))}
+            <div className="previous_search flex justify-center gap-1 flex-wrap py-4">
+              {!isLoading &&
+                data.map((e: anime, i: number) => {
+                  return (
+                    <Link
+                      href={`detail/${e.id}`}
+                      className={`anime_name text-xs p-1 md:p-2 border-2 border-solid rounded-md cursor-pointer`}
+                      key={i * 8998900000 + 1292686912}
+                    >
+                      {e.title.userPreferred}
+                    </Link>
+                  );
+                })}
             </div>
             <div
               className="close_Search_Modal cursor-pointer absolute top-2 right-2 text-secondary-600 "

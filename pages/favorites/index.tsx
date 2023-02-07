@@ -1,20 +1,45 @@
 import { motion } from "framer-motion";
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Card from "../../src/common/Card";
-import FavoriteCard from "../../src/common/FavoriteCard";
+import FavoriteCard from "../../src/components/favouriteSection/FavoriteCard";
 import Navbar from "../../src/common/NavBar/Navbar";
 import { favorite } from "../../types/favorites";
+import { useRouter } from "next/router";
+import { useQuery } from "react-query";
+import { userContext } from "../_app";
+//
 
-function index({ favorites }: { favorites: favorite[] }) {
+//
+function index() {
   const [seeNav, setShowNav] = useState(false);
+  const { isSpinner } = useContext(userContext);
+  //
   useEffect(() => {
     if (typeof window !== "undefined") {
       setShowNav(true);
     }
-  }, []);
-  // console.log(favorites);
+  }, []); //
 
+  const fetchFavorite = async () => {
+    const req = await fetch(
+      `https://animotime.onrender.com/api/favorites/${
+        JSON.parse(localStorage.getItem("info")!).id
+      }`
+    );
+    const res = await req.json();
+    return res.data;
+  };
+  //
+  const { data, isLoading } = useQuery(["favorite", isSpinner], fetchFavorite);
+  //
+  if (isLoading) {
+    return (
+      <div className="w-full h-screen flex justify-center items-center">
+        <span>loading ...</span>
+      </div>
+    );
+  }
   return (
     <div className=" min-h-screen bg-slate-200 ">
       <Head>
@@ -32,7 +57,8 @@ function index({ favorites }: { favorites: favorite[] }) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.4 }}
         >
-          {favorites.map((e: favorite, i: number) => (
+          <h3 className="text-subHead uppercase w-full mb-12">My Favorites</h3>
+          {data.map((e: favorite, i: number) => (
             <div
               className={`min-w-[150px] w-1/4 md:w-1/5 sm:flex-grow max-w-[204px] md:max-w-[242px] lg:max-w-[261px] xl:max-w-[356px]`}
               key={e.id + e._id + e.by}
@@ -50,19 +76,3 @@ export default index;
 
 //
 //
-
-export const getServerSideProps = async (context: {
-  params: { id: string };
-}) => {
-  const { params } = context;
-  const req = await fetch(
-    `https://animotime.onrender.com/api/favorites/${params.id}`
-  );
-  const res = await req.json();
-  const favorites = res.data;
-  return {
-    props: {
-      favorites,
-    },
-  };
-};

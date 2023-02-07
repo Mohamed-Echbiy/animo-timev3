@@ -30,7 +30,7 @@ function PastYearCard({ data }: { data: anime }) {
       <div className=" relative group min-w-[150px]  aspect-[.7]  flex-grow overflow-hidden rounded-xl text-xs lg:text-sm text-white shadow-primary shadow-gray-500">
         <Image
           src={data.image}
-          quality={65}
+          quality={20}
           alt={data.title.english}
           fill={true}
           sizes="(max-width: 768px) 50vw,

@@ -5,6 +5,9 @@ import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import LoadingLink from "../src/common/LoadingLink";
 import SearchModel from "../src/common/SearchModel";
+import Spinner from "../src/common/Spinner";
+import Toast from "../src/common/Toast";
+import { useRouter } from "next/router";
 //
 export const userContext = createContext<
   | {
@@ -19,14 +22,28 @@ const queryClient = new QueryClient();
 function MyApp({ Component, pageProps }: AppProps) {
   const [userIn, setIsUserIn] = useState<Boolean>(false);
   const [isSearchModel, setSearchModel] = useState<Boolean>(false);
+  const [isSpinner, setSpinner] = useState<Boolean>(false);
+  const [isToast, setToast] = useState<Boolean>(false);
+  // const router = useRouter();
 
   return (
     <QueryClientProvider client={queryClient}>
       <userContext.Provider
-        value={{ userIn, setIsUserIn, setSearchModel, isSearchModel }}
+        value={{
+          userIn,
+          setIsUserIn,
+          setSearchModel,
+          isSearchModel,
+          setSpinner,
+          isSpinner,
+          isToast,
+          setToast,
+        }}
       >
         <LoadingLink />
+        <Spinner />
         <SearchModel />
+        <Toast />
         <Component {...pageProps} />
       </userContext.Provider>
     </QueryClientProvider>

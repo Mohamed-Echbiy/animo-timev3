@@ -36,8 +36,10 @@ const Home = ({
 
       <main className=" max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative">
         {sesNav && <Navbar />}
+
         <HeroSection data={data} />
         <RecentEpisodes data={dataEp} />
+
         <PastYear data={dataPastYear} />
         <Upcoming data={dataUpcoming} />
       </main>

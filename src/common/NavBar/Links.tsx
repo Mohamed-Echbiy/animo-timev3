@@ -6,7 +6,7 @@ import { HomeIcon, TvIcon, MovieIcon, RandomIcon } from "../Icons";
 
 // tailwindcss variable
 const after =
-  " after:absolute after:left-1/2 after:bottom-0 after:w-full after:-translate-x-1/2 after:h-[2px] after:bg-secondary-600 text-black";
+  " relative after:absolute after:left-1/2 after:bottom-0 after:w-full after:-translate-x-1/2 after:h-[2px] after:bg-secondary-600 text-black";
 
 function Links() {
   const { pathname } = useRouter();
@@ -15,7 +15,7 @@ function Links() {
       <li className="home_link ">
         <Link
           href="/"
-          className={` flex items-center gap-2 py-2 relative ${
+          className={` flex items-center gap-2 py-2  ${
             pathname === "/" && after
           }`}
         >
@@ -27,7 +27,7 @@ function Links() {
           </span>
         </Link>
       </li>
-      <li className="top_category flex items-center justify-center gap-5 md:gap-10">
+      <li className="top_category flex items-center justify-center gap-5 md:gap-10 ">
         <Link
           href="/top_series"
           className={` flex items-center justify-center gap-2 py-2 ${
