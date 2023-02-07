@@ -23,7 +23,7 @@ const fetchFavourite = async () => {
 
 //
 
-function Heart({ data }: { data: trending | anime }) {
+function Heart({ data }: { data: trending | anime | recent_episodes }) {
   const [isItFill, setHeart] = useState<Boolean>(false);
   const [isUserIn, setIsUserIn] = useState<Boolean>(false);
   const [typeOfFavorite, setTypeFavorite] = useState<String>("plan to watch");
