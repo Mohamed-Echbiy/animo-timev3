@@ -8,12 +8,12 @@ import { favorite } from "../../types/favorites";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { userContext } from "../_app";
+import Favorites from "../../src/components/favouriteSection/Favorites";
 //
 
 //
 function index() {
   const [seeNav, setShowNav] = useState(false);
-  const { isSpinner } = useContext(userContext);
   //
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -21,25 +21,6 @@ function index() {
     }
   }, []); //
 
-  const fetchFavorite = async () => {
-    const req = await fetch(
-      `https://animotime.onrender.com/api/favorites/${
-        JSON.parse(localStorage.getItem("info")!).id
-      }`
-    );
-    const res = await req.json();
-    return res.data;
-  };
-  //
-  const { data, isLoading } = useQuery(["favorite", isSpinner], fetchFavorite);
-  //
-  if (isLoading) {
-    return (
-      <div className="w-full h-screen flex justify-center items-center">
-        <span>loading ...</span>
-      </div>
-    );
-  }
   return (
     <div className=" min-h-screen bg-slate-200 ">
       <Head>
@@ -58,15 +39,7 @@ function index() {
           transition={{ delay: 0.4 }}
         >
           <h3 className="text-subHead uppercase w-full mb-12">My Favorites</h3>
-          {seeNav &&
-            data.map((e: favorite, i: number) => (
-              <div
-                className={`min-w-[150px] w-1/4 md:w-1/5 sm:flex-grow max-w-[204px] md:max-w-[242px] lg:max-w-[261px] xl:max-w-[356px]`}
-                key={e.id + e._id + e.by}
-              >
-                <FavoriteCard data={e} />
-              </div>
-            ))}
+          {seeNav && <Favorites />}
         </motion.div>
       </main>
     </div>
