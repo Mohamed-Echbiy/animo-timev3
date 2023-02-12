@@ -1,19 +1,13 @@
+import dynamic from "next/dynamic";
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
-import Navbar from "../../src/common/NavBar/Navbar";
 import TopSeries from "../../src/components/top_series/TopSeries";
 import { anime } from "../../types/anime";
+
+const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 
 function index({ data }: { data: { currentPage: number; results: [anime] } }) {
   const { results } = data;
   //   console.log(results);
-  const [seeNav, setShowNav] = useState(false);
-  //
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setShowNav(true);
-    }
-  }, []);
   return (
     <div className="min-h-screen bg-slate-200">
       <Head>
@@ -24,7 +18,7 @@ function index({ data }: { data: { currentPage: number; results: [anime] } }) {
         />
       </Head>
       <main className="max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative py-2">
-        {seeNav && <Navbar />}
+        <Navbar />
         <TopSeries data={results} />
       </main>
     </div>

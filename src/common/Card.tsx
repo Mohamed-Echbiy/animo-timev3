@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import FlexIt from "./FlexIt";
 import { StarIconMini } from "./Icons";

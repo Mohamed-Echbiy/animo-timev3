@@ -1,12 +1,13 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
-import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import LoadingLink from "../src/common/LoadingLink";
-import SearchModel from "../src/common/SearchModel";
-import Spinner from "../src/common/Spinner";
-import Toast from "../src/common/Toast";
+import dynamic from "next/dynamic";
+//
+const Toast = dynamic(() => import("../src/common/Toast"));
+const Spinner = dynamic(() => import("../src/common/Spinner"));
+const SearchModel = dynamic(() => import("../src/common/SearchModel"));
 //
 export const userContext = createContext<
   | {

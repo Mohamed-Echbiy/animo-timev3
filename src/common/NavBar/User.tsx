@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
-import { app, initFirebase } from "../../../firebase/firebaseApp";
+import { app } from "../../../firebase/firebaseApp";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import {
   AvatarIcon,
@@ -13,7 +13,6 @@ import {
   SignInIcon,
 } from "../Icons";
 import { userContext } from "../../../pages/_app";
-import Links from "./Links";
 import { useRouter } from "next/router";
 
 function User() {

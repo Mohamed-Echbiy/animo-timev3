@@ -1,22 +1,13 @@
-import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { anime } from "../../../../types/anime";
 import { CoverCardPastYear } from "../PastYear/CoverCardPastYear";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper";
-import { motion } from "framer-motion";
 
 function Upcoming({ data }: { data: [anime] }) {
-  const filtredData = data.filter((e) => e.cover);
-
   return (
-    <motion.main
-      className="upcoming_anime mt-section"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ delay: 0.5 }}
-    >
+    <main className="upcoming_anime mt-section">
       <h3 className="uppercase text-subHead">Upcoming</h3>
       <Swiper
         className="Swiper-Container"
@@ -30,13 +21,13 @@ function Upcoming({ data }: { data: [anime] }) {
           delay: 6500,
         }}
       >
-        {filtredData.map((e) => (
+        {data.map((e) => (
           <SwiperSlide key={e.cover}>
             <CoverCardPastYear anime1={e} />
           </SwiperSlide>
         ))}
       </Swiper>
-    </motion.main>
+    </main>
   );
 }
 

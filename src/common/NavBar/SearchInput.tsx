@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { userContext } from "../../../pages/_app";
 import { SearchIcon } from "../Icons";
 

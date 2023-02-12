@@ -1,39 +1,22 @@
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
 // import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 // import "swiper/css/navigation";
 import { anime } from "../../../../types/anime";
-import Card from "../../../common/Card";
 import FlexIt from "../../../common/FlexIt";
-import {
-  CheckMarkIcon,
-  PlayIcon,
-  StarIconMini,
-  TvIcon,
-} from "../../../common/Icons";
+import { StarIconMini } from "../../../common/Icons";
 import PastYearCard from "./PastYearCard";
 import { CoverCardPastYear } from "./CoverCardPastYear";
-import { motion } from "framer-motion";
-
 function PastYear({ data }: { data: [anime] }) {
   //here we got exactly 3 anime objects
   const [anime1]: anime[] = data;
 
   return (
-    <motion.main
-      className="top_past_year relative overflow-hidden"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ delay: 0.5 }}
-    >
+    <main className="top_past_year relative overflow-hidden">
       <h3 className=" text-subHead uppercase mb-4 mt-section">
         Best Last Year
       </h3>
       <FlexIt warp="wrap" className="mt-section">
-        {/**/}
         <CoverCardPastYear anime1={anime1} />
         <div className="w-full">
           <Swiper
@@ -65,7 +48,7 @@ function PastYear({ data }: { data: [anime] }) {
           <StarIconMini />
         </span>
       </div>
-    </motion.main>
+    </main>
   );
 }
 

@@ -1,11 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { useQuery } from "react-query";
 import { userContext } from "../../pages/_app";
 import { anime } from "../../types/anime";
-import FlexIt from "./FlexIt";
 import { CloseIcon, SearchIcon } from "./Icons";
 
 const getPopular = async () => {

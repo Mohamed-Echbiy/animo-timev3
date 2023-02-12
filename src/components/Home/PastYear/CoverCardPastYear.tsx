@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
 import { anime } from "../../../../types/anime";
 import FlexIt from "../../../common/FlexIt";
 import { TvIcon, CheckMarkIcon, PlayIcon } from "../../../common/Icons";

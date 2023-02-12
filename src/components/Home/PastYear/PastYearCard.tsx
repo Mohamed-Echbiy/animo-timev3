@@ -1,4 +1,3 @@
-import React from "react";
 import { anime } from "../../../../types/anime";
 import Image from "next/image";
 import { PlayIcon, StarIconMini } from "../../../common/Icons";

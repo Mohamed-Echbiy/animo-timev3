@@ -1,14 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { title } from "process";
-import React, {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { userContext } from "../../../pages/_app";
+
+import { useState } from "react";
 import { favorite } from "../../../types/favorites";
 import FlexIt from "../../common/FlexIt";
 import { StarIconMini } from "../../common/Icons";

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, {
+import {
   Dispatch,
   SetStateAction,
   useContext,
@@ -32,7 +32,7 @@ const fetchFavourite = async () => {
 
 interface data {
   data: trending | anime | recent_episodes | favorite;
-  setShow: Dispatch<SetStateAction<boolean>>;
+  setShow?: Dispatch<SetStateAction<boolean>>;
 }
 
 function Heart({ data, setShow }: data) {
@@ -92,11 +92,9 @@ function Heart({ data, setShow }: data) {
       setSpinner(true);
       await removeFavorite(body);
       if (pathname === "/favorites/[id]") {
-        setShow(false);
-        console.log("show");
+        setShow ? setShow(false) : null;
       } else {
         setHeart((pre) => !pre);
-        console.log("heart");
       }
       setSpinner(false);
       setToast(true);
@@ -108,7 +106,7 @@ function Heart({ data, setShow }: data) {
       setSpinner(true);
       await addToFavorites(info);
       if (pathname === "/favorites/[id]") {
-        setShow(false);
+        setShow ? setShow(false) : null;
       } else {
         setHeart((pre) => !pre);
       }

@@ -1,13 +1,19 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useContext } from "react";
-import { userContext } from "../../../pages/_app";
+import { useEffect, useState } from "react";
 import Links from "./Links";
 import SearchInput from "./SearchInput";
 import User from "./User";
 
 function Navbar() {
   //  const { isSearchModel } = useContext(userContext);
+  const [window, setWindow] = useState(false);
+  useEffect(() => {
+    if (window !== undefined) {
+      setWindow(true);
+    }
+  }, []);
+
   return (
     <motion.nav
       className="navbar fixed w-full px-1 z-50 bg-slate-200 top-0 left-0 py-5 xl:py-0 flex justify-between items-center min-h-[96px]  gap-2 capitalize text-xs lg:text-base flex-wrap"
@@ -28,7 +34,7 @@ function Navbar() {
       </div>
       <div className="navbar_search flex items-center gap-5 md:gap-10 ">
         <SearchInput />
-        <User />
+        {window && <User />}
       </div>
       <div className="flex w-full navbar_logo justify-center items-center mt-5 flex-grow xl:hidden">
         <Links />

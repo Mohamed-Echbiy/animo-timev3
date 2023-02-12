@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { useQuery } from "react-query";
+import { useContext } from "react";
 import { userContext } from "../../../pages/_app";
 import { favorite } from "../../../types/favorites";
 import FlexIt from "../../common/FlexIt";
