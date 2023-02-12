@@ -1,18 +1,13 @@
 import { motion } from "framer-motion";
 import Head from "next/head";
-import React, { useContext, useEffect, useState } from "react";
-import Card from "../../src/common/Card";
-import FavoriteCard from "../../src/components/favouriteSection/FavoriteCard";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../src/common/NavBar/Navbar";
-import { favorite } from "../../types/favorites";
-import { useRouter } from "next/router";
-import { useQuery } from "react-query";
-import { userContext } from "../_app";
 import Favorites from "../../src/components/favouriteSection/Favorites";
+import { favorite } from "../../types/favorites";
 //
 
 //
-function index() {
+function index({ data }: { data: favorite[] }) {
   const [seeNav, setShowNav] = useState(false);
   //
   useEffect(() => {
@@ -39,7 +34,7 @@ function index() {
           transition={{ delay: 0.4 }}
         >
           <h3 className="text-subHead uppercase w-full mb-12">My Favorites</h3>
-          {seeNav && <Favorites />}
+          <Favorites data={data} />
         </motion.div>
       </main>
     </div>
@@ -48,5 +43,18 @@ function index() {
 
 export default index;
 
-//
-//
+export const getServerSideProps = async (context: {
+  params: { id: string };
+}) => {
+  const { params } = context;
+  const req = await fetch(
+    `https://animotime.onrender.com/api/favorites/${params.id}`
+  );
+  const res = await req.json();
+  const data = await res.data;
+  return {
+    props: {
+      data,
+    },
+  };
+};

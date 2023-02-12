@@ -23,7 +23,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [isSearchModel, setSearchModel] = useState<Boolean>(false);
   const [isSpinner, setSpinner] = useState<Boolean>(false);
   const [isToast, setToast] = useState<Boolean>(false);
-  // const router = useRouter();
 
   return (
     <QueryClientProvider client={queryClient}>

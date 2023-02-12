@@ -19,7 +19,6 @@ function SearchModel() {
   const { setSearchModel, isSearchModel } = useContext(userContext);
   const { data, isLoading, refetch } = useQuery("popular", getPopular, {});
 
-  console.log(data);
   return (
     <AnimatePresence>
       {isSearchModel && (

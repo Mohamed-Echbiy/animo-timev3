@@ -74,6 +74,6 @@ export const getStaticProps = async () => {
       dataPastYear,
       dataUpcoming,
     },
-    // revalidate: 43200,
+    revalidate: 43200,
   };
 };

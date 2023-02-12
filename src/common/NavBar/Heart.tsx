@@ -1,4 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useQuery } from "react-query";
 import { userContext } from "../../../pages/_app";
 import { anime } from "../../../types/anime";
@@ -23,17 +30,18 @@ const fetchFavourite = async () => {
 
 //
 
-function Heart({
-  data,
-}: {
+interface data {
   data: trending | anime | recent_episodes | favorite;
-}) {
+  setShow?: Dispatch<SetStateAction<boolean>> | undefined;
+}
+
+function Heart({ data, setShow }: data) {
+  const { pathname } = useRouter();
   const [isItFill, setHeart] = useState<Boolean>(false);
   const [isUserIn, setIsUserIn] = useState<Boolean>(false);
   const [typeOfFavorite, setTypeFavorite] = useState<String>("plan to watch");
   const { setSpinner, setToast } = useContext(userContext);
   //
-
   const { data: favorites, isLoading } = useQuery(
     ["fetchFavorite"],
     fetchFavourite
@@ -83,7 +91,13 @@ function Heart({
     if (isItFill) {
       setSpinner(true);
       await removeFavorite(body);
-      setHeart(false);
+      if (pathname === "/favorites/[id]") {
+        setShow(false);
+        console.log("show");
+      } else {
+        setHeart((pre) => !pre);
+        console.log("heart");
+      }
       setSpinner(false);
       setToast(true);
       setTimeout(() => {
@@ -93,7 +107,11 @@ function Heart({
     if (!isItFill) {
       setSpinner(true);
       await addToFavorites(info);
-      setHeart(true);
+      if (pathname === "/favorites/[id]") {
+        setShow(false);
+      } else {
+        setHeart((pre) => !pre);
+      }
       await setSpinner(false);
       await setToast(true);
       setTimeout(() => {
