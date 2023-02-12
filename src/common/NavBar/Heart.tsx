@@ -32,7 +32,7 @@ const fetchFavourite = async () => {
 
 interface data {
   data: trending | anime | recent_episodes | favorite;
-  setShow?: Dispatch<SetStateAction<boolean>> | undefined;
+  setShow: Dispatch<SetStateAction<boolean>>;
 }
 
 function Heart({ data, setShow }: data) {
