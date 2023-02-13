@@ -1,11 +1,17 @@
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import RecentEpisodes from "../../src/components/recent-episodes/RecentEpisodes";
 import TopSeries from "../../src/components/top_series/TopSeries";
 import { anime } from "../../types/anime";
+import { recent_episodes } from "../../types/recent_episodes";
 
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 
-function index({ data }: { data: { currentPage: number; results: [anime] } }) {
+function index({
+  data,
+}: {
+  data: { currentPage: number; results: [recent_episodes] };
+}) {
   const { results } = data;
 
   return (
@@ -19,7 +25,7 @@ function index({ data }: { data: { currentPage: number; results: [anime] } }) {
       </Head>
       <main className="max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative py-2">
         <Navbar />
-        <TopSeries data={results} />
+        <RecentEpisodes data={results} />
       </main>
     </div>
   );
@@ -28,9 +34,7 @@ function index({ data }: { data: { currentPage: number; results: [anime] } }) {
 export default index;
 
 export const getServerSideProps = async () => {
-  const req = await fetch(
-    `${process.env.API}advanced-search?perPage=100&format=TV&sort=["SCORE_DESC"]`
-  );
+  const req = await fetch(`${process.env.API}recent-episodes?perPage=34`);
   const data = await req.json();
 
   return {
