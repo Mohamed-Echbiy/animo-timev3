@@ -39,8 +39,9 @@ function SearchModel() {
               />
               <span className=" absolute top-1/2 -translate-y-1/2 right-0 cursor-pointer">
                 <Link
-                  href={`detail/${searchValue}`}
+                  href={`/search/${searchValue}`}
                   title={`search for ${searchValue}`}
+                  onClick={() => setSearchModel(false)}
                 >
                   <SearchIcon />
                 </Link>
@@ -52,7 +53,7 @@ function SearchModel() {
                   return (
                     <Link
                       href={`detail/${e.id}`}
-                      className={`anime_name text-xs p-1 md:p-2 border-2 border-solid rounded-md cursor-pointer`}
+                      className={`anime_name text-xs p-1 md:p-2 relative after:absolute after:bottom-0 after:w-full after:left-0 after:h-[1px] after:bg-slate-700`}
                       key={i * 8998900000 + 1292686912}
                     >
                       {e.title.userPreferred}

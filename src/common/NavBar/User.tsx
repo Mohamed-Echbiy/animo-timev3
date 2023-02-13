@@ -43,20 +43,30 @@ function User() {
     localStorage.setItem("info", JSON.stringify(userObject));
     setIsUserIn(true);
     router.push("/");
+    window.location.reload();
   };
   const signOut = async () => {
-    const SignOUT = await auth.signOut();
+    await auth.signOut();
     localStorage.clear();
     setIsUserIn(false);
     router.push("/");
   };
 
+  console.log(user);
   return (
     <>
       {userIn ? (
         <div className="user flex items-center justify-center gap-4 p-2  bg-white rounded-md relative">
           <div className="user_avatar cursor-pointer text-primary-700">
-            <AvatarIcon />
+            {user ? (
+              <img
+                src={user.image}
+                alt="user photo"
+                className="h-6 w-6 rounded-full"
+              />
+            ) : (
+              <AvatarIcon />
+            )}
           </div>
           <div
             className="user_name cursor-pointer"
