@@ -25,6 +25,7 @@ function Card({ data }: { data: trending | anime }) {
               (max-width: 995px) 33vw,
               25vw"
           priority={true}
+          quality={20}
         />
       </Link>
       <Heart data={data} />

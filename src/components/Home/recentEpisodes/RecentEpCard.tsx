@@ -22,7 +22,7 @@ function RecentEpCard({ data }: { data: recent_episodes }) {
         alt={data.title.userPreferred}
         fill={true}
         className="rounded-xl"
-        quality={65}
+        quality={20}
         sizes="(max-width: 768px) 50vw,
               (max-width: 995px) 33vw,
               25vw"
