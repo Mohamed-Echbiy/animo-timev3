@@ -57,10 +57,11 @@ function Heart({ data, setShow }: data) {
       // check if the anime is exists in the favorites
       setHeart(!!isItExists);
       // if anime exists the heart icon will be filled
+      if (pathname === "/favorites/[id]") {
+        setHeart(true);
+      }
     }
   }, [isUserIn, isLoading]);
-
-  //
 
   //
 
