@@ -14,7 +14,7 @@ function PastYearCard({ data }: { data: anime }) {
         title={`watch ${data.title.userPreferred}`}
         className=""
       >
-        <div className="rating absolute -bottom-6 right-4 z-20 justify-center flex items-center w-12 h-12 bg-primary-500 border-8 rounded-full border-slate-200 border-solid">
+        <div className="rating absolute -bottom-6 right-4 z-20 justify-center flex items-center w-10 h-10 md:w-12 md:h-12 bg-primary-500 border-4 md:border-8 rounded-full border-slate-200 border-solid">
           <span className="w-4 h-4 text-black">
             <PlayIcon />
           </span>

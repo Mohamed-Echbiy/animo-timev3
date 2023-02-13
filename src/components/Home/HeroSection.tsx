@@ -1,8 +1,7 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
 import Card from "../../common/Card";
 import { m, LazyMotion, domAnimation } from "framer-motion";
 import { trending } from "../../../types/trending";
+import FlexIt from "../../common/FlexIt";
 
 function HeroSection({ data }: { data: [trending] }) {
   return (
@@ -14,28 +13,17 @@ function HeroSection({ data }: { data: [trending] }) {
         transition={{ delay: 0.4 }}
       >
         <h2 className=" text-subHead mb-4 uppercase">Trending</h2>
-        <Swiper
-          className="Swiper-Container"
-          style={{ paddingBottom: "50px", paddingTop: "50px" }}
-          breakpoints={{
-            769: {
-              slidesPerView: 3,
-            },
-            1024: {
-              slidesPerView: 4,
-            },
-          }}
-          slidesPerView={2}
-          grabCursor={true}
-          spaceBetween={15}
-          // navigation={true}
-        >
+
+        <FlexIt warp="wrap" className="py-10">
           {data.map((e: trending) => (
-            <SwiperSlide key={`${e.malId}hdfhqohzedsqdbjsq`}>
+            <div
+              className="flex-grow w-[45%] lg:w-[20%]"
+              key={`${e.malId}hdfhqohzedsqdbjsq`}
+            >
               <Card data={e} />
-            </SwiperSlide>
+            </div>
           ))}
-        </Swiper>
+        </FlexIt>
       </m.main>
     </LazyMotion>
   );

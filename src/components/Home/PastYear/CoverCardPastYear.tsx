@@ -8,7 +8,7 @@ import Heart from "../../../common/NavBar/Heart";
 export const CoverCardPastYear = ({ anime1 }: { anime1: anime }) => {
   return (
     <>
-      <div className="pastYear-cover-anime w-full aspect-[9/5] md:aspect-[9/3] shadow-primary shadow-gray-700 rounded-lg relative">
+      <div className="pastYear-cover-anime w-full aspect-[9/5] lg:aspect-[9/3] shadow-primary shadow-gray-700 rounded-lg relative">
         <Image
           src={anime1.cover}
           alt={anime1.title.userPreferred}
@@ -24,10 +24,12 @@ export const CoverCardPastYear = ({ anime1 }: { anime1: anime }) => {
             className="px-2 md:px-4 text-slate-200 h-full "
             gap="0"
           >
-            <h3 className={`title text-base lg:text-xl `}>
+            <h3
+              className={`title text-cardSm sm:text-xs md:text-base lg:text-xl `}
+            >
               {anime1.title.userPreferred}
             </h3>
-            <p className="native-title text-xs lg:text-sm text-gray-400">
+            <p className="native-title text-cardSm lg:text-sm text-gray-400">
               {anime1.title.native}
             </p>
             <div className="mt-4 mb-2 flex items-center gap-4 uppercase text-cardSm sm:text-xs">

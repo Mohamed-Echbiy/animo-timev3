@@ -6,6 +6,8 @@ import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper";
 
 function Upcoming({ data }: { data: [anime] }) {
+  const filtredData = data.filter((e) => e.cover);
+
   return (
     <main className="upcoming_anime mt-section">
       <h3 className="uppercase text-subHead">Upcoming</h3>
@@ -21,7 +23,7 @@ function Upcoming({ data }: { data: [anime] }) {
           delay: 6500,
         }}
       >
-        {data.map((e) => (
+        {filtredData.map((e) => (
           <SwiperSlide key={e.cover}>
             <CoverCardPastYear anime1={e} />
           </SwiperSlide>
