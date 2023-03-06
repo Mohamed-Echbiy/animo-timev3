@@ -11,6 +11,8 @@ import { userContext } from "../../../pages/_app";
 import { anime } from "../../../types/anime";
 import { favorite } from "../../../types/favorites";
 import { recent_episodes } from "../../../types/recent_episodes";
+import { recommndation } from "../../../types/recomndation";
+import { relations } from "../../../types/relations";
 import { trending } from "../../../types/trending";
 import { addToFavorites } from "../../functions/addFavorite";
 import { removeFavorite } from "../../functions/removeFavorite";
@@ -31,7 +33,8 @@ const fetchFavourite = async () => {
 //
 
 interface data {
-  data: trending | anime | recent_episodes | favorite;
+  data: trending | anime | recent_episodes | favorite | recommndation;
+
   setShow?: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -85,7 +88,7 @@ function Heart({ data, setShow }: data) {
       image: data.image,
       rating: data.rating,
       type: typeOfFavorite,
-      genres: data.genres,
+      // genres: data.genres || ["action", "advanture"],
     };
     // this used to add document
 
@@ -125,6 +128,8 @@ function Heart({ data, setShow }: data) {
     <>
       {isUserIn && (
         <button
+          name="add it to favourite"
+          aria-label=" hearth add this anime to your favourite anime"
           className={`icon w-5 h-5 md:w-7 md:h-7 z-10 absolute top-3 right-3 hover:text-secondary-600  ${
             isItFill ? "text-secondary-500" : "text-white"
           }`}

@@ -6,6 +6,8 @@ import { favorite } from "../../../types/favorites";
 import FlexIt from "../../common/FlexIt";
 import { StarIconMini } from "../../common/Icons";
 import Heart from "../../common/NavBar/Heart";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 function FavoriteCard({ data }: { data: favorite }) {
   const title =
@@ -13,6 +15,7 @@ function FavoriteCard({ data }: { data: favorite }) {
       ? data.title
       : data.title.userPreferred;
   const [show, setShow] = useState(true);
+  const [imgLoading, setImgLoading] = useState(false);
   return (
     <>
       {show && (
@@ -29,8 +32,23 @@ function FavoriteCard({ data }: { data: favorite }) {
               (max-width: 995px) 33vw,
               25vw"
                 priority={true}
+                onLoad={() => setImgLoading(true)}
               />
             </Link>
+            {!imgLoading && (
+              <Skeleton
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  position: "absolute",
+                  top: "0",
+                  left: "0",
+                  display: "block",
+                  zIndex: "300000",
+                }}
+                containerClassName="absolute w-full h-full"
+              />
+            )}
             <Heart data={data} setShow={setShow} />
             <div className="absolute transition-all duration-500 text-cardSm sm:text-xs xl:text-sm ease-in-out p-4 z-10 md:h-fit w-full left-0 -bottom-1  bg-gray-900 backdrop-blur-sm bg-opacity-80">
               <FlexIt justify="between" items="center">

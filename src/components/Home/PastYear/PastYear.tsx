@@ -13,9 +13,7 @@ function PastYear({ data }: { data: [anime] }) {
 
   return (
     <main className="top_past_year relative overflow-hidden">
-      <h3 className=" text-subHead uppercase mb-4 mt-section">
-        Best Last Year
-      </h3>
+      <h3 className=" text-subHead uppercase mb-4 mt-section">Best 2020</h3>
       <FlexIt warp="wrap" className="mt-section">
         <CoverCardPastYear anime1={anime1} />
         <div className="w-full">

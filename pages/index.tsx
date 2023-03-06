@@ -51,19 +51,21 @@ const Home = ({
 export default Home;
 
 export const getStaticProps = async () => {
-  const req = await fetch(`${process.env.API}trending?perPage=4`);
+  const req = await fetch(`${process.env.NEXT_PUBLIC_API}trending?perPage=4`);
   const res = await req.json();
   const data = await res.results;
-  const reqEp = await fetch(`${process.env.API}recent-episodes?perPage=4`);
+  const reqEp = await fetch(
+    `${process.env.NEXT_PUBLIC_API}recent-episodes?perPage=12`
+  );
   const resEp = await reqEp.json();
   const dataEp = await resEp.results;
   const reqPastYear = await fetch(
-    `${process.env.API}advanced-search?year=2022&perPage=4`
+    `${process.env.NEXT_PUBLIC_API}advanced-search?year=2020&perPage=4`
   );
   const resPastYear = await reqPastYear.json();
   const dataPastYear = await resPastYear.results;
   const reqUpcoming = await fetch(
-    `${process.env.API}advanced-search?status=NOT_YET_RELEASED&perPage=4`
+    `${process.env.NEXT_PUBLIC_API}advanced-search?status=FINISHED&perPage=8`
   );
   const resUpcoming = await reqUpcoming.json();
   const dataUpcoming = await resUpcoming.results;

@@ -5,7 +5,7 @@ export const addToFavorites = async (info: {
   image: string;
   rating: number;
   type: String;
-  genres: string[] | undefined;
+  // genres: string[] | undefined;
 }) => {
   const send = await fetch(`https://animotime.onrender.com/api/addFavorite/`, {
     method: "POST",

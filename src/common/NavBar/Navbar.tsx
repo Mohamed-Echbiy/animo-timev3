@@ -16,7 +16,7 @@ function Navbar() {
 
   return (
     <motion.nav
-      className="navbar fixed w-full px-1 z-50 bg-slate-200 top-0 left-0 py-5 xl:py-0 flex justify-between items-center min-h-[96px]  gap-2 capitalize text-xs lg:text-base flex-wrap"
+      className="navbar fixed w-full px-1 pl-1 z-50 bg-slate-200 top-0 left-0 py-5 xl:py-0 flex justify-between items-center min-h-[96px]  gap-2 capitalize text-xs lg:text-base flex-wrap"
       initial={{ y: "-20vh" }}
       animate={{ y: 0 }}
     >

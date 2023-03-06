@@ -16,6 +16,8 @@ function Links() {
           className={` flex items-center gap-2 py-2  ${
             pathname === "/" && after
           }`}
+          title="go to home page"
+          aria-label=" home page link"
         >
           <span>
             <HomeIcon />
@@ -31,6 +33,8 @@ function Links() {
           className={` flex items-center justify-center gap-2 py-2 ${
             pathname === "/top_series" && after
           }`}
+          title="go to tv series page"
+          aria-label="tv series page link"
         >
           <span>
             <TvIcon />
@@ -48,6 +52,8 @@ function Links() {
           className={` flex items-center gap-2 py-2 ${
             pathname === "/top_movies" && after
           }`}
+          title="go to movies page"
+          aria-label="movies page link"
         >
           <span>
             <MovieIcon />
@@ -65,6 +71,8 @@ function Links() {
         className={`random_link flex items-center gap-2 py-2 ${
           pathname === "random" && after
         }`}
+        title="click to get a random anime"
+        aria-label="get a random anime to watch"
       >
         <span>
           <RandomIcon />

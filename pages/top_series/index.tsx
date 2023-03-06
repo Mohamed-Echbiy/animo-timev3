@@ -29,7 +29,7 @@ export default index;
 
 export const getServerSideProps = async () => {
   const req = await fetch(
-    `${process.env.API}advanced-search?perPage=100&format=TV&sort=["SCORE_DESC"]`
+    `${process.env.NEXT_PUBLIC_API}advanced-search?perPage=100&format=TV&sort=["SCORE_DESC"]`
   );
   const data = await req.json();
 

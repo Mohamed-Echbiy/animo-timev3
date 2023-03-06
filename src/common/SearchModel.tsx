@@ -7,7 +7,7 @@ import { anime } from "../../types/anime";
 import { CloseIcon, SearchIcon } from "./Icons";
 
 const getPopular = async () => {
-  const req = await fetch(`${process.env.API_URL}popular?perPage=4`);
+  const req = await fetch(`${process.env.NEXT_PUBLIC_API}popular?perPage=4`);
   const res = await req.json();
   return res.results;
 };
@@ -52,9 +52,10 @@ function SearchModel() {
                 data.map((e: anime, i: number) => {
                   return (
                     <Link
-                      href={`detail/${e.id}`}
+                      href={`/detail/${e.id}`}
                       className={`anime_name text-xs p-1 md:p-2 relative after:absolute after:bottom-0 after:w-full after:left-0 after:h-[1px] after:bg-slate-700`}
                       key={i * 8998900000 + 1292686912}
+                      onClick={() => setSearchModel(false)}
                     >
                       {e.title.userPreferred}
                     </Link>

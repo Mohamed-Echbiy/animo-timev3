@@ -14,7 +14,7 @@ import {
 } from "../Icons";
 import { userContext } from "../../../pages/_app";
 import { useRouter } from "next/router";
-
+import image from "../../photos/avatar.svg";
 function User() {
   const [isBarOpen, setBar] = useState<Boolean>(false);
   const { userIn, setIsUserIn } = useContext(userContext);
@@ -52,18 +52,13 @@ function User() {
     router.push("/");
   };
 
-  console.log(user);
   return (
     <>
       {userIn ? (
         <div className="user flex items-center justify-center gap-4 p-2  bg-white rounded-md relative">
-          <div className="user_avatar cursor-pointer text-primary-700">
+          <div className="user_avatar cursor-pointer text-primary-700 text-xs flex items-center h-full">
             {user ? (
-              <img
-                src={user.image}
-                alt="user photo"
-                className="h-6 w-6 rounded-full"
-              />
+              <img src={image} alt="user" className="h-6 w-6 rounded-full" />
             ) : (
               <AvatarIcon />
             )}

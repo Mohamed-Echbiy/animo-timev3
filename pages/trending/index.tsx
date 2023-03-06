@@ -34,7 +34,7 @@ function index({
 export default index;
 
 export const getServerSideProps = async () => {
-  const req = await fetch(`${process.env.API}trending?perPage=34`);
+  const req = await fetch(`${process.env.NEXT_PUBLIC_API}trending?perPage=34`);
   const data = await req.json();
 
   return {
