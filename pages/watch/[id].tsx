@@ -7,31 +7,50 @@ import React, { useEffect, useState } from "react";
 import { ArrowNext, ArrowPerv } from "../../src/common/Icons";
 import { animeDetail } from "../../types/animeDetail";
 import { episode } from "../../types/episode";
+const Quality = dynamic(() => import("../../src/components/watchPage/Quality"));
+const IframeContainer = dynamic(
+  () => import("../../src/components/watchPage/IframeContainer")
+);
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
-const ReactPlayer = dynamic(() => import("react-player"));
-function index({ data, data1 }: { data: episode; data1: animeDetail }) {
+
+function index({
+  data,
+  data1,
+  dataAr,
+}: {
+  data: episode;
+  data1: animeDetail;
+  dataAr: { data: string[] };
+}) {
   const router = useRouter();
+
   const { id, animeData }: any = router.query;
-  console.log(data1);
+  // console.log(data1);
   const nextEp = id?.slice(0, id.length - 1);
   const nextEpNum: any = id?.slice(-1);
-
+  console.log(dataAr, "from back");
   const [hydrated, setIsHydrated] = useState(false);
-  const [sourceIs, setSource] = useState(data.sources[0].url);
+  const [whatLanguage, setWhatLanguage] = useState("en");
+  const [sourceIs, setSource] = useState(data.sources[0].url || "0");
   const [active, setActive] = useState("default");
-  const switchIt = (e: string, s: string) => {
-    setActive(e);
-    setSource(s);
-  };
 
   useEffect(() => {
     if (window !== undefined) {
       setIsHydrated(true);
-      if (data.message) {
+    }
+    if (whatLanguage === "ar") {
+      setSource(dataAr.data[0]);
+      setActive("server 1");
+    }
+    if (data.message) {
+      if (dataAr.data.length < 1) {
         router.push("/404");
+      } else {
+        setSource(dataAr.data[0]);
+        setActive("server 1");
       }
     }
-  }, []);
+  }, [whatLanguage]);
 
   return (
     <div className="bg-slate-200">
@@ -49,33 +68,21 @@ function index({ data, data1 }: { data: episode; data1: animeDetail }) {
           {hydrated && (
             <div className="w-full md:w-1/2 flex-wrap gap-2 min-w-[320px] flex-grow">
               <div className=" w-full">
-                <div className="sources flex flex-wrap items-center justify-center gap-2 py-2  ">
-                  {data.sources.map((e, i) => (
-                    <button
-                      className={`py-1 px-2 ${
-                        active === e.quality
-                          ? "bg-secondary-700"
-                          : " bg-gray-800"
-                      } text-slate-200 rounded`}
-                      key={e.url + i}
-                      onClick={() => switchIt(e.quality, e.url)}
-                    >
-                      {e.quality}
-                    </button>
-                  ))}
-                </div>
-                <div className="relative w-full aspect-video rounded overflow-hidden">
-                  <ReactPlayer
-                    url={sourceIs}
-                    controls
-                    width={"100%"}
-                    height={"100%"}
-                    className="top-0 left-0 absolute"
-                    light={
-                      <div className="absolute top-0 left-0 bg-gray-900 w-full h-full"></div>
-                    }
-                  />
-                </div>
+                {/* quality */}
+                <Quality
+                  data={data}
+                  active={active}
+                  setActive={setActive}
+                  setSource={setSource}
+                  setWhatLanguage={setWhatLanguage}
+                  dataAr={dataAr}
+                  whatLanguage={whatLanguage}
+                />
+                {/* {ifram} */}
+                <IframeContainer
+                  sourceIs={sourceIs}
+                  whatLanguage={whatLanguage}
+                />
               </div>
               <div className="mt-5 uppercase gap-2 w-fit flex flex-row-reverse">
                 {+data.totalEp > 1 && (
@@ -91,7 +98,6 @@ function index({ data, data1 }: { data: episode; data1: animeDetail }) {
                     >
                       Next <ArrowNext />
                     </Link>
-
                     <>
                       <Link
                         href={`/watch/${nextEp}${
@@ -155,10 +161,20 @@ export const getServerSideProps = async (context: {
   console.log(ids);
   const AnimeData = await fetch(`${process.env.NEXT_PUBLIC_API}info/${ids}`);
   const AnimeDataRespo = await AnimeData.json();
+  const nextEpNum: string = id.slice(-1);
+  const title = (await AnimeDataRespo.title.romaji)
+    ? AnimeDataRespo.title.romaji
+    : AnimeDataRespo.data.english;
+  const arabicTran = await fetch(
+    `http://localhost:8088/${title}?ep=${nextEpNum}`
+  );
+  const arabicRes = await arabicTran.json();
+  // console.log(arabicRes);
   return {
     props: {
       data: { ...res, totalEp: animeData },
       data1: AnimeDataRespo,
+      dataAr: arabicRes,
     },
   };
 };
