@@ -1,3 +1,4 @@
+//
 import Head from "next/head";
 import HeroSection from "../src/components/Home/HeroSection";
 import { anime } from "../types/anime";

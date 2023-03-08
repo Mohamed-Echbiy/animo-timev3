@@ -1,3 +1,6 @@
+import NodeCache from "node-cache";
+
+//
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import TopMovies from "../../src/components/top_movies/TopMovies";
@@ -26,12 +29,21 @@ function index({ data }: { data: { currentPage: number; results: [anime] } }) {
 }
 
 export default index;
+const cache = new NodeCache({ stdTTL: 91800 * 5, checkperiod: 1200 });
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context: { req: { url: string } }) => {
+  const cachedData = cache.get(context.req.url);
+  if (cachedData) {
+    console.log("cachedData");
+    return {
+      props: cachedData,
+    };
+  }
   const req = await fetch(
     `${process.env.NEXT_PUBLIC_API}advanced-search?perPage=100&format=MOVIE&sort=["SCORE_DESC"]`
   );
   const data = await req.json();
+  cache.set(context.req.url, { data }, 91800 * 5);
 
   return {
     props: {

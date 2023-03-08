@@ -1,3 +1,5 @@
+import NodeCache from "node-cache";
+//
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import RecentEpisodes from "../../src/components/recent-episodes/RecentEpisodes";
@@ -33,12 +35,21 @@ function index({
 
 export default index;
 
-export const getServerSideProps = async () => {
+const cache = new NodeCache({ stdTTL: 1000 * 5, checkperiod: 1200 });
+
+export const getServerSideProps = async (context: { req: { url: string } }) => {
+  const cachedData = cache.get(context.req.url);
+  if (cachedData) {
+    console.log("cachedData");
+    return {
+      props: cachedData,
+    };
+  }
   const req = await fetch(
     `${process.env.NEXT_PUBLIC_API}recent-episodes?perPage=34`
   );
   const data = await req.json();
-
+  cache.set(context.req.url, { data }, 1000 * 5);
   return {
     props: {
       data,

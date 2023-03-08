@@ -7,9 +7,7 @@ import Link from "next/link";
 
 function Hero({ data }: { data: animeDetail }) {
   const ep = data.episodes[0].id[data.episodes[0].id.length - 1] || 0;
-  const title = data.title.userPreferred
-    ? data.title.userPreferred
-    : data.title.english;
+  const title = data.title.romaji ? data.title.romaji : data.title.english;
 
   const [isModal, setIsModal] = useState(false);
   return (
@@ -119,7 +117,7 @@ function Hero({ data }: { data: animeDetail }) {
             </div>
             {data.episodes.length ? (
               <Link
-                href={`/watch/${data.episodes[0].id}?animeData=${data.currentEpisode}&ids=${data.id}`}
+                href={`/watch/${data.episodes[0].id}?animeData=${data.currentEpisode}&ids=${data.id}&title=${title}`}
                 className=" text-xs sm:text-sm lg:text-base flex items-center justify-center gap-1 h-5 w-fit mt-2 p-1 sm:p-2 lg:p-3  box-content rounded-lg bg-secondary-600"
               >
                 Watch <PlayIcon />
