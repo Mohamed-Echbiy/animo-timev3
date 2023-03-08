@@ -23,7 +23,7 @@ function HeroSection({ data }: { data: [trending] }) {
         <FlexIt warp="wrap" className="py-10">
           {data.map((e: trending) => (
             <div
-              className="flex-grow w-[45%] lg:w-[20%]"
+              className="flex-grow w-[45%] max-w-sm lg:max-w-sm lg:w-[20%]"
               key={`${e.malId}hdfhqohzedsqdbjsq`}
             >
               <Card data={e} />
