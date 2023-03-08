@@ -155,7 +155,7 @@ export const getServerSideProps = async (context: {
 
   cache.set(
     context.req.url,
-    { data: { ...res, dataAr: arabicRes } },
+    { data: { ...res }, dataAr: arabicRes },
     60 * 1200
   );
 
