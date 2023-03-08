@@ -17,7 +17,7 @@ function RecentEpisodes({ data }: { data: [recent_episodes] }) {
           show more {`->>`}
         </Link>
       </div>
-      <FlexIt warp="wrap" justify="start" className="py-10 gap-y-10">
+      <FlexIt warp="wrap" justify="center" className="py-10 gap-y-10">
         {data.map((e: recent_episodes) => (
           <div
             className="flex-grow w-[45%] max-w-xs lg:max-w-sm lg:w-[20%]"
