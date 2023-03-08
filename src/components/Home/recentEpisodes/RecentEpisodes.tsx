@@ -20,7 +20,7 @@ function RecentEpisodes({ data }: { data: [recent_episodes] }) {
       <FlexIt warp="wrap" className="py-10 gap-y-10">
         {data.map((e: recent_episodes) => (
           <div
-            className="flex-grow w-[45%] lg:w-[20%]"
+            className="flex-grow w-[45%] max-w-sm lg:w-[20%]"
             key={`${e.malId}recentEpisodes-kqkjfqskj`}
           >
             <RecentEpCard data={e} />
