@@ -1,4 +1,4 @@
-// import NodeCache from "node-cache";
+import NodeCache from "node-cache";
 //
 import dynamic from "next/dynamic";
 import Head from "next/head";
@@ -127,7 +127,7 @@ function index({
 
 export default index;
 
-// const cache = new NodeCache({ stdTTL: 60 * 1200, checkperiod: 1200 });
+const cache = new NodeCache({ stdTTL: 60 * 1200, checkperiod: 1200 });
 
 export const getServerSideProps = async (context: {
   req: { url: string };
@@ -135,32 +135,33 @@ export const getServerSideProps = async (context: {
   query: { animeData: string; ids: string; title: string };
 }) => {
   // check if the response is already cached
-  // const cachedData = cache.get(context.req.url);
-  // console.log(cachedData);
-  // if (cachedData) {
-  //   console.log("cachedData");
-  //   return {
-  //     props: cachedData,
-  //   };
-  // }
+  const cachedData = cache.get(context.req.url);
+  console.log(cachedData);
+  if (cachedData) {
+    console.log("cachedData");
+    return {
+      props: cachedData,
+    };
+  }
   const { id } = context.params;
   const { animeData, ids, title } = context.query;
   const req = await fetch(`${process.env.NEXT_PUBLIC_API}watch/${id}`);
   console.log(req.status);
   const res = req.status === 500 ? { message: "error" } : await req.json();
   const nextEpNum: string = id.slice(-1);
-  console.log(nextEpNum);
+  const titleIs = id.slice(0, id.indexOf("-episode-"));
+
   const arabicTran = await fetch(
-    `https://arabic-trans.onrender.com/${title}?ep=${nextEpNum}`
+    `https://arabic-trans.onrender.com/${titleIs}?ep=${nextEpNum}`
   );
   console.log(arabicTran.status);
   const arabicRes = await arabicTran.json();
 
-  // cache.set(
-  //   context.req.url,
-  //   { data: { ...res }, dataAr: arabicRes },
-  //   60 * 1200
-  // );
+  cache.set(
+    context.req.url,
+    { data: { ...res }, dataAr: arabicRes },
+    60 * 1200
+  );
 
   return {
     props: {

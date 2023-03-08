@@ -5,7 +5,9 @@ import { animeDetail } from "../../../types/animeDetail";
 import { PlayIcon } from "../../common/Icons";
 
 function Episodes({ data }: { data: animeDetail }) {
-  const title = data.title.romaji ? data.title.romaji : data.title.english;
+  const title = data.title.userPreferred
+    ? data.title.userPreferred
+    : data.title.romaji;
   const [showAll, setShowAll] = useState(100);
   return (
     <div className="episodes flex flex-wrap justify-center items-center mt-10 gap-3">

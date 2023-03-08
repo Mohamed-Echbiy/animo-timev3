@@ -7,7 +7,9 @@ import Link from "next/link";
 
 function Hero({ data }: { data: animeDetail }) {
   const ep = data.episodes[0].id[data.episodes[0].id.length - 1] || 0;
-  const title = data.title.romaji ? data.title.romaji : data.title.english;
+  const title = data.title.userPreferred
+    ? data.title.userPreferred
+    : data.title.romaji;
 
   const [isModal, setIsModal] = useState(false);
   return (
