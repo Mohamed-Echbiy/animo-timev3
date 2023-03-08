@@ -17,6 +17,7 @@ const Episodes = dynamic(
 );
 
 function index({ data }: { data: animeDetail }) {
+  console.log(data.title);
   return (
     <div className=" min-h-screen bg-slate-200 ">
       <Head>
