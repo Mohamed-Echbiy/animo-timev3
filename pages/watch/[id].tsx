@@ -144,7 +144,7 @@ export const getServerSideProps = async (context: {
   const { id } = context.params;
   const { animeData, ids, title } = context.query;
   const req = await fetch(
-    `https://consumet-api-5vbo.onrender.com/anime/gogoanime/servers/${id}`
+    `https://animo-time-api.vercel.app/anime/gogoanime/servers/${id}`
   );
   // console.log(req.status);
   const res = req.status === 500 ? { message: "error" } : await req.json();
