@@ -1,10 +1,8 @@
-import NodeCache from "node-cache";
+// import NodeCache from "node-cache";
 //
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import RecentEpisodes from "../../src/components/recent-episodes/RecentEpisodes";
-import TopSeries from "../../src/components/top_series/TopSeries";
-import { anime } from "../../types/anime";
 import { recent_episodes } from "../../types/recent_episodes";
 
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
@@ -35,21 +33,21 @@ function index({
 
 export default index;
 
-const cache = new NodeCache({ stdTTL: 1000 * 5, checkperiod: 1200 });
+// const cache = new NodeCache({ stdTTL: 1000 * 5, checkperiod: 1200 });
 
 export const getStaticProps = async (context: { req: { url: string } }) => {
-  const cachedData = cache.get(context.req.url);
-  if (cachedData) {
-    console.log("cachedData");
-    return {
-      props: cachedData,
-    };
-  }
+  // const cachedData = cache.get(context.req.url);
+  // if (cachedData) {
+  //   console.log("cachedData");
+  //   return {
+  //     props: cachedData,
+  //   };
+  // }
   const req = await fetch(
     `${process.env.NEXT_PUBLIC_API_V}recent-episodes?perPage=34`
   );
   const data = await req.json();
-  cache.set(context.req.url, { data }, 1000 * 5);
+  // cache.set(context.req.url, { data }, 1000 * 5);
   return {
     props: {
       data,
