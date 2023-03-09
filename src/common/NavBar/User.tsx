@@ -57,11 +57,7 @@ function User() {
       {userIn ? (
         <div className="user flex items-center justify-center gap-4 p-2  bg-white rounded-md relative">
           <div className="user_avatar cursor-pointer text-primary-700 text-xs flex items-center h-full">
-            {user ? (
-              <img src={image} alt="user" className="h-6 w-6 rounded-full" />
-            ) : (
-              <AvatarIcon />
-            )}
+            <AvatarIcon />
           </div>
           <div
             className="user_name cursor-pointer"

@@ -37,7 +37,7 @@ export default index;
 
 const cache = new NodeCache({ stdTTL: 1000 * 5, checkperiod: 1200 });
 
-export const getServerSideProps = async (context: { req: { url: string } }) => {
+export const getStaticProps = async (context: { req: { url: string } }) => {
   const cachedData = cache.get(context.req.url);
   if (cachedData) {
     console.log("cachedData");
@@ -46,13 +46,14 @@ export const getServerSideProps = async (context: { req: { url: string } }) => {
     };
   }
   const req = await fetch(
-    `${process.env.NEXT_PUBLIC_API}recent-episodes?perPage=34`
+    `${process.env.NEXT_PUBLIC_API_V}recent-episodes?perPage=34`
   );
   const data = await req.json();
   cache.set(context.req.url, { data }, 1000 * 5);
   return {
     props: {
       data,
+      revalidate: 2000 * 10,
     },
   };
 };

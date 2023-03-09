@@ -10,7 +10,7 @@ function Quality({
   whatLanguage,
   dataAr,
 }: {
-  data: episode;
+  data: episode[];
   setActive: React.Dispatch<React.SetStateAction<string>>;
   setSource: React.Dispatch<React.SetStateAction<string>>;
   active: string;
@@ -62,16 +62,16 @@ function Quality({
   }
   return (
     <div className="sources flex flex-wrap items-center justify-center gap-2 py-2  ">
-      {!data.message &&
-        data.sources.map((e, i) => (
+      {!data[0].url &&
+        data.map((e, i) => (
           <button
             className={`py-1 px-2 ${
-              active === e.quality ? "bg-secondary-700" : " bg-gray-800"
+              active === e.name ? "bg-secondary-700" : " bg-gray-800"
             } text-slate-200 rounded`}
             key={e.url + i}
-            onClick={() => switchIt(e.quality, e.url)}
+            onClick={() => switchIt(e.name, e.url)}
           >
-            {e.quality}
+            {e.name}
           </button>
         ))}
       <select

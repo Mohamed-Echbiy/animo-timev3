@@ -2,12 +2,10 @@ import NodeCache from "node-cache";
 //
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { ArrowNext, ArrowPerv } from "../../src/common/Icons";
-import { animeDetail } from "../../types/animeDetail";
 import { episode } from "../../types/episode";
 const Quality = dynamic(() => import("../../src/components/watchPage/Quality"));
 const IframeContainer = dynamic(
@@ -20,7 +18,7 @@ function index({
   // data1,
   dataAr,
 }: {
-  data: episode;
+  data: episode[];
   // data1: animeDetail;
   dataAr: { data: string[] };
 }) {
@@ -33,21 +31,21 @@ function index({
   // console.log(dataAr, "from back");
   const [hydrated, setIsHydrated] = useState(false);
   const [whatLanguage, setWhatLanguage] = useState("en");
-  const sourceDefault = data.message ? "default" : data.sources[0].url;
+  const sourceDefault = data[0].url ? data[0].url : "default";
   const [sourceIs, setSource] = useState(sourceDefault);
   const [active, setActive] = useState("default");
   console.log(whatLanguage);
   useEffect(() => {
     if (window !== undefined) {
       setIsHydrated(true);
-      if (data.message) {
-        if (dataAr.data.length < 1) {
-          router.push("/404");
-        } else {
-          setSource(dataAr.data[0]);
-          setActive("server 1");
-        }
-      }
+      // if (data[0].url) {
+      //   if (dataAr.data.length < 1) {
+      //     router.push("/404");
+      //   } else {
+      //     setSource(dataAr.data[0]);
+      //     setActive("server 1");
+      //   }
+      // }
     }
     if (whatLanguage === "ar") {
       setSource(dataAr.data[0]);
@@ -145,8 +143,10 @@ export const getServerSideProps = async (context: {
   }
   const { id } = context.params;
   const { animeData, ids, title } = context.query;
-  const req = await fetch(`${process.env.NEXT_PUBLIC_API}watch/${id}`);
-  console.log(req.status);
+  const req = await fetch(
+    `https://consumet-api-5vbo.onrender.com/anime/gogoanime/servers/${id}`
+  );
+  // console.log(req.status);
   const res = req.status === 500 ? { message: "error" } : await req.json();
   const nextEpNum: string = id.slice(-1);
   const titleIs = id.slice(0, id.indexOf("-episode-"));

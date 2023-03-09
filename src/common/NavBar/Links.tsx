@@ -1,13 +1,19 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { HomeIcon, TvIcon, MovieIcon, RandomIcon } from "../Icons";
 
 // tailwindcss variable
 const after =
   " relative after:absolute after:left-1/2 after:bottom-0 after:w-full after:-translate-x-1/2 after:h-[2px] after:bg-secondary-600 text-black";
-
 function Links() {
   const { pathname } = useRouter();
+  const [randomId, setRandomId] = useState(0);
+  useEffect(() => {
+    const id = Math.floor(Math.random() * 1500);
+    console.log(id);
+    setRandomId(id);
+  }, []);
   return (
     <ul className="navbar_links flex items-center gap-5 md:gap-10  justify-center text-gray-500">
       <li className="home_link ">
@@ -78,7 +84,7 @@ function Links() {
           <RandomIcon />
         </span>
         <Link
-          href="/random"
+          href={`/detail/${randomId}`}
           className={` md:block ${pathname === "/random" ? "block" : "hidden"}`}
         >
           random

@@ -22,12 +22,14 @@ const Home = ({
   dataEp,
   dataPastYear,
   dataUpcoming,
+  response_Q,
 }: {
   data: [trending];
   dataEp: [recent_episodes];
   dataPastYear: [anime];
   dataUpcoming: [anime];
 }) => {
+  console.log(response_Q);
   return (
     <div className=" min-h-screen bg-slate-200 ">
       <Head>
@@ -70,6 +72,8 @@ export const getStaticProps = async () => {
   );
   const resUpcoming = await reqUpcoming.json();
   const dataUpcoming = await resUpcoming.results;
+  const question = await fetch(`http://localhost:3000/api/quize`);
+  const response_Q = await question.json();
 
   return {
     props: {
@@ -77,6 +81,7 @@ export const getStaticProps = async () => {
       dataEp,
       dataPastYear,
       dataUpcoming,
+      response_Q,
     },
     revalidate: 300000,
   };

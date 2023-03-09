@@ -1,4 +1,4 @@
-import NodeCache from "node-cache";
+// import NodeCache from "node-cache";
 
 //
 import dynamic from "next/dynamic";
@@ -36,19 +36,21 @@ function index({
 
 export default index;
 
-const cache = new NodeCache({ stdTTL: 91800 * 5, checkperiod: 1200 });
+// const cache = new NodeCache({ stdTTL: 91800 * 5, checkperiod: 1200 });
 
-export const getServerSideProps = async (context: { req: { url: string } }) => {
-  const cachedData = cache.get(context.req.url);
-  if (cachedData) {
-    console.log("cachedData");
-    return {
-      props: cachedData,
-    };
-  }
-  const req = await fetch(`${process.env.NEXT_PUBLIC_API}trending?perPage=34`);
+export const getStaticProps = async (context: { req: { url: string } }) => {
+  // const cachedData = cache.get(context.req.url);
+  // if (cachedData) {
+  //   console.log("cachedData");
+  //   return {
+  //     props: cachedData,
+  //   };
+  // }
+  const req = await fetch(
+    `${process.env.NEXT_PUBLIC_API_V}trending?perPage=34`
+  );
   const data = await req.json();
-  cache.set(context.req.url, { data }, 1800 * 5);
+  // cache.set(context.req.url, { data }, 1800 * 5);
 
   return {
     props: {
