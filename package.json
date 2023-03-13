@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@vercel/analytics": "^0.1.11",
     "firebase": "^9.16.0",
     "framer-motion": "^8.5.4",
     "next": "latest",

@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
+import { Analytics } from "@vercel/analytics/react";
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import LoadingLink from "../src/common/LoadingLink";
@@ -44,6 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <SearchModel />
         <Toast />
         <Component {...pageProps} />
+        <Analytics />
       </userContext.Provider>
     </QueryClientProvider>
   );
