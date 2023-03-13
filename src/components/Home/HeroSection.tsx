@@ -3,6 +3,7 @@ import { m, LazyMotion, domAnimation } from "framer-motion";
 import { trending } from "../../../types/trending";
 import FlexIt from "../../common/FlexIt";
 import Link from "next/link";
+import { TredningUp } from "../../common/Icons";
 
 function HeroSection({ data }: { data: [trending] }) {
   return (
@@ -14,7 +15,12 @@ function HeroSection({ data }: { data: [trending] }) {
         transition={{ delay: 0.4 }}
       >
         <div className="w-full mb-4 flex justify-between items-center">
-          <h2 className=" text-subHead  uppercase">Trending</h2>
+          <h2 className=" text-subHead uppercase flex items-center gap-3">
+            Trending{" "}
+            <span>
+              <TredningUp />
+            </span>
+          </h2>
           <Link href={"/trending"} className="text-gray-600 text-xs md:text-sm">
             show more {`->>`}
           </Link>

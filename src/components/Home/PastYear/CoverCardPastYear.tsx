@@ -8,16 +8,16 @@ import Heart from "../../../common/NavBar/Heart";
 export const CoverCardPastYear = ({ anime1 }: { anime1: anime }) => {
   return (
     <>
-      <div className="pastYear-cover-anime w-full aspect-[9/5] lg:aspect-[9/3] shadow-primary shadow-gray-700 rounded-lg relative">
+      <div className="pastYear-cover-anime group overflow-hidden w-full aspect-[9/5] lg:aspect-[9/3] shadow-primary shadow-gray-700 rounded-lg relative">
         <Image
           src={anime1.cover}
           alt={anime1.title.userPreferred}
           fill
-          className="rounded-lg"
+          className="rounded-lg saturate-50 group-hover:saturate-150 group-hover:scale-125 ease-in-out duration-500 "
           sizes="100vw"
           quality={20}
         />
-        <div className="details z-10 absolute w-full bg-gradient-to-r from-gray-900 to-transparent h-full">
+        <div className="details ease-in duration-150  z-10 absolute w-full bg-gradient-to-r from-gray-900 to-transparent h-full">
           <FlexIt
             flex="col"
             items="start"
@@ -34,7 +34,7 @@ export const CoverCardPastYear = ({ anime1 }: { anime1: anime }) => {
             </p>
             <div className="mt-4 mb-2 flex items-center gap-4 uppercase text-cardSm sm:text-xs">
               <p className="flex items-center gap-1">
-                <span>
+                <span className="blcok w-6 h-6">
                   <TvIcon />
                 </span>
                 <span>{anime1.type}</span>

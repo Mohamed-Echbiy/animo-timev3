@@ -40,7 +40,7 @@ function Card({ data }: { data: trending | anime }) {
           </p>
         </FlexIt>
         <FlexIt justify="start" gap="4" className="mt-4 text-gray-300">
-          {genres.map((e, i) => (
+          {genres.slice(0, 3).map((e, i) => (
             <span key={i * 258109237.6}>{e}</span>
           ))}
         </FlexIt>

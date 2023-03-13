@@ -12,11 +12,15 @@ const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 
 function index({
   data,
+  data1,
 }: {
   data: { currentPage: number; results: [trending] };
+  data1: { currentPage: number; results: [trending] };
 }) {
   const { results } = data;
-
+  const { results: results1 } = data1;
+  const AllData = [...results, ...results1];
+  // console.log(AllData);
   return (
     <div className="min-h-screen bg-slate-200">
       <Head>
@@ -28,7 +32,7 @@ function index({
       </Head>
       <main className="max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative py-2">
         <Navbar />
-        <Trending data={results} />
+        <Trending data={AllData} />
       </main>
     </div>
   );
@@ -47,14 +51,20 @@ export const getStaticProps = async (context: { req: { url: string } }) => {
   //   };
   // }
   const req = await fetch(
-    `${process.env.NEXT_PUBLIC_API_V}trending?perPage=34`
+    `${process.env.NEXT_PUBLIC_API_V}trending?perPage=50`
   );
   const data = await req.json();
+
+  const req1 = await fetch(
+    `${process.env.NEXT_PUBLIC_API}trending?page=2&perPage=50`
+  );
+  const data1 = await req1.json();
   // cache.set(context.req.url, { data }, 1800 * 5);
 
   return {
     props: {
       data,
+      data1,
     },
   };
 };

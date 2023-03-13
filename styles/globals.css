@@ -22,9 +22,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  background-color: black;
   border-radius: 5px;
-  color: #1c1917;
+  color: white;
   font-weight: 700;
 }
 .Swiper-Container .swiper-button-prev {
@@ -39,4 +39,14 @@
 
 .description_pastYear::-webkit-scrollbar {
   display: none;
+}
+/* img {
+  transition: all 0.5s ease-in-out;
+}
+img:hover {
+  scale: 1.1;
+} */
+.outlinedIt {
+  transition: all 0.5s ease-in-out;
+  outline: 2px rgba(226, 224, 224, 0.876), solid;
 }

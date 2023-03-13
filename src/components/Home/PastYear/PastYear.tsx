@@ -1,7 +1,7 @@
-// import { Navigation } from "swiper";
+import { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-// import "swiper/css/navigation";
+import "swiper/css/navigation";
 import { anime } from "../../../../types/anime";
 import FlexIt from "../../../common/FlexIt";
 import { StarIconMini } from "../../../common/Icons";
@@ -19,18 +19,24 @@ function PastYear({ data }: { data: [anime] }) {
         <div className="w-full">
           <Swiper
             className="Swiper-Container"
-            // modules={[Navigation]}
-            style={{ paddingBottom: "50px", paddingTop: "50px" }}
+            modules={[Navigation, Autoplay]}
+            style={{ paddingBottom: "50px", paddingTop: "80px" }}
             breakpoints={{
-              769: {
+              320: {
                 slidesPerView: 3,
+              },
+              769: {
+                slidesPerView: 4,
+              },
+              1200: {
+                slidesPerView: 5,
               },
             }}
             slidesPerView={2}
             grabCursor={true}
             spaceBetween={15}
-
-            // navigation={true}
+            navigation={true}
+            autoplay={true}
           >
             {data.slice(1).map((e: anime, i: number) => (
               <SwiperSlide key={i + e.id + "kksjdfskdhfsfbn"}>

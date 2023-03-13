@@ -6,7 +6,9 @@ import { PlayIcon } from "../../common/Icons";
 import Link from "next/link";
 
 function Hero({ data }: { data: animeDetail }) {
-  const ep = data.episodes[0].id[data.episodes[0].id.length - 1] || 0;
+  const ep = !!data.episodes.length
+    ? data.episodes[0].id[data.episodes[0].id.length - 1]
+    : 0;
   const title = data.title.userPreferred
     ? data.title.userPreferred
     : data.title.romaji;
@@ -125,7 +127,7 @@ function Hero({ data }: { data: animeDetail }) {
                 Watch <PlayIcon />
               </Link>
             ) : (
-              <p className="text-secondary-700 font-bold capitalize p-2 bg-white w-fit mt-4">
+              <p className="text-secondary-700 font-bold capitalize p-2 bg-slate-200 w-fit mt-4 rounded-sm">
                 there is no episode available
               </p>
             )}

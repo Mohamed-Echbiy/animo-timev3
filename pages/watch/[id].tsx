@@ -7,51 +7,57 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { ArrowNext, ArrowPerv } from "../../src/common/Icons";
 import { episode } from "../../types/episode";
+
+import { commentSchema } from "../../types/commentSchema";
+import { useQuery } from "react-query";
+import IframeContainerArabic from "../../src/components/watchPage/IframeContainerArabic";
 const Quality = dynamic(() => import("../../src/components/watchPage/Quality"));
 const IframeContainer = dynamic(
   () => import("../../src/components/watchPage/IframeContainer")
 );
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
+const Comments = dynamic(
+  () => import("../../src/components/watchPage/comments/Comments")
+);
 
 function index({
   data,
-  // data1,
   dataAr,
+  comments,
 }: {
   data: episode[];
-  // data1: animeDetail;
   dataAr: { data: string[] };
+  comments: { data: commentSchema[] };
 }) {
   const router = useRouter();
-
+  console.log(comments);
   const { id, animeData, title, ids }: any = router.query;
-  // console.log(data1);
-  const nextEp = id?.slice(0, id.length - 1);
   const nextEpNum: any = id?.slice(-1);
+  //fc
+  const titleIs = id.slice(0, id.indexOf("-episode-"));
+  const fcQuery = async () => {
+    const req = await fetch(
+      `https://arabic-trans.onrender.com/${titleIs}?ep=${nextEpNum}`
+    );
+    const res = await req.json();
+    return res;
+  };
+  // console.log(data1);
+  const { data: dataAr1, isLoading } = useQuery(["arabicTranslate"], fcQuery);
+  const nextEp = id?.slice(0, id.length - 1);
   // console.log(dataAr, "from back");
   const [hydrated, setIsHydrated] = useState(false);
   const [whatLanguage, setWhatLanguage] = useState("en");
   const sourceDefault = data[0].url ? data[0].url : "default";
   const [sourceIs, setSource] = useState(sourceDefault);
   const [active, setActive] = useState("default");
-  console.log(whatLanguage);
   useEffect(() => {
     if (window !== undefined) {
       setIsHydrated(true);
-      // if (data[0].url) {
-      //   if (dataAr.data.length < 1) {
-      //     router.push("/404");
-      //   } else {
-      //     setSource(dataAr.data[0]);
-      //     setActive("server 1");
-      //   }
-      // }
-    }
-    if (whatLanguage === "ar") {
-      setSource(dataAr.data[0]);
-      setActive("server 1");
     }
   }, [whatLanguage]);
+
+  console.log(dataAr1);
 
   return (
     <div className="bg-slate-200">
@@ -65,9 +71,9 @@ function index({
       </Head>
       <Navbar />
       <main className=" max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative min-h-screen pb-4">
-        <div className="pt-[220px] md:pt-[158px] h-full flex gap-2 flex-wrap max-w-6xl mx-auto">
+        <div className="pt-[220px] md:pt-[220px] xl:pt-[125px] h-full flex gap-4 flex-wrap  mx-auto">
           {hydrated && (
-            <div className="w-full md:w-1/2 flex-wrap gap-2 min-w-[320px]  max-w-[720px] mx-auto flex-grow justify-center">
+            <div className="w-full md:w-2/3 flex-wrap gap-2 md:min-w-[360px] mx-auto flex-grow justify-center">
               <div className=" w-full">
                 {/* quality */}
                 <Quality
@@ -76,14 +82,24 @@ function index({
                   setActive={setActive}
                   setSource={setSource}
                   setWhatLanguage={setWhatLanguage}
-                  dataAr={dataAr}
+                  dataAr={dataAr1}
                   whatLanguage={whatLanguage}
                 />
                 {/* {ifram} */}
-                <IframeContainer
-                  sourceIs={sourceIs}
-                  whatLanguage={whatLanguage}
-                />
+                {whatLanguage === "ar" ? (
+                  <>
+                    {isLoading ? (
+                      "loading"
+                    ) : (
+                      <IframeContainerArabic
+                        data={dataAr1}
+                        setWhatLanguage={setWhatLanguage}
+                      />
+                    )}
+                  </>
+                ) : (
+                  <IframeContainer sourceIs={data[0].url} />
+                )}
               </div>
               <div className="mt-5 uppercase gap-2 w-fit flex flex-row-reverse">
                 {+animeData > 1 && (
@@ -117,6 +133,9 @@ function index({
               </div>
             </div>
           )}
+          <div className="md:min-w-[320px] max-w-[360px] self-center mx-auto">
+            <Comments data={comments} animeEpId={id} />
+          </div>
         </div>
       </main>
     </div>
@@ -125,22 +144,13 @@ function index({
 
 export default index;
 
-const cache = new NodeCache({ stdTTL: 60 * 1200, checkperiod: 1200 });
+// const cache = new NodeCache({ stdTTL: 60 * 1200, checkperiod: 1200 });
 
 export const getServerSideProps = async (context: {
   req: { url: string };
   params: { id: string };
   query: { animeData: string; ids: string; title: string };
 }) => {
-  // check if the response is already cached
-  const cachedData = cache.get(context.req.url);
-  console.log(cachedData);
-  if (cachedData) {
-    console.log("cachedData");
-    return {
-      props: cachedData,
-    };
-  }
   const { id } = context.params;
   const { animeData, ids, title } = context.query;
   const req = await fetch(
@@ -151,22 +161,27 @@ export const getServerSideProps = async (context: {
   const nextEpNum: string = id.slice(-1);
   const titleIs = id.slice(0, id.indexOf("-episode-"));
 
-  const arabicTran = await fetch(
-    `https://arabic-trans.onrender.com/${titleIs}?ep=${nextEpNum}`
+  const reqComment = await fetch(
+    `https://animotime.onrender.com/api/comments/${id}`
   );
-  console.log(arabicTran.status);
-  const arabicRes = await arabicTran.json();
+  const resComment = await reqComment.json();
+  // const arabicTran = await fetch(
+  //   `https://arabic-trans.onrender.com/${titleIs}?ep=${nextEpNum}`
+  // );
+  // console.log(arabicTran.status);
+  // const arabicRes = await arabicTran.json();
 
-  cache.set(
-    context.req.url,
-    { data: { ...res }, dataAr: arabicRes },
-    60 * 1200
-  );
+  // cache.set(
+  //   context.req.url,
+  //   { data: { ...res }, dataAr: [], comment: resComment },
+  //   60 * 1200
+  // );
 
   return {
     props: {
       data: { ...res },
-      dataAr: arabicRes,
+      dataAr: { data: ["lolo"] },
+      comments: resComment,
     },
   };
 };

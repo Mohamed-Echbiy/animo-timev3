@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { animeDetail } from "../../../types/animeDetail";
 import { recommndation } from "../../../types/recomndation";
 import PastYearCard from "../Home/PastYear/PastYearCard";
@@ -22,7 +23,12 @@ function Recommended({ data }: { data: animeDetail }) {
           </div>
         </>
       ) : (
-        <></>
+        <div className=" justify-center flex items-center capitalize flex-grow w-2/4 gap-3">
+          <p>there are no recommanded anime associted with this anime</p>
+          <div className="relative w-1/2 max-w-[120px] aspect-square">
+            <Image src="/natuto_error.png" alt="crying face" fill />
+          </div>
+        </div>
       )}
     </>
   );

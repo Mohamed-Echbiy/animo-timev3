@@ -58,12 +58,12 @@ export const getStaticProps = async () => {
   const res = await req.json();
   const data = await res.results;
   const reqEp = await fetch(
-    `${process.env.NEXT_PUBLIC_API}recent-episodes?perPage=12`
+    `${process.env.NEXT_PUBLIC_API}recent-episodes?perPage=15`
   );
   const resEp = await reqEp.json();
   const dataEp = await resEp.results;
   const reqPastYear = await fetch(
-    `${process.env.NEXT_PUBLIC_API}advanced-search?year=2020&perPage=4`
+    `${process.env.NEXT_PUBLIC_API}advanced-search?year=2022&perPage=11`
   );
   const resPastYear = await reqPastYear.json();
   const dataPastYear = await resPastYear.results;

@@ -38,7 +38,7 @@ function index({ data }: { data: animeDetail }) {
           >
             <Hero data={data} />
             <Character data={data} />
-            <main className="two_side_container flex flex-wrap gap-3 mb-10">
+            <main className="two_side_container flex w-full flex-wrap gap-3 mb-10">
               <Recommended data={data} />
               <SidebarRealted data={data} />
               <Episodes data={data} />

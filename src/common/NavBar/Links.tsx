@@ -11,7 +11,6 @@ function Links() {
   const [randomId, setRandomId] = useState(0);
   useEffect(() => {
     const id = Math.floor(Math.random() * 1500);
-    console.log(id);
     setRandomId(id);
   }, []);
   return (
@@ -42,7 +41,7 @@ function Links() {
           title="go to tv series page"
           aria-label="tv series page link"
         >
-          <span>
+          <span className="block w-6 h-6">
             <TvIcon />
           </span>
           <span

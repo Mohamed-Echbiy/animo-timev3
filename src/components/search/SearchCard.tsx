@@ -17,8 +17,11 @@ function SearchCard({
             <span className="text-sm">you searched for : </span> " {searchedFor}{" "}
             "
           </h3>
-          {data.map((e) => (
-            <div className="flex-grow min-w-[150px] w-1/4 lg:w-1/5  max-w-[250px] lg:max-w-sm">
+          {data.map((e, i) => (
+            <div
+              className="flex-grow min-w-[240px] w-1/6 max-w-[280px] text-xs md:text-sm "
+              key={i * 12 + "''''''" + "ooppoopp"}
+            >
               <PastYearCard data={e} />
             </div>
           ))}
