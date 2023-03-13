@@ -3,18 +3,23 @@ import Image from "next/image";
 import { PlayIcon, StarIconMini } from "../../../common/Icons";
 import FlexIt from "../../../common/FlexIt";
 import Link from "next/link";
-import Heart from "../../../common/NavBar/Heart";
+// import Heart from "../../../common/NavBar/Heart";
 import { recommndation } from "../../../../types/recomndation";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ImageLoader from "../../../common/ImageLoader";
+import { userContext } from "../../../../pages/_app";
 
 function PastYearCard({ data }: { data: anime | recommndation }) {
   const [imageLoad, setImageLoad] = useState(false);
+  const { userIn } = useContext(userContext);
+
+  // Conditionally import the Heart component if userIn is true
+  const Heart = userIn ? require("../../../common/NavBar/Heart").default : null;
   return (
     <div className="PastYearCard rounded-lg relative group max-w-xs">
       {imageLoad ? (
         <>
-          <Heart data={data} />
+          {Heart && <Heart data={data} />}
           <Link
             href={`/detail/${data.id}`}
             title={`watch ${data.title.userPreferred}`}
@@ -40,7 +45,7 @@ function PastYearCard({ data }: { data: anime | recommndation }) {
         <Link href={`/detail/${data.id}`} className="realtive w-full h-full">
           <Image
             src={data.image}
-            quality={60}
+            quality={30}
             alt={data.title.english || "image"}
             fill={true}
             sizes="(max-width: 768px) 50vw,

@@ -1,13 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { userContext } from "../../../../pages/_app";
 import { recent_episodes } from "../../../../types/recent_episodes";
 import { PlayIcon, TvIcon } from "../../../common/Icons";
 import ImageLoader from "../../../common/ImageLoader";
-import Heart from "../../../common/NavBar/Heart";
 
 function RecentEpCard({ data }: { data: recent_episodes }) {
   const [loadImage, setLoadImage] = useState(false);
+  const { userIn } = useContext(userContext);
+  const Heart = userIn ? require("../../../common/NavBar/Heart").default : null;
   return (
     <div className="recentCard aspect-[.7] relative min-w-[140px]  rounded-xl text-white shadow-primary shadow-gray-800">
       <Link

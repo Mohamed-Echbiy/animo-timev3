@@ -1,4 +1,4 @@
-import NodeCache from "node-cache";
+// import NodeCache from "node-cache";
 //
 import dynamic from "next/dynamic";
 import Head from "next/head";
@@ -57,7 +57,7 @@ function index({
     }
   }, [whatLanguage]);
 
-  console.log(dataAr1);
+  // console.log(dataAr1);
 
   return (
     <div className="bg-slate-200">
