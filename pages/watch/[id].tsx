@@ -9,8 +9,10 @@ import { ArrowNext, ArrowPerv } from "../../src/common/Icons";
 import { episode } from "../../types/episode";
 
 import { commentSchema } from "../../types/commentSchema";
-import { useQuery } from "react-query";
-import IframeContainerArabic from "../../src/components/watchPage/IframeContainerArabic";
+
+const IframeContainerArabic = dynamic(
+  () => import("../../src/components/watchPage/IframeContainerArabic")
+);
 const Quality = dynamic(() => import("../../src/components/watchPage/Quality"));
 const IframeContainer = dynamic(
   () => import("../../src/components/watchPage/IframeContainer")
@@ -22,7 +24,6 @@ const Comments = dynamic(
 
 function index({
   data,
-  dataAr,
   comments,
 }: {
   data: episode[];
@@ -34,16 +35,7 @@ function index({
   const { id, animeData, title, ids }: any = router.query;
   const nextEpNum: any = id?.slice(-1);
   //fc
-  const titleIs = id.slice(0, id.indexOf("-episode-"));
-  const fcQuery = async () => {
-    const req = await fetch(
-      `https://arabic-trans.onrender.com/${titleIs}?ep=${nextEpNum}`
-    );
-    const res = await req.json();
-    return res;
-  };
-  // console.log(data1);
-  const { data: dataAr1, isLoading } = useQuery(["arabicTranslate"], fcQuery);
+
   const nextEp = id?.slice(0, id.length - 1);
   // console.log(dataAr, "from back");
   const [hydrated, setIsHydrated] = useState(false);
@@ -82,20 +74,17 @@ function index({
                   setActive={setActive}
                   setSource={setSource}
                   setWhatLanguage={setWhatLanguage}
-                  dataAr={dataAr1}
                   whatLanguage={whatLanguage}
                 />
                 {/* {ifram} */}
                 {whatLanguage === "ar" ? (
                   <>
-                    {isLoading ? (
-                      "loading"
-                    ) : (
-                      <IframeContainerArabic
-                        data={dataAr1}
-                        setWhatLanguage={setWhatLanguage}
-                      />
-                    )}
+                    <IframeContainerArabic
+                      // data={dataAr1}
+                      id={id}
+                      setWhatLanguage={setWhatLanguage}
+                      nextEpNum={nextEpNum}
+                    />
                   </>
                 ) : (
                   <IframeContainer sourceIs={data[0].url} />
@@ -134,7 +123,11 @@ function index({
             </div>
           )}
           <div className="md:min-w-[320px] max-w-[360px] self-center mx-auto">
-            <Comments data={comments} animeEpId={id} />
+            {!!comments.data.length ? (
+              <Comments data={comments} animeEpId={id} />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </main>
@@ -144,43 +137,25 @@ function index({
 
 export default index;
 
-// const cache = new NodeCache({ stdTTL: 60 * 1200, checkperiod: 1200 });
-
 export const getServerSideProps = async (context: {
   req: { url: string };
   params: { id: string };
-  query: { animeData: string; ids: string; title: string };
 }) => {
   const { id } = context.params;
-  const { animeData, ids, title } = context.query;
   const req = await fetch(
     `https://animo-time-api.vercel.app/anime/gogoanime/servers/${id}`
   );
   // console.log(req.status);
   const res = req.status === 500 ? { message: "error" } : await req.json();
-  const nextEpNum: string = id.slice(-1);
-  const titleIs = id.slice(0, id.indexOf("-episode-"));
 
   const reqComment = await fetch(
     `https://animotime.onrender.com/api/comments/${id}`
   );
   const resComment = await reqComment.json();
-  // const arabicTran = await fetch(
-  //   `https://arabic-trans.onrender.com/${titleIs}?ep=${nextEpNum}`
-  // );
-  // console.log(arabicTran.status);
-  // const arabicRes = await arabicTran.json();
-
-  // cache.set(
-  //   context.req.url,
-  //   { data: { ...res }, dataAr: [], comment: resComment },
-  //   60 * 1200
-  // );
 
   return {
     props: {
       data: { ...res },
-      dataAr: { data: ["lolo"] },
       comments: resComment,
     },
   };

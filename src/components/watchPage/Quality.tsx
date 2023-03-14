@@ -8,25 +8,19 @@ function Quality({
   setSource,
   setWhatLanguage,
   whatLanguage,
-  dataAr,
 }: {
   data: episode[];
   setActive: React.Dispatch<React.SetStateAction<string>>;
   setSource: React.Dispatch<React.SetStateAction<string>>;
   active: string;
   setWhatLanguage: React.Dispatch<React.SetStateAction<string>>;
-  dataAr: { data: string[] };
   whatLanguage: string;
 }) {
   const switchIt = (e: string, s: string) => {
     setActive(e);
     setSource(s);
   };
-  // if (whatLanguage === "ar") {
-  //   return (
 
-  //   );
-  // }
   return (
     <div className="sources flex flex-wrap items-center justify-center gap-2 py-2  ">
       {!data[0].url &&
