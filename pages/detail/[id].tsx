@@ -4,9 +4,14 @@ import { LazyMotion, domAnimation, m } from "framer-motion";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import React from "react";
-import Character from "../../src/components/DetailPage/Character";
-import Hero from "../../src/components/DetailPage/Hero";
-import SidebarRealted from "../../src/components/DetailPage/SidebarRealted";
+//
+const Character = dynamic(
+  () => import("../../src/components/DetailPage/Character")
+);
+const Hero = dynamic(() => import("../../src/components/DetailPage/Hero"));
+const SidebarRealted = dynamic(
+  () => import("../../src/components/DetailPage/SidebarRealted")
+);
 import { animeDetail } from "../../types/animeDetail";
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 const Recommended = dynamic(
@@ -17,7 +22,6 @@ const Episodes = dynamic(
 );
 
 function index({ data }: { data: animeDetail }) {
-  console.log(data.title);
   return (
     <div className=" min-h-screen bg-slate-200 ">
       <Head>
@@ -52,7 +56,7 @@ function index({ data }: { data: animeDetail }) {
 
 export default index;
 
-const cache = new NodeCache({ stdTTL: 86400 * 5, checkperiod: 1200 });
+const cache = new NodeCache({ stdTTL: 1186400 * 5, checkperiod: 1200 });
 
 export const getServerSideProps = async (context: {
   req: { url: string };
@@ -66,7 +70,7 @@ export const getServerSideProps = async (context: {
     };
   }
   const { params } = context;
-  const req = await fetch(`${process.env.NEXT_PUBLIC_API}info/${params.id}`);
+  const req = await fetch(`${process.env.NEXT_PUBLIC_API_V}info/${params.id}`);
   const res = await req.json();
   cache.set(context.req.url, { data: res }, 86400 * 5);
   return {
