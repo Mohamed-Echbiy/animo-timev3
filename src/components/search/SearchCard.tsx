@@ -11,7 +11,7 @@ function SearchCard({
 }) {
   return (
     <div>
-      <FlexIt warp="wrap" className=" gap-y-12 pt-[220px]" gap="4">
+      <FlexIt warp="wrap" className=" gap-y-12 pt-[220px] " gap="4">
         <>
           <h3 className="w-full text-subHead mb-4 uppercase flex items-center gap-3">
             <span className="text-sm">you searched for : </span> " {searchedFor}{" "}

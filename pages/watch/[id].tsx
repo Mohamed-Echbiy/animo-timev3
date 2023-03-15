@@ -9,6 +9,7 @@ import { ArrowNext, ArrowPerv } from "../../src/common/Icons";
 import { episode } from "../../types/episode";
 
 import { commentSchema } from "../../types/commentSchema";
+import FlexIt from "../../src/common/FlexIt";
 
 const IframeContainerArabic = dynamic(
   () => import("../../src/components/watchPage/IframeContainerArabic")
@@ -142,15 +143,18 @@ export const getServerSideProps = async (context: {
   params: { id: string };
 }) => {
   const { id } = context.params;
-  const req = await fetch(
-    `https://animo-time-api.vercel.app/anime/gogoanime/servers/${id}`
-  );
+  const [req, reqComment] = await Promise.all([
+    fetch(`https://animo-time-api.vercel.app/anime/gogoanime/servers/${id}`),
+    fetch(`https://animotime.onrender.com/api/comments/${id}`),
+  ]);
+  // const req = await fetch(
+  //   `https://animo-time-api.vercel.app/anime/gogoanime/servers/${id}`
+  // );
   // console.log(req.status);
-  const res = req.status === 500 ? { message: "error" } : await req.json();
-
-  const reqComment = await fetch(
-    `https://animotime.onrender.com/api/comments/${id}`
-  );
+  // const reqComment = await fetch(
+  //   `https://animotime.onrender.com/api/comments/${id}`
+  // );
+  const res = await req.json();
   const resComment = await reqComment.json();
 
   return {

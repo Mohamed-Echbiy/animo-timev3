@@ -1,11 +1,12 @@
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import SearchCard from "../../src/components/search/SearchCard";
-import TopMovies from "../../src/components/top_movies/TopMovies";
+// import SearchCard from "../../src/components/search/SearchCard";
 import { anime } from "../../types/anime";
 
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
-
+const SearchCard = dynamic(
+  () => import("../../src/components/search/SearchCard")
+);
 function index({
   data,
   searchedFor,

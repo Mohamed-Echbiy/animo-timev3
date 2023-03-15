@@ -276,8 +276,8 @@ function SearchModel() {
           exit={{ opacity: 0, y: "-100vh" }}
         >
           <div className="bg-gray-900 opacity-80 top-0 left-0 absolute w-full h-full z-[900]"></div>
-          <div className="field min-w-[250px] w-2/6 py-10 min-h-[308px] bg-white opacity-100 z-[1200] rounded-lg flex  flex-col gap-2 relative px-2">
-            <div className="relative max-w-[420px] w-full pr-6 ">
+          <div className="field min-w-[250px] w-2/6 py-10 min-h-[308px] bg-white opacity-100 z-[1200] rounded-lg flex items-center flex-col gap-2 relative px-2">
+            <div className="relative max-w-[420px] w-full mx-auto pr-6 ">
               <InputSuggestions
                 autoFocus
                 type="text"
