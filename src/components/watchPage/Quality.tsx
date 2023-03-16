@@ -2,39 +2,12 @@ import React, { useEffect, useState } from "react";
 import { episode } from "../../../types/episode";
 
 function Quality({
-  data,
-  setActive,
-  active,
-  setSource,
   setWhatLanguage,
-  whatLanguage,
 }: {
-  data: episode[];
-  setActive: React.Dispatch<React.SetStateAction<string>>;
-  setSource: React.Dispatch<React.SetStateAction<string>>;
-  active: string;
   setWhatLanguage: React.Dispatch<React.SetStateAction<string>>;
-  whatLanguage: string;
 }) {
-  const switchIt = (e: string, s: string) => {
-    setActive(e);
-    setSource(s);
-  };
-
   return (
     <div className="sources flex flex-wrap items-center justify-center gap-2 py-2  ">
-      {!data[0].url &&
-        data.map((e, i) => (
-          <button
-            className={`py-1 px-2 ${
-              active === e.name ? "bg-secondary-700" : " bg-gray-800"
-            } text-slate-200 rounded`}
-            key={e.url + i}
-            onClick={() => switchIt(e.name, e.url)}
-          >
-            {e.name}
-          </button>
-        ))}
       <select
         onChange={(e) => setWhatLanguage(e.target.value)}
         className="p-2 bg-primary-400 rounded cursor-pointer uppercase"

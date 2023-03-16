@@ -22,10 +22,13 @@ function IframeContainerArabic({
     return res;
   };
 
-  const { data, isLoading } = useQuery(["arabicTranslate"], fcQuery);
+  const { data, isLoading, isError } = useQuery(["arabicTranslate"], fcQuery);
   useEffect(() => {
+    console.log("I RUN");
     if (!isLoading) {
-      setSource(data.data[active]);
+      console.log("did I RUN");
+      // console.log(data.data.data);
+      setSource(data.data.data[active]);
     }
   }, [active, isLoading]);
   const switchIt = (e: number, s: string) => {
@@ -40,11 +43,18 @@ function IframeContainerArabic({
       </div>
     );
   }
+  if (isError) {
+    return (
+      <div className="w-full h-full flex justify-center items-center">
+        <p>sorry but there is no translate episode for this anime out yet</p>
+      </div>
+    );
+  }
   return (
     <section className="">
       <div className="sources flex flex-wrap items-center justify-center gap-2 py-2  ">
-        {data.data.length > 0 &&
-          data.data.map((e: string, i: number) => {
+        {data.data.data.length > 0 &&
+          data.data.data.map((e: string, i: number) => {
             const index = i;
             return (
               <button

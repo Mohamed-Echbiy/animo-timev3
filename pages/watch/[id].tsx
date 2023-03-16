@@ -11,13 +11,15 @@ import { episode } from "../../types/episode";
 import { commentSchema } from "../../types/commentSchema";
 import IframeContainer from "../../src/components/watchPage/IframeContainer";
 
+// const IframeContainer = dynamic(
+//   () => import("../../src/components/watchPage/IframeContainer")
+// );
+
 const IframeContainerArabic = dynamic(
   () => import("../../src/components/watchPage/IframeContainerArabic")
 );
 const Quality = dynamic(() => import("../../src/components/watchPage/Quality"));
-// const IframeContainer = dynamic(
-//   () => import("../../src/components/watchPage/IframeContainer")
-// );
+
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 const Comments = dynamic(
   () => import("../../src/components/watchPage/comments/Comments")
@@ -28,7 +30,6 @@ function index({
   comments,
 }: {
   data: episode[];
-  dataAr: { data: string[] };
   comments: { data: commentSchema[] };
 }) {
   const router = useRouter();
@@ -36,26 +37,13 @@ function index({
   const { id, animeData, title, ids }: any = router.query;
   const nextEpNum: any = id?.slice(-1);
   //keywords
-
   const keywords = `${title} episode ${
     nextEpNum - 1
   } , Anime streaming , English subtitles , Arabic subtitles , Watch anime online , Anime ${title} , ${title} episode 
   ${nextEpNum} online , Watch ${title} episode ${nextEpNum} on AnimoTime`;
 
   const nextEp = id?.slice(0, id.length - 1);
-  // console.log(dataAr, "from back");
-  const [hydrated, setIsHydrated] = useState(false);
   const [whatLanguage, setWhatLanguage] = useState("en");
-  const sourceDefault = data[0].url ? data[0].url : "default";
-  const [sourceIs, setSource] = useState(sourceDefault);
-  const [active, setActive] = useState("default");
-  useEffect(() => {
-    if (window !== undefined) {
-      setIsHydrated(true);
-    }
-  }, [whatLanguage]);
-
-  // console.log(dataAr1);
 
   return (
     <div className="bg-slate-200">
@@ -76,64 +64,57 @@ function index({
           <h1 className="w-full uppercase my-2 text-lg lg:text-xl ">
             {title}--[episode-{nextEpNum}]
           </h1>
-          {hydrated && (
-            <section className="w-full md:w-2/3 flex-wrap gap-2 md:min-w-[360px] mx-auto flex-grow justify-center">
-              <div className=" w-full">
-                {/* quality */}
-                <Quality
-                  data={data}
-                  active={active}
-                  setActive={setActive}
-                  setSource={setSource}
-                  setWhatLanguage={setWhatLanguage}
-                  whatLanguage={whatLanguage}
-                />
-                {/* {ifram} */}
-                {whatLanguage === "ar" ? (
-                  <>
-                    <IframeContainerArabic
-                      // data={dataAr1}
-                      id={id}
-                      setWhatLanguage={setWhatLanguage}
-                      nextEpNum={nextEpNum}
-                    />
-                  </>
-                ) : (
-                  <IframeContainer sourceIs={data[0].url} />
-                )}
-              </div>
-              <nav className="mt-5 uppercase gap-2 w-fit flex flex-row-reverse">
-                {+animeData > 1 && (
+
+          <section className="w-full md:w-2/3 flex-wrap gap-2 md:min-w-[360px] mx-auto flex-grow justify-center">
+            <div className=" w-full">
+              {/* quality */}
+              <Quality setWhatLanguage={setWhatLanguage} />
+              {/* {ifram} */}
+              {whatLanguage === "ar" ? (
+                <>
+                  <IframeContainerArabic
+                    // data={dataAr1}
+                    id={id}
+                    setWhatLanguage={setWhatLanguage}
+                    nextEpNum={nextEpNum}
+                  />
+                </>
+              ) : (
+                <IframeContainer data={data} />
+              )}
+            </div>
+            <nav className="mt-5 uppercase gap-2 w-fit flex flex-row-reverse">
+              {+animeData > 1 && (
+                <>
+                  <Link
+                    href={`/watch/${nextEp}${
+                      +nextEpNum + 1
+                    }?animeData=${animeData}&ids=${ids}&title=${title}`}
+                    className={`${
+                      +nextEpNum === +animeData && "hidden"
+                    } w-fit px-2 py-1 gap-1 flex items-center justify-center rounded-md`}
+                    target="_parent"
+                  >
+                    Next <ArrowNext />
+                  </Link>
                   <>
                     <Link
                       href={`/watch/${nextEp}${
-                        +nextEpNum + 1
+                        +nextEpNum - 1
                       }?animeData=${animeData}&ids=${ids}&title=${title}`}
                       className={`${
-                        +nextEpNum === +animeData && "hidden"
+                        +nextEpNum === 1 && "hidden"
                       } w-fit px-2 py-1 gap-1 flex items-center justify-center rounded-md`}
                       target="_parent"
                     >
-                      Next <ArrowNext />
+                      <ArrowPerv /> Prev
                     </Link>
-                    <>
-                      <Link
-                        href={`/watch/${nextEp}${
-                          +nextEpNum - 1
-                        }?animeData=${animeData}&ids=${ids}&title=${title}`}
-                        className={`${
-                          +nextEpNum === 1 && "hidden"
-                        } w-fit px-2 py-1 gap-1 flex items-center justify-center rounded-md`}
-                        target="_parent"
-                      >
-                        <ArrowPerv /> Prev
-                      </Link>
-                    </>
                   </>
-                )}
-              </nav>
-            </section>
-          )}
+                </>
+              )}
+            </nav>
+          </section>
+
           <aside className="md:min-w-[320px] max-w-[360px] self-center mx-auto">
             <Comments data={comments} animeEpId={id} />
           </aside>
