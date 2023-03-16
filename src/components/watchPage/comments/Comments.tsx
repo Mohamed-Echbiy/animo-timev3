@@ -37,24 +37,7 @@ function Comments({
     );
   }
 
-  return (
-    <>
-      {user ? (
-        <AddComment animeEpId={animeEpId} />
-      ) : (
-        <div className="comment_section  pt-12 pl-3">
-          <div className="flex w-full items-center gap-3 flex-wrap h-24 justify-center">
-            <h2 className="uppercase self-start">
-              no comment yet sign in and be the first
-            </h2>
-            <div className=" relative w-12 h-12">
-              <Image fill src={"/nothing_yet.png"} alt="image" />
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  );
+  return <>{user ? <AddComment animeEpId={animeEpId} /> : <></>}</>;
 }
 
 export default Comments;

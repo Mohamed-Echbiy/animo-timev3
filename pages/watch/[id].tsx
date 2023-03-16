@@ -9,15 +9,15 @@ import { ArrowNext, ArrowPerv } from "../../src/common/Icons";
 import { episode } from "../../types/episode";
 
 import { commentSchema } from "../../types/commentSchema";
-import FlexIt from "../../src/common/FlexIt";
+import IframeContainer from "../../src/components/watchPage/IframeContainer";
 
 const IframeContainerArabic = dynamic(
   () => import("../../src/components/watchPage/IframeContainerArabic")
 );
 const Quality = dynamic(() => import("../../src/components/watchPage/Quality"));
-const IframeContainer = dynamic(
-  () => import("../../src/components/watchPage/IframeContainer")
-);
+// const IframeContainer = dynamic(
+//   () => import("../../src/components/watchPage/IframeContainer")
+// );
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 const Comments = dynamic(
   () => import("../../src/components/watchPage/comments/Comments")
@@ -35,7 +35,12 @@ function index({
   console.log(comments);
   const { id, animeData, title, ids }: any = router.query;
   const nextEpNum: any = id?.slice(-1);
-  //fc
+  //keywords
+
+  const keywords = `${title} episode ${
+    nextEpNum - 1
+  } , Anime streaming , English subtitles , Arabic subtitles , Watch anime online , Anime ${title} , ${title} episode 
+  ${nextEpNum} online , Watch ${title} episode ${nextEpNum} on AnimoTime`;
 
   const nextEp = id?.slice(0, id.length - 1);
   // console.log(dataAr, "from back");
@@ -55,18 +60,24 @@ function index({
   return (
     <div className="bg-slate-200">
       <Head>
-        <title>AnimoTime</title>
+        <title>
+          Watch {title} Episode {nextEpNum} Online | Free Streaming on AnimoTime
+        </title>
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"
-          content="AnimoTime a free streaming web application packed with many features"
+          content={`Stream ${title} Episode ${nextEpNum} for free on AnimoTime and Enjoy high-quality video with English & Arabic subtitles. Watch it now!`}
         />
+        <meta name="keywords" content={keywords} />
       </Head>
       <Navbar />
       <main className=" max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative min-h-screen pb-4">
-        <div className="pt-[220px] md:pt-[220px] xl:pt-[125px] h-full flex gap-4 flex-wrap  mx-auto">
+        <article className="pt-[220px] md:pt-[220px] xl:pt-[125px] h-full flex gap-4 flex-wrap  mx-auto">
+          <h1 className="w-full uppercase my-2 text-lg lg:text-xl ">
+            {title}--[episode-{nextEpNum}]
+          </h1>
           {hydrated && (
-            <div className="w-full md:w-2/3 flex-wrap gap-2 md:min-w-[360px] mx-auto flex-grow justify-center">
+            <section className="w-full md:w-2/3 flex-wrap gap-2 md:min-w-[360px] mx-auto flex-grow justify-center">
               <div className=" w-full">
                 {/* quality */}
                 <Quality
@@ -91,7 +102,7 @@ function index({
                   <IframeContainer sourceIs={data[0].url} />
                 )}
               </div>
-              <div className="mt-5 uppercase gap-2 w-fit flex flex-row-reverse">
+              <nav className="mt-5 uppercase gap-2 w-fit flex flex-row-reverse">
                 {+animeData > 1 && (
                   <>
                     <Link
@@ -120,17 +131,13 @@ function index({
                     </>
                   </>
                 )}
-              </div>
-            </div>
+              </nav>
+            </section>
           )}
-          <div className="md:min-w-[320px] max-w-[360px] self-center mx-auto">
-            {!!comments.data.length ? (
-              <Comments data={comments} animeEpId={id} />
-            ) : (
-              <></>
-            )}
-          </div>
-        </div>
+          <aside className="md:min-w-[320px] max-w-[360px] self-center mx-auto">
+            <Comments data={comments} animeEpId={id} />
+          </aside>
+        </article>
       </main>
     </div>
   );
@@ -147,13 +154,7 @@ export const getServerSideProps = async (context: {
     fetch(`https://animo-time-api.vercel.app/anime/gogoanime/servers/${id}`),
     fetch(`https://animotime.onrender.com/api/comments/${id}`),
   ]);
-  // const req = await fetch(
-  //   `https://animo-time-api.vercel.app/anime/gogoanime/servers/${id}`
-  // );
-  // console.log(req.status);
-  // const reqComment = await fetch(
-  //   `https://animotime.onrender.com/api/comments/${id}`
-  // );
+
   const res = await req.json();
   const resComment = await reqComment.json();
 

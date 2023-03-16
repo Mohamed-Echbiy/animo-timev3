@@ -13,6 +13,7 @@ function IframeContainer({ sourceIs }: { sourceIs: string }) {
         className="left-0 top-0"
         display="block"
         position="absolute"
+        loading="lazy"
       />
     </div>
   );
