@@ -12,7 +12,7 @@ function RecentEpCard({ data }: { data: recent_episodes }) {
   const [loadImage, setLoadImage] = useState(false);
 
   return (
-    <div className="recentCard aspect-[.7] relative min-w-[140px]  rounded-xl text-white shadow-primary shadow-gray-800">
+    <article className="recentCard aspect-[.7] relative min-w-[140px]  rounded-xl text-white shadow-primary shadow-gray-800">
       <Link
         href={`/detail/${data.id}`}
         title={`watch ${data.title.userPreferred}`}
@@ -37,21 +37,21 @@ function RecentEpCard({ data }: { data: recent_episodes }) {
         onLoad={() => setLoadImage(true)}
       />
       {!loadImage ? <ImageLoader /> : <></>}
-      <div className="absolute text-cardSm sm:text-xs xl:text-sm flex items-center flex-col justify-between p-1 md:p-4 z-10 h-fit w-full left-0 bottom-0 bg-gray-900 backdrop-blur-md bg-opacity-70">
-        <div className="anime-detail my-3">
-          <h3 className="anime_title mb-2">
+      <section className="absolute text-cardSm sm:text-xs xl:text-sm flex items-center flex-col justify-between p-1 md:p-4 z-10 h-fit w-full left-0 bottom-0 bg-gray-900 backdrop-blur-md bg-opacity-70">
+        <article className="anime-detail my-3">
+          <p className="anime_title mb-2">
             {data.title.userPreferred.slice(0, 27)}
-          </h3>
+          </p>
           <p className="episode flex items-center gap-4">
             <span className="block md:w-6 md:h-6 w-4 h-4 ">
               <TvIcon />
             </span>
             Ep: {data.episodeNumber}
           </p>
-        </div>
-      </div>
+        </article>
+      </section>
       <Heart data={data} />
-    </div>
+    </article>
   );
 }
 

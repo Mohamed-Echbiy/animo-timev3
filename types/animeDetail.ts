@@ -1,4 +1,5 @@
 export interface animeDetail {
+  synonyms: string[];
   duration: number;
   id: string;
   title: {

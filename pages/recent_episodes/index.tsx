@@ -1,5 +1,3 @@
-// import NodeCache from "node-cache";
-//
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import RecentEpisodes from "../../src/components/recent-episodes/RecentEpisodes";
@@ -17,10 +15,15 @@ function index({
   return (
     <div className="min-h-screen bg-slate-200">
       <Head>
-        <title>AnimoTime</title>
+        <title>Recent Episodes [animotime]</title>
         <meta
           name="description"
-          content="animo time a website to watch your favorite anime online without any ads"
+          content="Stay up-to-date with the latest anime episodes on Animotime. We update our library regularly with new episodes, so you never miss a beat. Watch recent episodes with both Arabic and English subtitles and be the first to know what happens next."
+        />
+        <meta
+          name="keywords"
+          content="anime episodes, latest anime episodes, Arabic subtitles, English subtitles, new episodes
+"
         />
       </Head>
       <main className="max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative py-2">
@@ -33,21 +36,11 @@ function index({
 
 export default index;
 
-// const cache = new NodeCache({ stdTTL: 1000 * 5, checkperiod: 1200 });
-
 export const getStaticProps = async (context: { req: { url: string } }) => {
-  // const cachedData = cache.get(context.req.url);
-  // if (cachedData) {
-  //   console.log("cachedData");
-  //   return {
-  //     props: cachedData,
-  //   };
-  // }
   const req = await fetch(
-    `${process.env.NEXT_PUBLIC_API_V}recent-episodes?perPage=34`
+    `${process.env.NEXT_PUBLIC_API_V}recent-episodes?perPage=20`
   );
   const data = await req.json();
-  // cache.set(context.req.url, { data }, 1000 * 5);
   return {
     props: {
       data,

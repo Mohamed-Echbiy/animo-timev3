@@ -39,7 +39,7 @@ function PastYearCard({ data }: { data: anime | recommndation }) {
       ) : (
         <></>
       )}
-      <div className=" relative group min-w-[150px] aspect-[.7] flex-grow text-xs lg:text-sm text-white ease-in duration-500 shadow-primary group-hover:shadow-gray-500 ">
+      <section className=" relative group min-w-[150px] aspect-[.7] flex-grow text-xs lg:text-sm text-white ease-in duration-500 shadow-primary group-hover:shadow-gray-500 ">
         <Link href={`/detail/${data.id}`} className="realtive w-full h-full">
           <Image
             src={data.image}
@@ -53,16 +53,16 @@ function PastYearCard({ data }: { data: anime | recommndation }) {
           />
         </Link>
         {!imageLoad ? <ImageLoader /> : <></>}
-        <div className="absolute transition-all duration-500 text-cardSm md:text-[12px] ease-in-out p-4 z-10 md:h-fit w-full left-0 bottom-0  bg-gray-900 backdrop-blur-sm bg-opacity-80">
+        <article className="absolute transition-all duration-500 text-cardSm md:text-[12px] ease-in-out p-4 z-10 md:h-fit w-full left-0 bottom-0  bg-gray-900 backdrop-blur-sm bg-opacity-80">
           {imageLoad ? (
             <>
               <FlexIt justify="between" items="center">
-                <span>{data.title.userPreferred}</span>
+                <p>{data.title.userPreferred}</p>
               </FlexIt>
               {data.genres && (
                 <FlexIt justify="start" gap="4" className="mt-4 text-gray-300">
                   {data.genres.slice(0, 3).map((e, i) => (
-                    <span key={i * 258109237.6}>{e}</span>
+                    <p key={i * 258109237.6}>{e}</p>
                   ))}
                 </FlexIt>
               )}
@@ -70,8 +70,8 @@ function PastYearCard({ data }: { data: anime | recommndation }) {
           ) : (
             <></>
           )}
-        </div>
-      </div>
+        </article>
+      </section>
     </div>
   );
 }

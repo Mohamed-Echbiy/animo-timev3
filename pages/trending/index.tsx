@@ -3,9 +3,7 @@
 //
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import TopSeries from "../../src/components/top_series/TopSeries";
 import Trending from "../../src/components/trending/Trending";
-import { anime } from "../../types/anime";
 import { trending } from "../../types/trending";
 
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
@@ -27,7 +25,11 @@ function index({
         <title>AnimoTime</title>
         <meta
           name="description"
-          content="animo time a website to watch your favorite anime online without any ads"
+          content="Explore the hottest anime content on Animotime. Our trending section features the most popular anime movies and series, as well as top-rated episodes. Join the conversation and see what everyone is talking about."
+        />
+        <meta
+          name="keywords"
+          content="trending anime, popular anime, top-rated anime, anime movies, anime series."
         />
       </Head>
       <main className="max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative py-2">
@@ -40,16 +42,7 @@ function index({
 
 export default index;
 
-// const cache = new NodeCache({ stdTTL: 91800 * 5, checkperiod: 1200 });
-
 export const getStaticProps = async (context: { req: { url: string } }) => {
-  // const cachedData = cache.get(context.req.url);
-  // if (cachedData) {
-  //   console.log("cachedData");
-  //   return {
-  //     props: cachedData,
-  //   };
-  // }
   const req = await fetch(
     `${process.env.NEXT_PUBLIC_API_V}trending?perPage=50`
   );
@@ -59,7 +52,6 @@ export const getStaticProps = async (context: { req: { url: string } }) => {
     `${process.env.NEXT_PUBLIC_API}trending?page=2&perPage=50`
   );
   const data1 = await req1.json();
-  // cache.set(context.req.url, { data }, 1800 * 5);
 
   return {
     props: {

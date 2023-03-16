@@ -8,7 +8,7 @@ import Heart from "../../../common/NavBar/Heart";
 export const CoverCardPastYear = ({ anime1 }: { anime1: anime }) => {
   return (
     <>
-      <div className="pastYear-cover-anime group overflow-hidden w-full aspect-[9/5] lg:aspect-[9/3] shadow-primary shadow-gray-700 rounded-lg relative">
+      <section className="pastYear-cover-anime group overflow-hidden w-full aspect-[9/5] lg:aspect-[9/3] shadow-primary shadow-gray-700 rounded-lg relative">
         <Image
           src={anime1.cover}
           alt={anime1.title.userPreferred}
@@ -17,18 +17,18 @@ export const CoverCardPastYear = ({ anime1 }: { anime1: anime }) => {
           sizes="100vw"
           quality={20}
         />
-        <div className="details ease-in duration-150  z-10 absolute w-full bg-gradient-to-r from-gray-900 to-transparent h-full">
+        <article className="details ease-in duration-150  z-10 absolute w-full bg-gradient-to-r from-gray-900 to-transparent h-full">
           <FlexIt
             flex="col"
             items="start"
             className="px-2 md:px-4 text-slate-200 h-full "
             gap="0"
           >
-            <h3
+            <p
               className={`title text-cardSm sm:text-xs md:text-base lg:text-xl `}
             >
               {anime1.title.userPreferred}
-            </h3>
+            </p>
             <p className="native-title text-cardSm lg:text-sm text-gray-400">
               {anime1.title.native}
             </p>
@@ -70,9 +70,9 @@ export const CoverCardPastYear = ({ anime1 }: { anime1: anime }) => {
               </button>
             </Link>
           </FlexIt>
-        </div>
+        </article>
         <Heart data={anime1} />
-      </div>
+      </section>
     </>
   );
 };

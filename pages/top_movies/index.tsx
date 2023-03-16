@@ -1,6 +1,3 @@
-// import NodeCache from "node-cache";
-
-//
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import TopMovies from "../../src/components/top_movies/TopMovies";
@@ -21,10 +18,14 @@ function index({
   return (
     <div className="min-h-screen bg-slate-200">
       <Head>
-        <title>AnimoTime</title>
+        <title>Top Movies [animotime]</title>
         <meta
           name="description"
-          content="animo time a website to watch your favorite anime online without any ads"
+          content="Discover the latest and greatest anime movies on Animotime. From action-packed adventures to heartwarming dramas, we've got it all. Watch the top movies with both Arabic and English subtitles and immerse yourself in the world of anime."
+        />
+        <meta
+          name="keywords"
+          content="anime movies, top anime movies, Arabic subtitles, English subtitles, action anime movies, drama anime movies"
         />
       </Head>
       <main className="max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative py-2">
@@ -39,21 +40,15 @@ export default index;
 // const cache = new NodeCache({ stdTTL: 91800 * 5, checkperiod: 1200 });
 
 export const getStaticProps = async () => {
-  // const cachedData = cache.get(context.req.url);
-  // if (cachedData) {
-  //   console.log("cachedData");
-  //   return {
-  //     props: cachedData,
-  //   };
-  // }
-  const req = await fetch(
-    `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=100&format=MOVIE&sort=["SCORE_DESC"]`
-  );
+  const [req, req1] = await Promise.all([
+    fetch(
+      `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=100&format=MOVIE&sort=["SCORE_DESC"]`
+    ),
+    fetch(
+      `${process.env.NEXT_PUBLIC_API}advanced-search?perPage=100&paeg=2&format=MOVIE&sort=["SCORE_DESC"]`
+    ),
+  ]);
   const data = await req.json();
-  // cache.set(context.req.url, { data }, 91800 * 5);
-  const req1 = await fetch(
-    `${process.env.NEXT_PUBLIC_API}advanced-search?perPage=100&paeg=2&format=MOVIE&sort=["SCORE_DESC"]`
-  );
   const data1 = await req1.json();
   return {
     props: {

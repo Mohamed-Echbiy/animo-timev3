@@ -8,11 +8,12 @@ import React from "react";
 const Character = dynamic(
   () => import("../../src/components/DetailPage/Character")
 );
-const Hero = dynamic(() => import("../../src/components/DetailPage/Hero"));
+
 const SidebarRealted = dynamic(
   () => import("../../src/components/DetailPage/SidebarRealted")
 );
 import { animeDetail } from "../../types/animeDetail";
+import Hero from "../../src/components/DetailPage/Hero";
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 const Recommended = dynamic(
   () => import("../../src/components/DetailPage/Recommended")
@@ -22,19 +23,31 @@ const Episodes = dynamic(
 );
 
 function index({ data }: { data: animeDetail }) {
+  const title = data.title.userPreferred
+    ? data.title.userPreferred
+    : data.title.romaji;
+  console.log(data);
+  const synonyms = data.synonyms.join(",");
   return (
     <div className=" min-h-screen bg-slate-200 ">
       <Head>
-        <title>AnimoTime</title>
+        <title>{title} [animotime]</title>
         <meta
           name="description"
-          content="animo time a website to watch your favorite anime online without any ads"
+          content={`watch ${title} with Arabic and English subtitles: Catch up on ${title} on Animotime. Follow the characters, as they continue their journey in this epic anime. Discover recommended anime to watch and join our anime community to share your thoughts on ${title}.`}
+        />
+        <meta
+          name="keywords"
+          content={
+            synonyms +
+            ` watch ${title} , animotime ${title}, discuss ${title} on animotime`
+          }
         />
       </Head>
       <main className="max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative overflow-hidden min-h-screen">
         <Navbar />
         <LazyMotion features={domAnimation}>
-          <m.div
+          <m.main
             className=" heroSection pt-[220px] md:pt-[158px] gap-2 flex-wrap flex items-center justify-center md:justify-start"
             initial={{ opacity: 0, x: "-100wv" }}
             animate={{ opacity: 1, x: 0 }}
@@ -42,12 +55,12 @@ function index({ data }: { data: animeDetail }) {
           >
             <Hero data={data} />
             <Character data={data} />
-            <main className="two_side_container flex w-full flex-wrap gap-3 mb-10">
+            <section className="two_side_container flex w-full flex-wrap gap-3 mb-10">
               <Recommended data={data} />
               <SidebarRealted data={data} />
               <Episodes data={data} />
-            </main>
-          </m.div>
+            </section>
+          </m.main>
         </LazyMotion>
       </main>
     </div>
