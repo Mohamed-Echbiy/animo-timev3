@@ -6,14 +6,15 @@ import { TvIcon, CheckMarkIcon, PlayIcon } from "../../../common/Icons";
 import Heart from "../../../common/NavBar/Heart";
 
 export const CoverCardPastYear = ({ anime1 }: { anime1: anime }) => {
+  const cover = anime1 ? (anime1.cover ? anime1.cover : anime1.image) : "";
   return (
     <>
       <section className="pastYear-cover-anime group overflow-hidden w-full aspect-[9/5] lg:aspect-[9/3] shadow-primary shadow-gray-700 rounded-lg relative">
         <Image
-          src={anime1.cover}
+          src={cover}
           alt={anime1.title.userPreferred}
           fill
-          className="rounded-lg saturate-50 group-hover:saturate-150 group-hover:scale-125 ease-in-out duration-500 "
+          className="rounded-lg saturate-[.6] brightness-[.6] group-hover:brightness-105 group-hover:saturate-100 group-hover:scale-[1.05] ease-in-out duration-500 "
           sizes="100vw"
           quality={20}
         />

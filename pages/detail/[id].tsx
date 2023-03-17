@@ -1,4 +1,3 @@
-import NodeCache from "node-cache";
 //
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import dynamic from "next/dynamic";
@@ -14,6 +13,7 @@ const SidebarRealted = dynamic(
 );
 import { animeDetail } from "../../types/animeDetail";
 import Hero from "../../src/components/DetailPage/Hero";
+
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 const Recommended = dynamic(
   () => import("../../src/components/DetailPage/Recommended")
@@ -22,16 +22,16 @@ const Episodes = dynamic(
   () => import("../../src/components/DetailPage/Episodes")
 );
 
-function index({ data }: { data: animeDetail }) {
-  const title = data.title.userPreferred
-    ? data.title.userPreferred
-    : data.title.romaji;
+function index({ data, title }: { data: animeDetail; title: string }) {
   // console.log(data);
-  const synonyms = data.synonyms.join(",");
+  const synonyms: string = !!data.synonyms.length
+    ? data.synonyms.join(",")
+    : title;
+  console.log(synonyms);
   return (
     <div className=" min-h-screen bg-slate-200 ">
       <Head>
-        <title>{title} [animotime]</title>
+        <title>{title + ` --animotime`}</title>
         <meta
           name="description"
           content={`watch ${title} with Arabic and English subtitles: Catch up on ${title} on Animotime. Follow the characters, as they continue their journey in this epic anime. Discover recommended anime to watch and join our anime community to share your thoughts on ${title}.`}
@@ -69,8 +69,6 @@ function index({ data }: { data: animeDetail }) {
 
 export default index;
 
-const cache = new NodeCache({ stdTTL: 1186400 * 5, checkperiod: 1200 });
-
 // export const getServerSideProps = async (context: {
 //   req: { url: string };
 //   params: { id: string };
@@ -95,8 +93,8 @@ const cache = new NodeCache({ stdTTL: 1186400 * 5, checkperiod: 1200 });
 
 export const getStaticPaths = async () => {
   const [reqPop, reqPop2] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=100`),
-    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=100&page=2`),
+    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=40`),
+    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=40&page=2`),
   ]);
   const resPop = await reqPop.json();
   const resPop2 = await reqPop2.json();
@@ -111,7 +109,8 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
   // console.log(params);
   const res = await fetch(`${process.env.NEXT_PUBLIC_API}info/${params.id}`);
   const data = await res.json();
+  const title = data.title.english;
 
   // Pass post data to the page via props
-  return { props: { data }, revalidate: 86400 };
+  return { props: { data, title }, revalidate: 86400 };
 }

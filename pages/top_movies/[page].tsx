@@ -1,17 +1,15 @@
-import dynamic from "next/dynamic";
 import Head from "next/head";
+import React from "react";
+import Navbar from "../../src/common/NavBar/Navbar";
 import TopMovies from "../../src/components/top_movies/TopMovies";
 import { anime } from "../../types/anime";
 
-const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
-
-function index({
+function page({
   data,
 }: {
   data: { currentPage: number; results: [anime]; hasNextPage: boolean };
 }) {
-  const { results } = data;
-
+  console.log(data.currentPage, data);
   return (
     <div className="min-h-screen bg-slate-200">
       <Head>
@@ -28,7 +26,7 @@ function index({
       <main className="max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative py-2">
         <Navbar />
         <TopMovies
-          data={results}
+          data={data.results}
           currentPage={data.currentPage}
           hasNextPage={data.hasNextPage}
         />
@@ -37,17 +35,32 @@ function index({
   );
 }
 
-export default index;
-// const cache = new NodeCache({ stdTTL: 91800 * 5, checkperiod: 1200 });
+export default page;
 
-export const getStaticProps = async () => {
-  const [req] = await Promise.all([
-    fetch(
-      `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=20&format=MOVIE&sort=["SCORE_DESC"]`
-    ),
-  ]);
+export const getStaticPaths = async () => {
+  const paths = [
+    { params: { page: "2" } },
+    { params: { page: "3" } },
+    { params: { page: "4" } },
+    { params: { page: "5" } },
+    { params: { page: "6" } },
+    { params: { page: "7" } },
+    { params: { page: "8" } },
+    { params: { page: "9" } },
+    { params: { page: "10" } },
+  ];
+  return { paths, fallback: "blocking" };
+};
+
+export const getStaticProps = async ({
+  params,
+}: {
+  params: { page: string };
+}) => {
+  const req = await fetch(
+    `${process.env.NEXT_PUBLIC_API}advanced-search?perPage=20&format=MOVIE&sort=["SCORE_DESC"]&page=${params.page}`
+  );
   const data = await req.json();
-
   return {
     props: {
       data,

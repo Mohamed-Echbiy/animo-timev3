@@ -5,11 +5,11 @@ import dynamic from "next/dynamic";
 const LightBox = dynamic(() => import("../../common/LightBox"));
 
 function Character({ data }: { data: animeDetail }) {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const slides = data.characters.slice(0, 6).map((e) => {
     return { src: e.image, alt: e.name.full };
   });
-  console.log(showModal, slides);
+
   return (
     <>
       {data.characters.length ? (
@@ -32,25 +32,25 @@ function Character({ data }: { data: animeDetail }) {
               <div className="relative min-w-[56px] min-h-[56px] lg:min-w-[76px] lg:min-h-[76px] rounded-full overflow-hidden border-4 border-white border-solid">
                 <Image
                   src={e.image}
-                  alt={e.name.full}
+                  alt={e.name.full || e.name.userPreferred}
                   fill
                   onClick={() => setShowModal(true)}
                   className="cursor-pointer"
                 />
               </div>
               <div className=" text-sm md:text-sm lg:text-xl">
-                <p>{e.name.full}</p>
-                <p className="text-xs">{e.name.native}</p>
+                <p>{e.name.full || e.name.first}</p>
+                <p className="text-xs">{e.name.native || e.name.full}</p>
               </div>
               <div className="role text-xs md:text-sm lg:text-xl flex-grow flex justify-end gap-1 items-center">
                 <p className="capitalize text-xs">{e.role}</p>
-                {e.role === "MAIN" && <p>🌟</p>}
+                {e.role === "MAIN" ? <p>🌟</p> : <></>}
               </div>
             </div>
           ))}
         </main>
       ) : (
-        <div></div>
+        <></>
       )}
     </>
   );

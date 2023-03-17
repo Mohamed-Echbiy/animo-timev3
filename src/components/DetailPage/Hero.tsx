@@ -6,12 +6,15 @@ import { PlayIcon } from "../../common/Icons";
 import Link from "next/link";
 
 function Hero({ data }: { data: animeDetail }) {
+  console.log(data);
   const ep = !!data.episodes.length
     ? data.episodes[0].id[data.episodes[0].id.length - 1]
     : 0;
   const title = data.title.userPreferred
     ? data.title.userPreferred
-    : data.title.romaji;
+    : data.title.romaji
+    ? data.title.romaji
+    : data.title.english;
 
   const [isModal, setIsModal] = useState(false);
   return (
@@ -63,7 +66,7 @@ function Hero({ data }: { data: animeDetail }) {
           </div>
           <div className="content_info w-full mt-8 sm:mt-0 z-10 flex sm:block flex-col justify-center items-center">
             <h3 className="title text-xl sm:text-2xl lg:text-3xl text-center sm:text-start">
-              {data.title.english}
+              {title}
             </h3>
             {data.title.english !== data.title.native && (
               <p className=" text-xs sm:text-sm text-center sm:text-start mt-2">
@@ -77,12 +80,8 @@ function Hero({ data }: { data: animeDetail }) {
               <span className="p-1 s border border-solid text-white  border-white rounded-md">
                 {data.subOrDub}
               </span>
-              <div className="w-8 h-8 relative">
-                <Image
-                  src={`https://flagsapi.com/${data.countryOfOrigin}/flat/64.png`}
-                  alt={`country flag`}
-                  fill
-                />
+              <div className=" text-base md:text-xl relative">
+                {data.countryOfOrigin}
               </div>
               <div className="w-[1px] bg-white h-7 "></div>
               <p className="capitalize text-white ">{data.currentEpisode} ep</p>

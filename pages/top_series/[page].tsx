@@ -1,14 +1,10 @@
-import NodeCache from "node-cache";
-
-//
-import dynamic from "next/dynamic";
 import Head from "next/head";
+import React from "react";
+import Navbar from "../../src/common/NavBar/Navbar";
 import TopSeries from "../../src/components/top_series/TopSeries";
 import { anime } from "../../types/anime";
 
-const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
-
-function index({
+function Page({
   data,
 }: {
   data: { currentPage: number; results: [anime]; hasNextPage: boolean };
@@ -30,25 +26,41 @@ function index({
         <Navbar />
         <TopSeries
           data={data.results}
-          currentPage={data.currentPage}
           hasNextPage={data.hasNextPage}
+          currentPage={data.currentPage}
         />
       </main>
     </div>
   );
 }
 
-export default index;
-const cache = new NodeCache({ stdTTL: 91800 * 5, checkperiod: 1200 });
+export default Page;
+export const getStaticPaths = async () => {
+  const paths = [
+    { params: { page: "2" } },
+    { params: { page: "3" } },
+    { params: { page: "4" } },
+    { params: { page: "5" } },
+    { params: { page: "6" } },
+    { params: { page: "7" } },
+    { params: { page: "8" } },
+    { params: { page: "9" } },
+    { params: { page: "10" } },
+    { params: { page: "11" } },
+  ];
+  return { paths, fallback: "blocking" };
+};
 
-export const getStaticProps = async (context: { req: { url: string } }) => {
-  const [req] = await Promise.all([
-    fetch(
-      `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=20&format=TV&sort=["SCORE_DESC"]`
-    ),
-  ]);
+export const getStaticProps = async ({
+  params,
+}: {
+  params: { page: string };
+}) => {
+  const req = await fetch(
+    `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=20&format=TV&sort=["SCORE_DESC"]&page=${params.page}`
+  );
   const data = await req.json();
-
+  console.log(data);
   return {
     props: {
       data,
