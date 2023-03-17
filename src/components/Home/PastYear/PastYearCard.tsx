@@ -20,7 +20,7 @@ function PastYearCard({ data }: { data: anime | recommndation }) {
           <Heart data={data} />
           <Link
             href={`/detail/${data.id}`}
-            title={`watch ${data.title.userPreferred || data.title.english}`}
+            title={`watch ${data.title.userPreferred || "watch anime now"}`}
             className=""
           >
             <div className="rating absolute -bottom-6 right-4 z-20 justify-center flex items-center w-10 h-10 md:w-12 md:h-12 bg-primary-500 border-4 md:border-8 rounded-full border-slate-200 border-solid">
@@ -44,7 +44,7 @@ function PastYearCard({ data }: { data: anime | recommndation }) {
           <Image
             src={data.image}
             quality={30}
-            alt={data.title.english || "image"}
+            alt={data.title.romaji || "cover image"}
             fill={true}
             sizes="(max-width: 768px) 50vw,
              33vw"
@@ -57,7 +57,7 @@ function PastYearCard({ data }: { data: anime | recommndation }) {
           {imageLoad ? (
             <>
               <FlexIt justify="between" items="center">
-                <p>{data.title.userPreferred || data.title.english}</p>
+                <p>{data.title.userPreferred || data.title.romaji}</p>
               </FlexIt>
               {data.genres && (
                 <FlexIt justify="start" gap="4" className="mt-4 text-gray-300">
