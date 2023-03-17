@@ -24,10 +24,8 @@ const Episodes = dynamic(
 
 function index({ data, title }: { data: animeDetail; title: string }) {
   // console.log(data);
-  const synonyms: string = !!data.synonyms.length
-    ? data.synonyms.join(",")
-    : title;
-  console.log(synonyms);
+  const synonyms: string = !!data?.synonyms ? data.synonyms.join(",") : title;
+
   return (
     <div className=" min-h-screen bg-slate-200 ">
       <Head>
@@ -93,8 +91,8 @@ export default index;
 
 export const getStaticPaths = async () => {
   const [reqPop, reqPop2] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=50`),
-    fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=50&page=2`),
+    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=49`),
+    fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=49&page=2`),
   ]);
   const resPop = await reqPop.json();
   const resPop2 = await reqPop2.json();
@@ -109,12 +107,24 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
   // console.log(params);
   const res = await fetch(`${process.env.NEXT_PUBLIC_API}info/${params.id}`);
   const data = await res.json();
-  const title = data.title.romaji
-    ? data.title.romaji
-    : data.title.english
-    ? data.title.english
-    : data.title.native;
-
+  const titles: {
+    userPreferred?: string;
+    english?: string;
+    romaji?: string;
+    native?: string;
+  } = await data.title;
+  let title;
+  if (titles?.english !== undefined) {
+    title = titles.english;
+  } else if (titles?.romaji !== undefined) {
+    title = titles.romaji;
+  } else if (titles?.native !== undefined) {
+    title = titles.native;
+  } else if (titles?.userPreferred !== undefined) {
+    title = titles.userPreferred;
+  } else {
+    title = "";
+  }
   // Pass post data to the page via props
   return { props: { data, title }, revalidate: 86400 };
 }

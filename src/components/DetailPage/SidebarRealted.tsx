@@ -10,8 +10,8 @@ function SidebarRealted({ data }: { data: animeDetail }) {
       </h4>
       {!!data.relations.length ? (
         <>
-          {data.relations.slice(0, 2).map((e) => (
-            <RelationCard data={e} />
+          {data.relations.slice(0, 2).map((e, i) => (
+            <RelationCard key={e.id + i + "ppppppp"} data={e} />
           ))}
         </>
       ) : (

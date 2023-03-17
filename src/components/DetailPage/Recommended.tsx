@@ -4,7 +4,7 @@ import { recommndation } from "../../../types/recomndation";
 import PastYearCard from "../Home/PastYear/PastYearCard";
 
 function Recommended({ data }: { data: animeDetail }) {
-  console.log(data.recommendations);
+  // console.log(data.recommendations);
 
   return (
     <>

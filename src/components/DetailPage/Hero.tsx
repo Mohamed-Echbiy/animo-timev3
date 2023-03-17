@@ -6,15 +6,14 @@ import { PlayIcon } from "../../common/Icons";
 import Link from "next/link";
 
 function Hero({ data }: { data: animeDetail }) {
-  console.log(data);
-  const ep = !!data.episodes.length
+  const ep = !!data?.episodes
     ? data.episodes[0].id[data.episodes[0].id.length - 1]
     : 0;
-  const title = data.title.userPreferred
-    ? data.title.userPreferred
-    : data.title.romaji
-    ? data.title.romaji
-    : data.title.english;
+  const title = data.title?.userPreferred
+    ? data.title?.userPreferred
+    : data.title?.romaji
+    ? data.title?.romaji
+    : data.title?.english;
 
   const [isModal, setIsModal] = useState(false);
   return (
@@ -70,7 +69,7 @@ function Hero({ data }: { data: animeDetail }) {
             </h3>
 
             <p className=" text-xs sm:text-sm text-center sm:text-start mt-2">
-              {data.title.native || ""}
+              {data.title?.native || ""}
             </p>
 
             <div className="info_sub_hd mt-4 flex gap-2 uppercase items-center justify-center sm:justify-start text-xs md:text-sm bg-black sm:bg-transparent px-4 py-2 sm:p-0 rounded-md flex-wrap">
@@ -84,11 +83,13 @@ function Hero({ data }: { data: animeDetail }) {
                 {data.countryOfOrigin}
               </div>
               <div className="w-[1px] bg-white h-7 "></div>
-              <p className="capitalize text-white ">{data.currentEpisode} ep</p>
+              <p className="capitalize text-white ">
+                {data?.currentEpisode} ep
+              </p>
               <div className="w-[1px] bg-white h-7 "></div>
-              <p className="text-white ">{data.studios[0]}</p>
+              <p className="text-white ">{data.studios?.toString()}</p>
               <div className="w-[1px] bg-white h-7 "></div>
-              <p className="text-white ">{data.season}</p>
+              <p className="text-white ">{data?.season}</p>
             </div>
             <div className="geners flex items-center gap-3 mt-4 text-xs md:text-sm flex-wrap">
               {data.genres.map((e, i) => (
@@ -118,9 +119,9 @@ function Hero({ data }: { data: animeDetail }) {
                 </span>
               </p>
             </div>
-            {data.episodes.length ? (
+            {data.episodes?.length ? (
               <Link
-                href={`/watch/${data.episodes[0].id}?animeData=${data.currentEpisode}&ids=${data.id}&title=${title}`}
+                href={`/watch/${data?.episodes[0]?.id}?animeData=${data.currentEpisode}&ids=${data.id}&title=${title}`}
                 className=" text-xs sm:text-sm lg:text-base flex items-center justify-center gap-1 h-5 w-fit mt-2 p-1 sm:p-2 lg:p-3  box-content rounded-lg bg-secondary-600"
               >
                 Watch <PlayIcon />
