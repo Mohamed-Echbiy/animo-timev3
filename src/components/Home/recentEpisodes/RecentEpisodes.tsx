@@ -7,7 +7,7 @@ function RecentEpisodes({ data }: { data: [recent_episodes] }) {
   return (
     <main className="recent_episodes_container">
       <div className="flex justify-between items-center mb-4 mt-section">
-        <h2 className="recent_episodes_title  text-subHead  uppercase flex items-center gap-3">
+        <h2 className="recent_episodes_title text-base  md:text-subHead  uppercase flex items-center gap-3">
           Recent Episodes
           <img
             src="/new.gif"

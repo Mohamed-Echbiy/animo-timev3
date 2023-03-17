@@ -14,7 +14,7 @@ import {
 } from "../Icons";
 import { userContext } from "../../../pages/_app";
 import { useRouter } from "next/router";
-import image from "../../photos/avatar.svg";
+
 function User() {
   const [isBarOpen, setBar] = useState<Boolean>(false);
   const { userIn, setIsUserIn } = useContext(userContext);
@@ -42,7 +42,6 @@ function User() {
     };
     localStorage.setItem("info", JSON.stringify(userObject));
     setIsUserIn(true);
-    router.push("/");
     window.location.reload();
   };
   const signOut = async () => {

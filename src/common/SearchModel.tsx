@@ -7,6 +7,7 @@ import { CloseIcon, SearchIcon } from "./Icons";
 import { InputSuggestions } from "react-input-suggestions";
 
 const animeTitles = [
+  "spy x familly",
   "Attack on Titan",
   "One Piece",
   "Naruto",

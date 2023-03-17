@@ -26,7 +26,7 @@ function index({ data }: { data: animeDetail }) {
   const title = data.title.userPreferred
     ? data.title.userPreferred
     : data.title.romaji;
-  console.log(data);
+  // console.log(data);
   const synonyms = data.synonyms.join(",");
   return (
     <div className=" min-h-screen bg-slate-200 ">
@@ -71,24 +71,47 @@ export default index;
 
 const cache = new NodeCache({ stdTTL: 1186400 * 5, checkperiod: 1200 });
 
-export const getServerSideProps = async (context: {
-  req: { url: string };
-  params: { id: string };
-}) => {
-  const cachedData = cache.get(context.req.url);
-  if (cachedData) {
-    console.log("cachedData");
-    return {
-      props: cachedData,
-    };
-  }
-  const { params } = context;
-  const req = await fetch(`${process.env.NEXT_PUBLIC_API_V}info/${params.id}`);
-  const res = await req.json();
-  cache.set(context.req.url, { data: res }, 86400 * 5);
-  return {
-    props: {
-      data: res,
-    },
-  };
+// export const getServerSideProps = async (context: {
+//   req: { url: string };
+//   params: { id: string };
+// }) => {
+//   const cachedData = cache.get(context.req.url);
+//   if (cachedData) {
+//     console.log("cachedData");
+//     return {
+//       props: cachedData,
+//     };
+//   }
+//   const { params } = context;
+//   const req = await fetch(`${process.env.NEXT_PUBLIC_API_V}info/${params.id}`);
+//   const res = await req.json();
+//   cache.set(context.req.url, { data: res }, 86400 * 5);
+//   return {
+//     props: {
+//       data: res,
+//     },
+//   };
+// };
+
+export const getStaticPaths = async () => {
+  const [reqPop, reqPop2] = await Promise.all([
+    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=100`),
+    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=100&page=2`),
+  ]);
+  const resPop = await reqPop.json();
+  const resPop2 = await reqPop2.json();
+  const data = [...resPop.results, ...resPop2.results];
+  const paths = data.map((animeId: { id: string }) => {
+    return { params: { id: animeId.id } };
+  });
+  console.log(paths);
+  return { paths, fallback: "blocking" };
 };
+export async function getStaticProps({ params }: { params: { id: string } }) {
+  // console.log(params);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API}info/${params.id}`);
+  const data = await res.json();
+
+  // Pass post data to the page via props
+  return { props: { data }, revalidate: 86400 };
+}

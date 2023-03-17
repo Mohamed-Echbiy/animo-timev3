@@ -18,8 +18,11 @@ function TopMovies({ data }: { data: anime[] }) {
             </span>
           </h1>
           <CoverCardPastYear anime1={anime1[0]} />
-          {data.slice(1).map((e) => (
-            <article className="flex-grow min-w-[240px] w-1/6 max-w-[250px] md:max-w-[none] text-xs md:text-sm">
+          {data.slice(1).map((e, i) => (
+            <article
+              className="flex-grow min-w-[240px] w-1/6 max-w-[250px] md:max-w-[none] text-xs md:text-sm"
+              key={i + e.color + e.id + e.malId + "ldfjdlfjsd"}
+            >
               <PastYearCard data={e} />
             </article>
           ))}

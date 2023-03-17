@@ -51,9 +51,8 @@ export const getStaticProps = async () => {
   const [req, reqEp] = await Promise.all([
     fetch(`${process.env.NEXT_PUBLIC_API}trending?perPage=4`),
     fetch(`${process.env.NEXT_PUBLIC_API}recent-episodes?perPage=10`),
-    // fetch(`process.env.NEXT_PUBLIC_API}advanced-search?year=2023&perPage=8`),
   ]);
-  // const req = await fetch(`${process.env.NEXT_PUBLIC_API}trending?perPage=4`);
+
   const reqPastYear = await fetch(
     `https://api.consumet.org/meta/anilist/advanced-search?year=2020&perPage=8`
   );
@@ -72,6 +71,5 @@ export const getStaticProps = async () => {
       dataEp,
       dataPastYear,
     },
-    revalidate: 6000,
   };
 };

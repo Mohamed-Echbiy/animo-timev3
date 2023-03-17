@@ -8,8 +8,11 @@ function TopSeries({ data }: { data: anime[] }) {
       <FlexIt warp="wrap" className=" gap-y-12 pt-[220px] gap-x-2 lg:gap-x-2">
         <>
           <h3 className="w-full text-subHead mb-4 uppercase">Top Series</h3>
-          {data.map((e) => (
-            <div className="flex-grow min-w-[240px] w-1/6 max-w-[250px] md:max-w-[none] text-xs md:text-sm">
+          {data.map((e, i) => (
+            <div
+              key={i + e.id + e.type + e.image}
+              className="flex-grow min-w-[240px] w-1/6 max-w-[250px] md:max-w-[none] text-xs md:text-sm"
+            >
               <PastYearCard data={e} />
             </div>
           ))}

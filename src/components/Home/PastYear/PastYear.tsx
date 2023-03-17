@@ -22,7 +22,7 @@ function PastYear({ data }: { data: [anime] }) {
             modules={[Navigation, Autoplay]}
             style={{ paddingBottom: "50px", paddingTop: "80px" }}
             breakpoints={{
-              390: {
+              320: {
                 slidesPerView: 2,
               },
               560: {
