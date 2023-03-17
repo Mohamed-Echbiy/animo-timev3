@@ -93,8 +93,8 @@ export default index;
 
 export const getStaticPaths = async () => {
   const [reqPop, reqPop2] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=40`),
-    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=40&page=2`),
+    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=50`),
+    fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=50&page=2`),
   ]);
   const resPop = await reqPop.json();
   const resPop2 = await reqPop2.json();
@@ -109,7 +109,11 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
   // console.log(params);
   const res = await fetch(`${process.env.NEXT_PUBLIC_API}info/${params.id}`);
   const data = await res.json();
-  const title = data.title.english;
+  const title = data.title.romaji
+    ? data.title.romaji
+    : data.title.english
+    ? data.title.english
+    : data.title.native;
 
   // Pass post data to the page via props
   return { props: { data, title }, revalidate: 86400 };
