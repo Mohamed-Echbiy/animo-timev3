@@ -68,11 +68,11 @@ function Hero({ data }: { data: animeDetail }) {
             <h3 className="title text-xl sm:text-2xl lg:text-3xl text-center sm:text-start">
               {title}
             </h3>
-            {data.title.english !== data.title.native && (
-              <p className=" text-xs sm:text-sm text-center sm:text-start mt-2">
-                {data.title.native}
-              </p>
-            )}
+
+            <p className=" text-xs sm:text-sm text-center sm:text-start mt-2">
+              {data.title.native || ""}
+            </p>
+
             <div className="info_sub_hd mt-4 flex gap-2 uppercase items-center justify-center sm:justify-start text-xs md:text-sm bg-black sm:bg-transparent px-4 py-2 sm:p-0 rounded-md flex-wrap">
               <span className="p-[5px]  bg-white text-black rounded-md h-fit">
                 {data.type}
