@@ -11,7 +11,7 @@ function RelationCard({ data }: { data: relations }) {
     >
       <Image
         src={data.image}
-        alt={data.title.userPreferred || data.title.english}
+        alt={data.title.userPreferred || "anime cover"}
         fill
         className=""
       />
