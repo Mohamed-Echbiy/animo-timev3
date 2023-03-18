@@ -51,6 +51,8 @@ function User() {
     router.push("/");
   };
 
+  console.log(user);
+
   return (
     <>
       {userIn ? (
@@ -73,9 +75,7 @@ function User() {
           {isBarOpen && (
             <div className="setting absolute z-50 bottom-[0%] translate-y-full py-3 px-2 left-0 w-full text-center flex flex-col gap-3 rounded items-start justify-center bg-white">
               <Link
-                href={`/favorites/${
-                  JSON.parse(localStorage.getItem("info")!).id
-                }`}
+                href={`/favorites/${user.id}`}
                 className="mt-2 flex items-center gap-2"
               >
                 <span className="h-5 w-5">

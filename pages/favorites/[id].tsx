@@ -7,6 +7,7 @@ import { favorite } from "../../types/favorites";
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 //
 function index({ data }: { data: favorite[] }) {
+  console.log(data);
   return (
     <div className=" min-h-screen bg-slate-200 ">
       <Head>
@@ -47,6 +48,7 @@ export const getServerSideProps = async (context: {
   );
   const res = await req.json();
   const data = await res.data;
+  console.log(data);
   return {
     props: {
       data,
