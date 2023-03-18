@@ -37,7 +37,7 @@ function IframeContainerArabic({
       if (!isLoading && !isError) {
         console.log("did I RUN");
         console.log(data.data);
-        setSource(data.data.data[active]);
+        setSource(data.data[active] || 0);
       }
     }
   }, [active, isLoading]);
