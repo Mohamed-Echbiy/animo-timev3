@@ -33,7 +33,7 @@ function index({
   comments: { data: commentSchema[] };
 }) {
   const router = useRouter();
-  console.log(comments);
+  // console.log(comments);
   const { id, animeData, title, ids }: any = router.query;
   const nextEpNum: any = id?.slice(-1);
   //keywords
