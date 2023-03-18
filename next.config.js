@@ -13,12 +13,4 @@ module.exports = {
     API_URL: process.env.API,
   },
   // Serve static files from the "public" folder
-  async rewrites() {
-    return [
-      {
-        source: "/my-app/:path*",
-        destination: "/public/:path*",
-      },
-    ];
-  },
 };
