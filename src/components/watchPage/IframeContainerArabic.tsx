@@ -14,26 +14,31 @@ function IframeContainerArabic({
 }) {
   const [active, setActive] = useState(0);
   const [source, setSource] = useState("");
+  const [hydrate, setHydrate] = useState(true);
   const titleIs = id.slice(0, id.indexOf("-episode-"));
   console.log(titleIs);
   const fcQuery = async () => {
     const req = await fetch(
       `https://arabic-trans.onrender.com/${titleIs}?ep=${nextEpNum}`
     );
-    const res = await req.json();
-    return res;
+    const data = await req.json();
+    return data;
   };
 
   const { data, isLoading, isError } = useQuery(
-    ["arabicTranslate", titleIs],
+    ["arabicTranslate", nextEpNum],
     fcQuery
   );
   useEffect(() => {
     console.log("I RUN");
-    if (!isLoading && !!data.data) {
-      console.log("did I RUN");
-      // console.log(data.data.data);
-      setSource(data.data.data[active]);
+    if (window !== undefined) {
+      setHydrate(false);
+
+      if (!isLoading && !isError) {
+        console.log("did I RUN");
+        console.log(data.data);
+        setSource(data.data.data[active]);
+      }
     }
   }, [active, isLoading]);
   const switchIt = (e: number, s: string) => {
@@ -48,7 +53,7 @@ function IframeContainerArabic({
       </div>
     );
   }
-  console.log(data);
+  // console.log(data);
   if (isError || data.message) {
     return (
       <div className="w-full aspect-video uppercase flex justify-center items-center">
@@ -58,40 +63,48 @@ function IframeContainerArabic({
   }
   return (
     <>
-      {!!data.data && !!data.data.data && data.data.data.length > 0 ? (
-        <section className="">
-          <div className="sources flex flex-wrap items-center justify-center gap-2 py-2  ">
-            {data.data.data.map((e: string, i: number) => {
-              const index = i;
-              return (
-                <button
-                  onClick={() => switchIt(index, e)}
-                  className={`py-1 px-2 text-slate-200 rounded ${
-                    active === i ? "bg-secondary-700" : " bg-gray-700"
-                  }`}
-                  key={e + i + ";;:nhhlljlhjl"}
-                >
-                  server {i + 1}
-                </button>
-              );
-            })}
-          </div>
-          <div className="relative w-full aspect-video rounded overflow-hidden">
-            <Iframe
-              url={source}
-              width="100%"
-              height="100%"
-              id=""
-              className="left-0 top-0"
-              display="block"
-              position="absolute"
-            />
-          </div>
-        </section>
+      {hydrate ? (
+        <></>
       ) : (
-        <div className="w-full h-full flex justify-center items-center">
-          <p>sorry but there is no translate episode for this anime out yet</p>
-        </div>
+        <>
+          {!!data.data && !!data.data && data.data.length > 0 ? (
+            <section className="">
+              <div className="sources flex flex-wrap items-center justify-center gap-2 py-2  ">
+                {data.data.map((e: string, i: number) => {
+                  const index = i;
+                  return (
+                    <button
+                      onClick={() => switchIt(index, e)}
+                      className={`py-1 px-2 text-slate-200 rounded ${
+                        active === i ? "bg-secondary-700" : " bg-gray-700"
+                      }`}
+                      key={e + i + ";;:nhhlljlhjl"}
+                    >
+                      server {i + 1}
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="relative w-full aspect-video rounded overflow-hidden">
+                <Iframe
+                  url={source}
+                  width="100%"
+                  height="100%"
+                  id=""
+                  className="left-0 top-0"
+                  display="block"
+                  position="absolute"
+                />
+              </div>
+            </section>
+          ) : (
+            <div className="w-full h-full flex justify-center items-center">
+              <p>
+                sorry but there is no translate episode for this anime out yet
+              </p>
+            </div>
+          )}
+        </>
       )}
     </>
   );
