@@ -9,7 +9,13 @@ function RelationCard({ data }: { data: relations }) {
       href={`/detail/${data.id}`}
       className="relative aspect-[.7] min-w-[150px] max-w-[250px] flex-grow border-8 border-gray-900 border-solid "
     >
-      <Image src={data.image} alt={"anime cover"} fill className="" />
+      <Image
+        src={data.image}
+        alt={"anime cover"}
+        fill
+        className=""
+        quality={20}
+      />
     </Link>
   );
 }

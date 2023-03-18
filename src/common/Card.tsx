@@ -35,16 +35,22 @@ function Card({ data }: { data: trending | anime }) {
       <Heart data={data} />
       <article className="absolute transition-all duration-500 text-cardSm sm:text-xs xl:text-sm ease-in-out p-4 z-10 md:h-fit w-full left-0 -bottom-1  bg-gray-900 backdrop-blur-sm bg-opacity-80">
         <FlexIt justify="between" items="center">
-          <p>{title}</p>
-          <p className="hidden md:flex items-center gap-2">
+          <p className="text-cardSm sm:text-xs lg:text-sm xl:text-base">
+            {title}
+          </p>
+          <p className="hidden xs:text-cardSm lg:text-sm md:flex items-center gap-2">
             {(data.rating / 10).toPrecision(2)}
-            <span className="h-4 w-4 text-primary-400">
+            <span className=" h-2 w-2 md:h-4 md:w-4 text-primary-400">
               <StarIconMini />
             </span>
           </p>
         </FlexIt>
-        <FlexIt justify="start" gap="4" className="mt-4 text-gray-300">
-          {genres.slice(0, 3).map((e, i) => (
+        <FlexIt
+          justify="start"
+          gap="4"
+          className="mt-4 text-cardSm sm:text-xs lg:text-xs text-gray-300"
+        >
+          {genres.slice(0, 2).map((e, i) => (
             <p key={i * 258109237.6}>{e}</p>
           ))}
         </FlexIt>

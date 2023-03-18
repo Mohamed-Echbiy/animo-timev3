@@ -53,7 +53,7 @@ function Hero({ data }: { data: animeDetail }) {
               src={data.image}
               alt={title}
               fill
-              quality={60}
+              quality={20}
               priority={true}
             />
             <div className="absolute -top-8 left-1/2 rounded-full -translate-x-2/4 w-14 h-14 bg-black flex justify-center items-center gap-[2px] text-primary-500 border-4 border-solid border-white">

@@ -43,7 +43,7 @@ function PastYearCard({ data }: { data: anime | recommndation }) {
         <Link href={`/detail/${data.id}`} className="realtive w-full h-full">
           <Image
             src={data.image}
-            quality={30}
+            quality={20}
             alt={data.title.romaji || "cover image"}
             fill={true}
             sizes="(max-width: 768px) 50vw,

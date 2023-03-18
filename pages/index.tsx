@@ -6,21 +6,29 @@ import { recent_episodes } from "../types/recent_episodes";
 import { trending } from "../types/trending";
 import dynamic from "next/dynamic";
 
-import PastYear from "../src/components/Home/PastYear/PastYear";
+// import PastYear from "../src/components/Home/PastYear/PastYear";
 import RecentEpisodes from "../src/components/Home/recentEpisodes/RecentEpisodes";
+// import Upcoming from "../src/components/Home/Upcoming/Upcoming";
 
 const Navbar = dynamic(() => import("../src/common/NavBar/Navbar"));
+const Upcoming = dynamic(
+  () => import("../src/components/Home/Upcoming/Upcoming")
+);
+const PastYear = dynamic(
+  () => import("../src/components/Home/PastYear/PastYear")
+);
 const Home = ({
   data,
   dataEp,
   dataPastYear,
-}: // response_Q,
-{
+  popularData,
+}: {
   data: [trending];
   dataEp: [recent_episodes];
   dataPastYear: [anime];
+  popularData: [anime];
 }) => {
-  // console.log(response_Q);
+  console.log(popularData);
   return (
     <div className=" min-h-screen bg-slate-200 ">
       <Head>
@@ -34,10 +42,12 @@ const Home = ({
           name="keywords"
           content="anime, Animotime, anime website, watch anime, anime episodes, anime community, anime fans, anime streaming, classic anime, new anime releases, anime library, popular anime"
         />
+        <meta name="robots" content="all" />
       </Head>
       <main className=" max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative">
         <Navbar />
         <HeroSection data={data} />
+        <Upcoming data={popularData} />
         <RecentEpisodes data={dataEp} />
         <PastYear data={dataPastYear} />
       </main>
@@ -48,28 +58,37 @@ const Home = ({
 export default Home;
 
 export const getStaticProps = async () => {
-  const [req, reqEp] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_API}trending?perPage=4`),
+  const [reqPop, req, reqEp, reqPastYear] = await Promise.all([
+    fetch(
+      `https://api.consumet.org/meta/anilist/advanced-search?status=NOT_YET_RELEASED`
+    ),
+    fetch(`${process.env.NEXT_PUBLIC_API}trending?perPage=10`),
     fetch(`${process.env.NEXT_PUBLIC_API}recent-episodes?perPage=10`),
+    fetch(
+      `https://api.consumet.org/meta/anilist/advanced-search?year=2020&perPage=8`
+    ),
   ]);
 
-  const reqPastYear = await fetch(
-    `https://api.consumet.org/meta/anilist/advanced-search?year=2020&perPage=8`
-  );
   const res = await req.json();
   const data = await res.results;
-
+  //
   const resEp = await reqEp.json();
   const dataEp = await resEp.results;
-
+  //
   const resPastYear = await reqPastYear.json();
   const dataPastYear = await resPastYear.results;
+  //
+  const resPop = await reqPop.json();
+  const popularData = await resPop.results;
+  //
 
   return {
     props: {
       data,
       dataEp,
       dataPastYear,
+      popularData,
     },
+    revalidate: 86000,
   };
 };

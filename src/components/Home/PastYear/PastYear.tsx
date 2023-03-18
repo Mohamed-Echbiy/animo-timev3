@@ -42,8 +42,13 @@ function PastYear({ data }: { data: [anime] }) {
             autoplay={true}
           >
             {data.slice(1).map((e: anime, i: number) => (
-              <SwiperSlide key={i + e.id + "kksjdfskdhfsfbn"}>
-                <PastYearCard data={e} />
+              <SwiperSlide
+                key={i + e.id + "kksjdfskdhfsfbn"}
+                className="mx-auto"
+              >
+                <div className="max-w-[200px] sm:max-w-none mx-auto">
+                  <PastYearCard data={e} />
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>

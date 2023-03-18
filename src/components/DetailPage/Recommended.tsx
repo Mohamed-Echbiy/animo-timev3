@@ -26,7 +26,12 @@ function Recommended({ data }: { data: animeDetail }) {
         <div className=" justify-center flex items-center capitalize flex-grow w-2/4 gap-3">
           <p>there are no recommanded anime associted with this anime</p>
           <div className="relative w-1/2 max-w-[120px] aspect-square">
-            <Image src="/natuto_error.png" alt="crying face" fill />
+            <Image
+              src="/natuto_error.png"
+              alt="crying face"
+              fill
+              quality={30}
+            />
           </div>
         </div>
       )}

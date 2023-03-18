@@ -57,7 +57,12 @@ function Episodes({ data }: { data: animeDetail }) {
         <div className="flex flex-wrap justify-center items-center mt-10 gap-3 w-full capitalize h-24 md:h-32">
           <p className=" self-start py-6">there are no episodes out yet</p>
           <div className="relative w-16 h-16 md:w-24 md:h-24 self-end">
-            <Image src={"/nothing_yet.png"} alt="angry face" fill />
+            <Image
+              src={"/nothing_yet.png"}
+              alt="angry face"
+              fill
+              quality={20}
+            />
           </div>
         </div>
       )}
