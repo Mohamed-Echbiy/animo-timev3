@@ -25,7 +25,7 @@ function IframeContainerArabic({
     return data;
   };
 
-  const { data, isLoading, isError } = useQuery(
+  const { data, isLoading, isError, isSuccess } = useQuery(
     ["arabicTranslate", nextEpNum],
     fcQuery
   );
@@ -34,7 +34,7 @@ function IframeContainerArabic({
     if (window !== undefined) {
       setHydrate(false);
 
-      if (!isLoading && !isError) {
+      if (!isLoading && !isError && isSuccess) {
         console.log("did I RUN");
         console.log(data.data);
         setSource(data.data[active] || 0);
@@ -67,7 +67,7 @@ function IframeContainerArabic({
         <></>
       ) : (
         <>
-          {!!data.data && !!data.data && data.data.length > 0 ? (
+          {isSuccess && !!data.data && data.data.length > 0 ? (
             <section className="">
               <div className="sources flex flex-wrap items-center justify-center gap-2 py-2  ">
                 {data.data.map((e: string, i: number) => {
