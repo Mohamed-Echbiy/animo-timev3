@@ -22,14 +22,17 @@ const Episodes = dynamic(
   () => import("../../src/components/DetailPage/Episodes")
 );
 
-function index({ data, title }: { data: animeDetail; title: string }) {
+function index({ data }: { data: animeDetail; title: string }) {
   // console.log(data);
+  const title = data.title?.userPreferred
+    ? data.title?.userPreferred
+    : data.title?.english;
   const synonyms: string = !!data?.synonyms ? data.synonyms.join(",") : title;
 
   return (
     <div className=" min-h-screen bg-slate-200 ">
       <Head>
-        <title>{title + ` --animotime`}</title>
+        <title>{(title || "animotime") + ` --animotime`}</title>
         <meta
           name="description"
           content={`watch ${title} with Arabic and English subtitles: Catch up on ${title} on Animotime. Follow the characters, as they continue their journey in this epic anime. Discover recommended anime to watch and join our anime community to share your thoughts on ${title}.`}
@@ -101,30 +104,13 @@ export const getStaticPaths = async () => {
     return { params: { id: animeId.id } };
   });
   console.log(paths);
-  return { paths, fallback: "blocking" };
+  return { paths, fallback: true };
 };
 export async function getStaticProps({ params }: { params: { id: string } }) {
   // console.log(params);
   const res = await fetch(`${process.env.NEXT_PUBLIC_API}info/${params.id}`);
   const data = await res.json();
-  const titles: {
-    userPreferred?: string;
-    english?: string;
-    romaji?: string;
-    native?: string;
-  } = await data.title;
-  let title;
-  if (titles?.english !== undefined) {
-    title = titles.english;
-  } else if (titles?.romaji !== undefined) {
-    title = titles.romaji;
-  } else if (titles?.native !== undefined) {
-    title = titles.native;
-  } else if (titles?.userPreferred !== undefined) {
-    title = titles.userPreferred;
-  } else {
-    title = "";
-  }
+
   // Pass post data to the page via props
-  return { props: { data, title }, revalidate: 86400 };
+  return { props: { data }, revalidate: 86400 };
 }
