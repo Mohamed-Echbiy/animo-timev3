@@ -3,7 +3,7 @@ import Iframe from "react-iframe";
 import { episode } from "../../../types/episode";
 
 function IframeContainer({ data }: { data: episode[] }) {
-  console.log(data);
+  // console.log(data);
   return (
     <div className="relative w-full aspect-video rounded overflow-hidden">
       <Iframe
