@@ -12,4 +12,14 @@ module.exports = {
   env: {
     API_URL: process.env.API,
   },
+  // Serve static files from the "public" folder
+  async rewrites() {
+    return [
+      {
+        source: "/:path*",
+        destination: "/public/:path*",
+      },
+    ];
+  },
+  assetPrefix: process.env.NODE_ENV === "production" ? "/my-app" : "",
 };
