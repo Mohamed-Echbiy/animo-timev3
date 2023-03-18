@@ -92,7 +92,7 @@ function Hero({ data }: { data: animeDetail }) {
               <p className="text-white ">{data?.season}</p>
             </div>
             <div className="geners flex items-center gap-3 mt-4 text-xs md:text-sm flex-wrap">
-              {data.genres.map((e, i) => (
+              {data.genres?.map((e, i) => (
                 <span
                   className="p-2 border border-solid border-black sm:border-white rounded-lg"
                   key={e + "jdfldjlf" + 2901239290 * i}
@@ -105,7 +105,7 @@ function Hero({ data }: { data: animeDetail }) {
               <p className="uppercase mt-4 mb-2">description</p>
               <p className="text-sm md:text-base">
                 <span className=" capitalize hidden sm:inline">
-                  {data.description.slice(0, 200)}
+                  {data.description?.slice(0, 200)}
                 </span>
                 <span className="max-h-[80px] overflow-y-scroll block sm:hidden text-xs py-1">
                   {data.description}
