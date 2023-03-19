@@ -93,15 +93,26 @@ export default index;
 // };
 
 export const getStaticPaths = async () => {
-  const [reqPop, reqPop2, reqPop3] = await Promise.all([
+  const [reqPop, reqPop2, reqPop3, reqPop4, reqPop5] = await Promise.all([
     fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=49`),
     fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=49&page=2`),
     fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=49&page=3`),
+    fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=49&page=4`),
+    fetch(`${process.env.NEXT_PUBLIC_API_}advanced-search?perPage=49&page=5`),
   ]);
   const resPop = await reqPop.json();
   const resPop2 = await reqPop2.json();
   const resPop3 = await reqPop3.json();
-  const data = [...resPop.results, ...resPop2.results, ...resPop3.results];
+  const resPop4 = await reqPop4.json();
+  const resPop5 = await reqPop5.json();
+
+  const data = [
+    ...resPop.results,
+    ...resPop2.results,
+    ...resPop3.results,
+    ...resPop4.results,
+    ...resPop5.results,
+  ];
   const paths = data.map((animeId: { id: string }) => {
     return { params: { id: animeId.id } };
   });

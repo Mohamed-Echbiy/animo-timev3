@@ -15,10 +15,10 @@ import IframeContainer from "../../src/components/watchPage/IframeContainer";
 //   () => import("../../src/components/watchPage/IframeContainer")
 // );
 
-const IframeContainerArabic = dynamic(
-  () => import("../../src/components/watchPage/IframeContainerArabic")
-);
-const Quality = dynamic(() => import("../../src/components/watchPage/Quality"));
+// const IframeContainerArabic = dynamic(
+//   () => import("../../src/components/watchPage/IframeContainerArabic")
+// );
+// const Quality = dynamic(() => import("../../src/components/watchPage/Quality"));
 
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 const Comments = dynamic(
@@ -68,16 +68,16 @@ function index({
           <section className="w-full md:w-2/3 flex-wrap gap-2 md:min-w-[360px] mx-auto flex-grow justify-center">
             <div className=" w-full">
               {/* quality */}
-              <Quality setWhatLanguage={setWhatLanguage} />
+              {/* <Quality setWhatLanguage={setWhatLanguage} /> */}
               {/* {ifram} */}
               {whatLanguage === "ar" ? (
                 <>
-                  <IframeContainerArabic
+                  {/* <IframeContainerArabic
                     // data={dataAr1}
                     id={id}
                     setWhatLanguage={setWhatLanguage}
                     nextEpNum={nextEpNum}
-                  />
+                  /> */}
                 </>
               ) : (
                 <IframeContainer data={data} />
