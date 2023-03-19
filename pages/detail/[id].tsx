@@ -2,7 +2,7 @@
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
 //
 const Character = dynamic(
   () => import("../../src/components/DetailPage/Character")
@@ -28,6 +28,7 @@ function index({ data }: { data: animeDetail; title: string }) {
     ? data.title?.userPreferred
     : data.title?.english;
   const synonyms: string = !!data?.synonyms ? data.synonyms.join(",") : title;
+  const [show, setShow] = useState("episodes");
 
   return (
     <div className=" min-h-screen bg-slate-200 ">
@@ -49,17 +50,32 @@ function index({ data }: { data: animeDetail; title: string }) {
         <Navbar />
         <LazyMotion features={domAnimation}>
           <m.main
-            className=" heroSection pt-[220px] md:pt-[158px] gap-2 flex-wrap flex items-center justify-center md:justify-start"
+            className=" heroSection pt-[220px] md:pt-[178px] gap-2 flex-wrap flex items-center justify-center md:justify-start"
             initial={{ opacity: 0, x: "-100wv" }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
           >
             <Hero data={data} />
             <Character data={data} />
+            <div className="what-to-show flex items-center uppercase py-2 text-gray-500">
+              <p className={`${show === "episodes" && "text-secondary-600"}`}>
+                episodes
+              </p>
+              <p className={`${show === "recomanded" && "text-secondary-600"}`}>
+                recommanded
+              </p>
+              <p className={`${show === "related" && "text-secondary-600"}`}>
+                related
+              </p>
+            </div>
             <section className="two_side_container flex w-full flex-wrap gap-3 mb-10">
-              <Recommended data={data} />
-              <SidebarRealted data={data} />
-              <Episodes data={data} />
+              {show === "episodes" ? (
+                <Episodes data={data} />
+              ) : show === "recommanded" ? (
+                <Recommended data={data} />
+              ) : (
+                <SidebarRealted data={data} />
+              )}
             </section>
           </m.main>
         </LazyMotion>
@@ -98,7 +114,7 @@ export const getStaticPaths = async () => {
     fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=49&page=2`),
     fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=49&page=3`),
     fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=49&page=4`),
-    fetch(`${process.env.NEXT_PUBLIC_API_}advanced-search?perPage=49&page=5`),
+    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=49&page=5`),
   ]);
   const resPop = await reqPop.json();
   const resPop2 = await reqPop2.json();
