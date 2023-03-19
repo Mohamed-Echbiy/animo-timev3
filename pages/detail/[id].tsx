@@ -93,18 +93,20 @@ export default index;
 // };
 
 export const getStaticPaths = async () => {
-  const [reqPop, reqPop2] = await Promise.all([
+  const [reqPop, reqPop2, reqPop3] = await Promise.all([
     fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=49`),
     fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=49&page=2`),
+    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=49&page=3`),
   ]);
   const resPop = await reqPop.json();
   const resPop2 = await reqPop2.json();
-  const data = [...resPop.results, ...resPop2.results];
+  const resPop3 = await reqPop3.json();
+  const data = [...resPop.results, ...resPop2.results, ...resPop3.results];
   const paths = data.map((animeId: { id: string }) => {
     return { params: { id: animeId.id } };
   });
   console.log(paths);
-  return { paths, fallback: true };
+  return { paths, fallback: "blocking" };
 };
 export async function getStaticProps({ params }: { params: { id: string } }) {
   // console.log(params);
