@@ -33,7 +33,12 @@ const fetchFavourite = async () => {
 //
 
 interface data {
-  data: trending | anime | recent_episodes | favorite | recommndation;
+  data: {
+    id: string;
+    title: { userPreferred: string };
+    image: string;
+    rating: number;
+  };
 
   setShow?: Dispatch<SetStateAction<boolean>>;
 }

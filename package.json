@@ -3,7 +3,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "postbuild": "next-sitemap",
+    "sitemap": "next-sitemap"
   },
   "dependencies": {
     "@vercel/analytics": "^0.1.11",

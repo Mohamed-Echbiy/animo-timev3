@@ -10,6 +10,7 @@ import { episode } from "../../types/episode";
 
 import { commentSchema } from "../../types/commentSchema";
 import IframeContainer from "../../src/components/watchPage/IframeContainer";
+import { animeDetail } from "../../types/animeDetail";
 
 // const IframeContainer = dynamic(
 //   () => import("../../src/components/watchPage/IframeContainer")
@@ -126,11 +127,72 @@ function index({
 
 export default index;
 
-export const getServerSideProps = async (context: {
-  req: { url: string };
-  params: { id: string };
-}) => {
+// export const getServerSideProps = async (context: {
+//   req: { url: string };
+//   params: { id: string };
+// }) => {
+//   const { id } = context.params;
+//   const [req, reqComment] = await Promise.all([
+//     fetch(`https://animo-time-api.vercel.app/anime/gogoanime/servers/${id}`),
+//     fetch(`https://animotime.onrender.com/api/comments/${id}`),
+//   ]);
+
+//   const res = await req.json();
+//   const resComment = await reqComment.json();
+
+//   return {
+//     props: {
+//       data: { ...res },
+//       comments: resComment,
+//     },
+//   };
+// };
+
+export const getStaticPaths = async () => {
+  //reqPop2, reqPop3, reqPop4, reqPop5
+  const [reqPop, reqPop2, reqPop3, reqPop4, reqPop5] = await Promise.all([
+    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=1`),
+    fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=49&page=2`),
+    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=49&page=3`),
+    fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=49&page=4`),
+    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=49&page=5`),
+  ]);
+  const resPop = await reqPop.json();
+  const resPop2 = await reqPop2.json();
+  const resPop3 = await reqPop3.json();
+  const resPop4 = await reqPop4.json();
+  const resPop5 = await reqPop5.json();
+
+  const data = [
+    ...resPop.results,
+    ...resPop2.results,
+    ...resPop3.results,
+    ...resPop4.results,
+    ...resPop5.results,
+  ];
+  let arrayOfParams: { params: { id: string } }[] = [];
+  const makeParams = async () => {
+    const listOfId = data.map(async (animeId: animeDetail) => {
+      const fethcInfoAnime = await fetch(
+        `${process.env.NEXT_PUBLIC_API_V}info/${animeId.id}`
+      );
+      const anime = await fethcInfoAnime.json();
+      await anime.episodes.map((e: { id: string }) => {
+        return arrayOfParams.push({ params: { id: e.id } });
+      });
+    });
+    console.log(arrayOfParams, "inside map");
+    return arrayOfParams;
+  };
+  console.log(await makeParams());
+  const paths = await makeParams();
+  // console.log(paths, "paths");
+  return { paths, fallback: "blocking" };
+};
+//
+export const getStaticProps = async (context: { params: { id: string } }) => {
   const { id } = context.params;
+  console.log(id);
   const [req, reqComment] = await Promise.all([
     fetch(`https://animo-time-api.vercel.app/anime/gogoanime/servers/${id}`),
     fetch(`https://animotime.onrender.com/api/comments/${id}`),

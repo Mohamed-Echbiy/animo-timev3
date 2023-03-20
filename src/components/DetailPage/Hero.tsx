@@ -4,6 +4,7 @@ import { animeDetail } from "../../../types/animeDetail";
 import { m, LazyMotion, domAnimation, AnimatePresence } from "framer-motion";
 import { PlayIcon } from "../../common/Icons";
 import Link from "next/link";
+import ImageLoader from "../../common/ImageLoader";
 
 function Hero({ data }: { data: animeDetail }) {
   const ep = !!data?.episodes
@@ -16,6 +17,9 @@ function Hero({ data }: { data: animeDetail }) {
     : data.title?.english;
 
   const [isModal, setIsModal] = useState(false);
+  const [imgLoad, setImgLoad] = useState(false);
+  const [imgLoadSmall, setImgLoadSmall] = useState(false);
+
   return (
     <>
       <AnimatePresence>
@@ -28,7 +32,7 @@ function Hero({ data }: { data: animeDetail }) {
               className="modal_text absolute top-0 left-0 w-full h-screen justify-center items-center z-50 hidden sm:flex"
             >
               <div
-                className="backdrop top-0 w-full left-0 h-full absolute cursor-pointer bg-slate-200 opacity-80"
+                className="backdrop top-0 w-full left-0 h-full absolute cursor-pointer bg-slate-200 opacity-20"
                 onClick={() => setIsModal(false)}
               ></div>
               <div className="box_text text-sm md:text-base bg-black text-white rounded-t p-8 max-w-3xl z-50">
@@ -46,7 +50,9 @@ function Hero({ data }: { data: animeDetail }) {
           className=" brightness-[15%] rounded-md hidden sm:block"
           quality={15}
           priority={true}
+          onLoad={() => setImgLoad(true)}
         />
+        {!imgLoad && <ImageLoader />}
         <div className="content  sm:flex items-center justify-center sm:justify-start h-full w-full gap-4 sm:text-white">
           <div className="image_container mx-auto sm:mx-0 aspect-[.7] w-2/6 min-w-[150px] max-w-[250px] relative border-8 border-solid border-white  rounded-md">
             <Image
@@ -55,7 +61,9 @@ function Hero({ data }: { data: animeDetail }) {
               fill
               quality={20}
               priority={true}
+              onLoad={() => setImgLoadSmall(true)}
             />
+            {!imgLoadSmall && <ImageLoader />}
             <div className="absolute -top-8 left-1/2 rounded-full -translate-x-2/4 w-14 h-14 bg-black flex justify-center items-center gap-[2px] text-primary-500 border-4 border-solid border-white">
               <span className="text-sm font-bold">
                 {(data.rating / 10).toPrecision(2)}

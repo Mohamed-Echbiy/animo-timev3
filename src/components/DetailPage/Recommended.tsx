@@ -10,11 +10,10 @@ function Recommended({ data }: { data: animeDetail }) {
     <>
       {data.recommendations.length ? (
         <>
-          <h4 className="text-xl mb-4 w-full uppercase">recommanded</h4>
-          <div className="recomnded justify-center lg:w-3/4 flex items-center flex-grow flex-wrap gap-x-2 gap-y-10">
-            {data.recommendations.slice(0, 8).map((e: recommndation, i) => (
+          <div className="recomnded justify-center w-full flex items-center flex-grow flex-wrap gap-x-2 gap-y-10 pt-10">
+            {data.recommendations.map((e: recommndation, i) => (
               <div
-                className="flex-grow min-w-[150px] w-1/4 lg:w-1/5  max-w-[250px] lg:max-w-xs  rounded-xl"
+                className="flex-grow w-2/5 md:w-1/4 xl:w-1/6 max-w-[200px] md:max-w-[280px] min-w-[150px]"
                 key={e.id + i + "uuu"}
               >
                 <PastYearCard data={e} />

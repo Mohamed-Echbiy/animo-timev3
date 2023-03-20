@@ -15,4 +15,5 @@ export interface relations {
   type: string;
   cover: string;
   rating: number;
+  genres?: string[];
 }

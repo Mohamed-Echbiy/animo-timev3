@@ -4,25 +4,16 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import React, { useState } from "react";
 //
-const Character = dynamic(
-  () => import("../../src/components/DetailPage/Character")
-);
 
-const SidebarRealted = dynamic(
-  () => import("../../src/components/DetailPage/SidebarRealted")
-);
 import { animeDetail } from "../../types/animeDetail";
 import Hero from "../../src/components/DetailPage/Hero";
 
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
-const Recommended = dynamic(
-  () => import("../../src/components/DetailPage/Recommended")
-);
-const Episodes = dynamic(
-  () => import("../../src/components/DetailPage/Episodes")
+const TabSwitcher = dynamic(
+  () => import("../../src/components/DetailPage/TabSwitcher")
 );
 
-function index({ data }: { data: animeDetail; title: string }) {
+function index({ data }: { data: animeDetail }) {
   // console.log(data);
   const title = data.title?.userPreferred
     ? data.title?.userPreferred
@@ -56,27 +47,7 @@ function index({ data }: { data: animeDetail; title: string }) {
             transition={{ delay: 0.4 }}
           >
             <Hero data={data} />
-            <Character data={data} />
-            <div className="what-to-show flex items-center uppercase py-2 text-gray-500">
-              <p className={`${show === "episodes" && "text-secondary-600"}`}>
-                episodes
-              </p>
-              <p className={`${show === "recomanded" && "text-secondary-600"}`}>
-                recommanded
-              </p>
-              <p className={`${show === "related" && "text-secondary-600"}`}>
-                related
-              </p>
-            </div>
-            <section className="two_side_container flex w-full flex-wrap gap-3 mb-10">
-              {show === "episodes" ? (
-                <Episodes data={data} />
-              ) : show === "recommanded" ? (
-                <Recommended data={data} />
-              ) : (
-                <SidebarRealted data={data} />
-              )}
-            </section>
+            <TabSwitcher data={data} />
           </m.main>
         </LazyMotion>
       </main>
