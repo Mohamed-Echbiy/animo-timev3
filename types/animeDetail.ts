@@ -1,4 +1,9 @@
 export interface animeDetail {
+  nextAiringEpisode: {
+    airingTime: number;
+    episode: number;
+    timeUntilAiring: number;
+  };
   synonyms: string[];
   duration: number;
   id: string;
@@ -96,6 +101,7 @@ export interface animeDetail {
     rating: number;
   }[];
   episodes: {
+    number: number;
     description: string;
     id: string;
     title: string;

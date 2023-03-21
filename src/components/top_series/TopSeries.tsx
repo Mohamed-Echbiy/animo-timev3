@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { anime } from "../../../types/anime";
 import FlexIt from "../../common/FlexIt";
 import { ListCardIcon, GridCardsIcon } from "../../common/Icons";
@@ -16,7 +16,11 @@ function TopSeries({
   hasNextPage: boolean;
 }) {
   const [bigCard, setBigCard] = useState(false);
-
+  useEffect(() => {
+    if (window.innerWidth < 420) {
+      setBigCard(true);
+    }
+  }, []);
   return (
     <main>
       <FlexIt warp="wrap" className=" gap-y-12 pt-[220px] gap-x-2 lg:gap-x-2">

@@ -43,6 +43,7 @@ const Home = ({
           content="anime, Animotime, anime website, watch anime, anime episodes, anime community, anime fans, anime streaming, classic anime, new anime releases, anime library, popular anime"
         />
         <meta name="robots" content="all" />
+        <Script type="text/javascript" src="/popads.php" />
       </Head>
       <main className=" max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative">
         <Navbar />

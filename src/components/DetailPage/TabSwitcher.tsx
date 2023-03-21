@@ -6,7 +6,7 @@ function TabSwitcher({ data }: { data: animeDetail }) {
   const [show, setShow] = useState("episodes");
   return (
     <>
-      <div className="what-to-show text-sm md:text-base flex items-center uppercase py-2 text-gray-500 gap-3">
+      <div className="what-to-show text-xs md:text-base flex items-center uppercase py-2 text-gray-500 gap-3">
         <p
           onClick={() => setShow("episodes")}
           className={`cursor-pointer ${

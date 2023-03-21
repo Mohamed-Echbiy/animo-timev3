@@ -41,13 +41,19 @@
 .description_pastYear::-webkit-scrollbar {
   display: none;
 }
-/* img {
-  transition: all 0.5s ease-in-out;
-}
-img:hover {
-  scale: 1.1;
-} */
+
 .outlinedIt {
   transition: all 0.5s ease-in-out;
   outline: 2px rgba(226, 224, 224, 0.876), solid;
+}
+.beforeTrainagle::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  right: 5px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid #b91c1c;
 }

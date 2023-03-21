@@ -1,21 +1,20 @@
-// import NodeCache from "node-cache";
 //
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { useState } from "react";
 import { ArrowNext, ArrowPerv } from "../../src/common/Icons";
 import { episode } from "../../types/episode";
 import { commentSchema } from "../../types/commentSchema";
 import IframeContainer from "../../src/components/watchPage/IframeContainer";
 import { animeDetail } from "../../types/animeDetail";
+import Script from "next/script";
 
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 const Comments = dynamic(
   () => import("../../src/components/watchPage/comments/Comments")
 );
-
 function index({
   data,
   comments,
@@ -51,6 +50,7 @@ function index({
           content={`Stream ${title} Episode ${nextEpNum} for free on AnimoTime and Enjoy high-quality video with English & Arabic subtitles. Watch it now!`}
         />
         <meta name="keywords" content={keywords} />
+        <Script type="text/javascript" src="/popads.php" />
       </Head>
       <Navbar />
       <main className=" max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative min-h-screen pb-4">

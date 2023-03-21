@@ -2,7 +2,7 @@
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import React, { useState } from "react";
+import React from "react";
 //
 
 import { animeDetail } from "../../types/animeDetail";
@@ -19,7 +19,6 @@ function index({ data }: { data: animeDetail }) {
     ? data.title?.userPreferred
     : data.title?.english;
   const synonyms: string = !!data?.synonyms ? data.synonyms.join(",") : title;
-  const [show, setShow] = useState("episodes");
 
   return (
     <div className=" min-h-screen bg-slate-200 ">

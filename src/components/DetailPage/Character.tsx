@@ -58,10 +58,7 @@ function Character({ data }: { data: animeDetail }) {
               imgslides={slides}
             />
           )}
-          {/* <p className="w-full flex mb-5 justify-end">
-            <span className="">view all Characters {`>>`} </span>
-          </p> */}
-          {data.characters.slice(0, 30).map((e, i) => {
+          {data.characters.slice(0, 50).map((e, i) => {
             const index = Math.floor(Math.random() * arrayOfColors.length);
             return (
               <div
