@@ -144,13 +144,13 @@ export const getStaticPaths = async () => {
   //reqPop2, reqPop3, reqPop4, reqPop5
   const [reqPop, reqPop2, reqPop3, reaqPop4] = await Promise.all([
     fetch(
-      `${process.env.NEXT_PUBLIC_API}advanced-search?perPage=30&status=FINISHED&format=TV`
+      `${process.env.NEXT_PUBLIC_API}advanced-search?perPage=100&status=FINISHED&format=TV`
     ),
     fetch(
-      `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=30&page=20&status=FINISHED&format=TV`
+      `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=100&page=2&status=FINISHED&format=TV`
     ),
     fetch(
-      `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=30&page=20&status=FINISHED&format=MOVIE`
+      `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=100&page=20&status=FINISHED&format=MOVIE`
     ),
     fetch(`${process.env.NEXT_PUBLIC_API}trending?perPage=20`),
   ]);
@@ -185,10 +185,11 @@ export const getStaticPaths = async () => {
       return { params: { id: path } };
     });
 
-  console.log(paths);
-  const filtredPaths = paths.filter((e) => !!e === true);
-  console.log(filtredPaths);
-  return { paths, fallback: "blocking" };
+  // console.log(paths.length);
+  const filtredPaths = paths.filter((e) => !!e.params.id === true);
+
+  console.log(filtredPaths.length, "where is me");
+  return { paths: filtredPaths, fallback: "blocking" };
 };
 //
 export const getStaticProps = async (context: { params: { id: string } }) => {
