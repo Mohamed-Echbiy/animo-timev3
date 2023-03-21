@@ -143,10 +143,8 @@ export default index;
 export const getStaticPaths = async () => {
   //reqPop2, reqPop3, reqPop4, reqPop5
   const [reqPop, reqPop2, reqPop3] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=100`),
-    fetch(
-      `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=49&page=100`
-    ),
+    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=30`),
+    fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=49&page=30`),
     fetch(`${process.env.NEXT_PUBLIC_API}trending?perPage=20`),
   ]);
   const resPop = await reqPop.json();
@@ -162,7 +160,8 @@ export const getStaticPaths = async () => {
       `${process.env.NEXT_PUBLIC_API_V}info/${id}`
     );
     const detailJson: animeDetail = await fetchDetail.json();
-    const episodes = detailJson.episodes.map((ep) => ep.id);
+    const episodes = detailJson.episodes?.map((ep) => ep.id);
+
     return episodes;
   });
   const animeDetail = await Promise.all(animeDetailPromises);
@@ -174,7 +173,8 @@ export const getStaticPaths = async () => {
     });
 
   console.log(paths);
-
+  const filtredPaths = paths.filter((e) => !!e === true);
+  console.log(filtredPaths);
   return { paths, fallback: "blocking" };
 };
 //
