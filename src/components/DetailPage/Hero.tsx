@@ -45,11 +45,7 @@ function Hero({ data }: { data: animeDetail }) {
       </AnimatePresence>
       <main className="hero_section relative w-full sm:aspect-[9/6.3] mt-10 md:aspect-[9/5.5] lg:aspect-[9/4] rounded-lg p-6 mb-10">
         <Image
-          src={
-            data?.cover && data?.cover !== data?.image
-              ? data?.cover
-              : data?.episodes[0]?.image
-          }
+          src={data.cover || data.image}
           alt={title}
           fill
           className=" brightness-[20%] sm:rounded-md blur-[7px] sm:blur-none"
@@ -127,7 +123,7 @@ function Hero({ data }: { data: animeDetail }) {
               </p>
               <p className="studios">
                 <span>studios : </span>
-                <span>{data.studios.join(" / ")}</span>
+                <span>{data.studios?.join(" / ")}</span>
               </p>
               <p className="season">
                 <span>season : </span>
@@ -164,9 +160,9 @@ function Hero({ data }: { data: animeDetail }) {
               <p className="start_date">
                 <span>started at : </span>
                 {new Date(
-                  data.startDate.year,
-                  data.startDate.month,
-                  data.startDate.day
+                  data.startDate?.year,
+                  data.startDate?.month,
+                  data.startDate?.day
                 ).toDateString()}
               </p>
               <p>

@@ -6,8 +6,8 @@ import React from "react";
 //
 
 import { animeDetail } from "../../types/animeDetail";
-import Hero from "../../src/components/DetailPage/Hero";
-
+// import Hero from "../../src/components/DetailPage/Hero";
+const Hero = dynamic(() => import("../../src/components/DetailPage/Hero"));
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 const TabSwitcher = dynamic(
   () => import("../../src/components/DetailPage/TabSwitcher")
