@@ -1,10 +1,14 @@
 import dynamic from "next/dynamic";
 import React from "react";
 import { animeDetail } from "../../../types/animeDetail";
-import Character from "./Character";
-import Episodes from "./Episodes";
-import Recommended from "./Recommended";
-import SidebarRealted from "./SidebarRealted";
+// import Character from "./Character";
+// import Episodes from "./Episodes";
+// import Recommended from "./Recommended";
+// import SidebarRealted from "./SidebarRealted";
+const Character = dynamic(() => import("./Character"));
+const Episodes = dynamic(() => import("./Episodes"));
+const Recommended = dynamic(() => import("./Recommended"));
+const SidebarRealted = dynamic(() => import("./SidebarRealted"));
 
 function Section({ show, data }: { show: string; data: animeDetail }) {
   return (

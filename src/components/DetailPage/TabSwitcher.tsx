@@ -1,6 +1,8 @@
+import dynamic from "next/dynamic";
 import React, { useState } from "react";
 import { animeDetail } from "../../../types/animeDetail";
-import Section from "./Section";
+// import Section from "./Section"
+const Section = dynamic(() => import("./Section"));
 
 function TabSwitcher({ data }: { data: animeDetail }) {
   const [show, setShow] = useState("episodes");

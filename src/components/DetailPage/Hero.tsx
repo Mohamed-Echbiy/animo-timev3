@@ -46,9 +46,9 @@ function Hero({ data }: { data: animeDetail }) {
       <main className="hero_section relative w-full sm:aspect-[9/6.3] mt-10 md:aspect-[9/5.5] lg:aspect-[9/4] rounded-lg p-6 mb-10">
         <Image
           src={
-            data.cover && data.cover !== data.image
-              ? data.cover
-              : data.episodes[0].image
+            data?.cover && data?.cover !== data?.image
+              ? data?.cover
+              : data?.episodes[0]?.image
           }
           alt={title}
           fill
