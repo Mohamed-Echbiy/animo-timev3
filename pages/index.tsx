@@ -8,6 +8,7 @@ import dynamic from "next/dynamic";
 
 // import PastYear from "../src/components/Home/PastYear/PastYear";
 import RecentEpisodes from "../src/components/Home/recentEpisodes/RecentEpisodes";
+import Script from "next/script";
 // import Upcoming from "../src/components/Home/Upcoming/Upcoming";
 
 const Navbar = dynamic(() => import("../src/common/NavBar/Navbar"));
