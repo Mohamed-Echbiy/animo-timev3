@@ -142,16 +142,29 @@ export default index;
 
 export const getStaticPaths = async () => {
   //reqPop2, reqPop3, reqPop4, reqPop5
-  const [reqPop, reqPop2, reqPop3] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=30`),
-    fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=49&page=30`),
+  const [reqPop, reqPop2, reqPop3, reaqPop4] = await Promise.all([
+    fetch(
+      `${process.env.NEXT_PUBLIC_API}advanced-search?perPage=30&status=FINISHED&format=TV`
+    ),
+    fetch(
+      `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=30&page=20&status=FINISHED&format=TV`
+    ),
+    fetch(
+      `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=30&page=20&status=FINISHED&format=MOVIE`
+    ),
     fetch(`${process.env.NEXT_PUBLIC_API}trending?perPage=20`),
   ]);
   const resPop = await reqPop.json();
   const resPop2 = await reqPop2.json();
   const resPop3 = await reqPop3.json();
+  const resPop4 = await reaqPop4.json();
 
-  const data = [...resPop.results, ...resPop2.results, ...resPop3.results];
+  const data = [
+    ...resPop.results,
+    ...resPop2.results,
+    ...resPop3.results,
+    ...resPop4.results,
+  ];
 
   const id = data.map((animeId: animeDetail) => animeId.id);
   console.log(id, "ids");
