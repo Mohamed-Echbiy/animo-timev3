@@ -4,10 +4,9 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ArrowNext, ArrowPerv } from "../../src/common/Icons";
 import { episode } from "../../types/episode";
-
 import { commentSchema } from "../../types/commentSchema";
 import IframeContainer from "../../src/components/watchPage/IframeContainer";
 import { animeDetail } from "../../types/animeDetail";
@@ -27,7 +26,7 @@ function index({
   titleBackup: string;
 }) {
   const router = useRouter();
-  // console.log(comments);
+
   const { id, animeData, title: titleis, ids }: any = router.query;
   const title = titleis ? titleis : titleBackup;
   const nextEpNum: any = id?.slice(-1);
@@ -141,7 +140,6 @@ export default index;
 // };
 
 export const getStaticPaths = async () => {
-  //reqPop2, reqPop3, reqPop4, reqPop5
   const [reqPop, reqPop2, reqPop3, reaqPop4] = await Promise.all([
     fetch(
       `${process.env.NEXT_PUBLIC_API}advanced-search?perPage=100&status=FINISHED&format=TV`
@@ -215,3 +213,27 @@ export const getStaticProps = async (context: { params: { id: string } }) => {
     revalidate: 42000,
   };
 };
+
+/*
+#getStaticPaths
+
+This is a JavaScript code block that defines a function called getStaticPaths that utilizes the async/await syntax to fetch data from an external API using the fetch method.
+The fetched data is then parsed into JSON format using the json() method. The fetched data is coming from four different API endpoints and is stored in four different variables: reqPop, reqPop2, reqPop3, and reqPop4.
+
+After parsing the JSON data, the data variable is created by concatenating the results from all four API responses using the spread operator ....
+
+Then, id variable is created by mapping over the data array to extract the id field from each element.
+
+The animeDetailPromises variable is created by mapping over the id array to create a new array of promises that will resolve to the detail of each anime element in the data array.
+
+Each promise in animeDetailPromises will fetch additional data from the API by concatenating the anime id to the API endpoint URL. The returned data is then parsed as JSON and stored in detailJson.
+
+episodes variable is created to extract the id field from each element in the episodes array of the detailJson object.
+
+Finally, the animeDetailPromises are resolved using Promise.all() and the returned data is stored in the animeDetail array.
+
+The paths variable is created by mapping over the animeDetail array and returning an object with params field set to the anime id. The filtredPaths variable is created by filtering the paths array to remove any element where the id field is undefined.
+
+The function returns an object with two fields: paths which is an array of objects containing the anime id as a parameter, and fallback which is set to "blocking" indicating that any paths that are not included in the paths array will trigger a blocking fallback behavior.
+
+*/

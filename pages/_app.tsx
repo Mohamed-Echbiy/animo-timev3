@@ -5,6 +5,8 @@ import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import LoadingLink from "../src/common/LoadingLink";
 import dynamic from "next/dynamic";
+import Script from "next/script";
+
 //
 const Toast = dynamic(() => import("../src/common/Toast"));
 const Spinner = dynamic(() => import("../src/common/Spinner"));
@@ -46,6 +48,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Toast />
         <Component {...pageProps} />
         <Analytics />
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5526008717609443"
+          crossOrigin="anonymous"
+        />
       </userContext.Provider>
     </QueryClientProvider>
   );
