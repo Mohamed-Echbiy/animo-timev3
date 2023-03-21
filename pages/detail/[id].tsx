@@ -79,12 +79,21 @@ export default index;
 // };
 
 export const getStaticPaths = async () => {
+  //
   const [reqPop, reqPop2, reqPop3, reqPop4, reqPop5] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=49`),
-    fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=49&page=2`),
-    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=49&page=3`),
-    fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=49&page=4`),
-    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=49&page=5`),
+    fetch(
+      `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=49`
+    ),
+    fetch(
+      `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=49&page=2`
+    ),
+    fetch(
+      `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=49&page=3`
+    ),
+    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=49&page=4`),
+    fetch(
+      `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=49&page=5`
+    ),
   ]);
   const resPop = await reqPop.json();
   const resPop2 = await reqPop2.json();
@@ -97,7 +106,7 @@ export const getStaticPaths = async () => {
     ...resPop2.results,
     ...resPop3.results,
     ...resPop4.results,
-    ...resPop5.results,
+    // ...resPop5.results,
   ];
   const paths = data.map((animeId: { id: string }) => {
     return { params: { id: animeId.id } };
@@ -107,7 +116,14 @@ export const getStaticPaths = async () => {
 };
 export async function getStaticProps({ params }: { params: { id: string } }) {
   // console.log(params);
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API}info/${params.id}`);
+  const url =
+    +params.id >= 200
+      ? Number.isInteger(+params.id / 2)
+        ? `${process.env.NEXT_PUBLIC_API_V2}`
+        : `${process.env.NEXT_PUBLIC_API_V3}`
+      : `${process.env.NEXT_PUBLIC_API_V}`;
+
+  const res = await fetch(`${url}info/${params.id}`);
   const data = await res.json();
 
   // Pass post data to the page via props

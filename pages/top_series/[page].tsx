@@ -57,7 +57,7 @@ export const getStaticProps = async ({
   params: { page: string };
 }) => {
   const req = await fetch(
-    `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=20&format=TV&sort=["SCORE_DESC"]&page=${params.page}`
+    `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=20&format=TV&sort=["SCORE_DESC"]&page=${params.page}`
   );
   const data = await req.json();
   console.log(data);

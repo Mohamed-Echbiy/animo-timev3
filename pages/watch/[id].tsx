@@ -142,13 +142,13 @@ export default index;
 export const getStaticPaths = async () => {
   const [reqPop, reqPop2, reqPop3, reaqPop4] = await Promise.all([
     fetch(
-      `${process.env.NEXT_PUBLIC_API}advanced-search?perPage=100&status=FINISHED&format=TV`
+      `${process.env.NEXT_PUBLIC_API_V2}advanced-search?perPage=49&status=FINISHED&format=TV`
     ),
     fetch(
-      `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=100&page=2&status=FINISHED&format=TV`
+      `${process.env.NEXT_PUBLIC_API_V3}advanced-search?perPage=49&page=2&status=FINISHED&format=TV`
     ),
     fetch(
-      `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=100&page=20&status=FINISHED&format=MOVIE`
+      `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=49&page=20&status=FINISHED&format=MOVIE`
     ),
     fetch(`${process.env.NEXT_PUBLIC_API}trending?perPage=20`),
   ]);
@@ -165,11 +165,13 @@ export const getStaticPaths = async () => {
   ];
 
   const id = data.map((animeId: animeDetail) => animeId.id);
-  console.log(id, "ids");
-  const animeDetailPromises = id.map(async (id) => {
-    const fetchDetail = await fetch(
-      `${process.env.NEXT_PUBLIC_API_V}info/${id}`
-    );
+  console.log(id.length, "ids");
+  const animeDetailPromises = id.map(async (id, i) => {
+    const url = Number.isInteger((i + 1) / 2)
+      ? `${process.env.NEXT_PUBLIC_API}`
+      : `${process.env.NEXT_PUBLIC_API_V}`;
+    console.log(url, i);
+    const fetchDetail = await fetch(`${url}info/${id}`);
     const detailJson: animeDetail = await fetchDetail.json();
     const episodes = detailJson.episodes?.map((ep) => ep.id);
 
