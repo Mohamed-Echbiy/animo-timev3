@@ -2,6 +2,7 @@
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import Script from "next/script";
 import React from "react";
 //
 
@@ -34,6 +35,10 @@ function index({ data }: { data: animeDetail }) {
             synonyms +
             ` watch ${title} , animotime ${title}, discuss ${title} on animotime`
           }
+        />
+        <Script
+          data-cfasync="false"
+          src="//dlh8c15zw7vfn.cloudfront.net/?zchld=981396"
         />
       </Head>
       <main className="max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative overflow-hidden min-h-screen">

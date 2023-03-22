@@ -50,7 +50,10 @@ function index({
           content={`Stream ${title} Episode ${nextEpNum} for free on AnimoTime and Enjoy high-quality video with English & Arabic subtitles. Watch it now!`}
         />
         <meta name="keywords" content={keywords} />
-        <Script type="text/javascript" src="/popads.php" />
+        <Script
+          data-cfasync="false"
+          src="//dlh8c15zw7vfn.cloudfront.net/?zchld=981396"
+        />
       </Head>
       <Navbar />
       <main className=" max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative min-h-screen pb-4">
