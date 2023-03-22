@@ -44,7 +44,7 @@ export default index;
 
 export const getStaticProps = async (context: { req: { url: string } }) => {
   const req = await fetch(
-    `${process.env.NEXT_PUBLIC_API_V}trending?perPage=50`
+    `https://animotime-api-3.vercel.app/meta/anilist/trending?perPage=50`
   );
   const data = await req.json();
 

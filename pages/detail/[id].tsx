@@ -40,6 +40,10 @@ function index({ data }: { data: animeDetail }) {
           data-cfasync="false"
           src="//dlh8c15zw7vfn.cloudfront.net/?zchld=981396"
         />
+        <Script
+          data-cfasync="false"
+          src="//dlh8c15zw7vfn.cloudfront.net/?zchld=981397"
+        />
       </Head>
       <main className="max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative overflow-hidden min-h-screen">
         <Navbar />
