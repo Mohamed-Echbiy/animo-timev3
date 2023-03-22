@@ -9,7 +9,6 @@ function SidebarRealted({ data }: { data: animeDetail }) {
     .sort((p1, p2) =>
       p1.rating < p2.rating ? 1 : p1.rating > p2.rating ? -1 : 0
     );
-  console.log(excludeTypeManga);
   return (
     <div className=" w-full flex gap-3 gap-y-5 overflow-hidden  justify-center items-center flex-wrap h-fit  p-2 rounded-xl">
       {!!excludeTypeManga.length ? (

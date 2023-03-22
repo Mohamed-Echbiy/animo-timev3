@@ -125,93 +125,18 @@ function index({
 
 export default index;
 
-// export const getServerSideProps = async (context: {
-//   req: { url: string };
-//   params: { id: string };
-// }) => {
-//   const { id } = context.params;
-//   const [req, reqComment] = await Promise.all([
-//     fetch(`https://animo-time-api.vercel.app/anime/gogoanime/servers/${id}`),
-//     fetch(`https://animotime.onrender.com/api/comments/${id}`),
-//   ]);
-
-//   const res = await req.json();
-//   const resComment = await reqComment.json();
-
-//   return {
-//     props: {
-//       data: { ...res },
-//       comments: resComment,
-//     },
-//   };
-// };
-
-export const getStaticPaths = async () => {
-  const [reqPop, reqPop2, reqPop3, reaqPop4] = await Promise.all([
-    fetch(
-      `${process.env.NEXT_PUBLIC_API_V2}advanced-search?perPage=49&status=FINISHED&format=TV`
-    ),
-    fetch(
-      `${process.env.NEXT_PUBLIC_API_V3}advanced-search?perPage=49&page=2&status=FINISHED&format=TV`
-    ),
-    fetch(
-      `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=49&page=20&status=FINISHED&format=MOVIE`
-    ),
-    fetch(`${process.env.NEXT_PUBLIC_API}trending?perPage=20`),
-  ]);
-  const resPop = await reqPop.json();
-  const resPop2 = await reqPop2.json();
-  const resPop3 = await reqPop3.json();
-  const resPop4 = await reaqPop4.json();
-
-  const data = [
-    ...resPop.results,
-    ...resPop2.results,
-    ...resPop3.results,
-    ...resPop4.results,
-  ];
-
-  const id = data.map((animeId: animeDetail) => animeId.id);
-  console.log(id.length, "ids");
-  const animeDetailPromises = id.map(async (id, i) => {
-    const url = Number.isInteger((i + 1) / 2)
-      ? `${process.env.NEXT_PUBLIC_API}`
-      : `${process.env.NEXT_PUBLIC_API_V}`;
-    console.log(url, i);
-    const fetchDetail = await fetch(`${url}info/${id}`);
-    const detailJson: animeDetail = await fetchDetail.json();
-    const episodes = detailJson.episodes?.map((ep) => ep.id);
-
-    return episodes;
-  });
-  const animeDetail = await Promise.all(animeDetailPromises);
-  const paths = animeDetail
-    .join(",")
-    .split(",")
-    .map((path) => {
-      return { params: { id: path } };
-    });
-
-  // console.log(paths.length);
-  const filtredPaths = paths.filter((e) => !!e.params.id === true);
-
-  console.log(filtredPaths.length, "where is me");
-  return { paths: filtredPaths, fallback: "blocking" };
-};
-//
-export const getStaticProps = async (context: { params: { id: string } }) => {
+export const getServerSideProps = async (context: {
+  req: { url: string };
+  params: { id: string };
+}) => {
   const { id } = context.params;
-
   const [req, reqComment] = await Promise.all([
     fetch(`https://animo-time-api.vercel.app/anime/gogoanime/servers/${id}`),
     fetch(`https://animotime.onrender.com/api/comments/${id}`),
   ]);
-
   const res = await req.json();
   const resComment = await reqComment.json();
-  const nextEpNum: string = id?.slice(id.lastIndexOf("-"));
   const title = id.slice(0, id.lastIndexOf("-")).split("-").join(" ");
-  console.log(nextEpNum, title, id);
 
   return {
     props: {
@@ -219,30 +144,74 @@ export const getStaticProps = async (context: { params: { id: string } }) => {
       comments: resComment,
       titleBackup: title,
     },
-    revalidate: 42000,
   };
 };
 
-/*
-#getStaticPaths
+//reqPop2
+// export const getStaticPaths = async () => {
+//   const [reqPop, reqPop3, reaqPop4] = await Promise.all([
+//     fetch(
+//       `${process.env.NEXT_PUBLIC_API_V2}advanced-search?perPage=49&status=FINISHED&format=TV`
+//     ),
+//     fetch(
+//       `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=49&page=20&status=FINISHED&format=MOVIE`
+//     ),
+//     fetch(`${process.env.NEXT_PUBLIC_API}trending?perPage=20`),
+//   ]);
+//   const resPop = await reqPop.json();
+//   const resPop3 = await reqPop3.json();
+//   const resPop4 = await reaqPop4.json();
 
-This is a JavaScript code block that defines a function called getStaticPaths that utilizes the async/await syntax to fetch data from an external API using the fetch method.
-The fetched data is then parsed into JSON format using the json() method. The fetched data is coming from four different API endpoints and is stored in four different variables: reqPop, reqPop2, reqPop3, and reqPop4.
+//   const data = [...resPop.results, ...resPop3.results, ...resPop4.results];
 
-After parsing the JSON data, the data variable is created by concatenating the results from all four API responses using the spread operator ....
+//   const id = data.map((animeId: animeDetail) => animeId.id);
+//   console.log(id.length, "ids");
+//   const animeDetailPromises = id.map(async (id, i) => {
+//     const url = Number.isInteger((i + 1) / 2)
+//       ? `${process.env.NEXT_PUBLIC_API}`
+//       : `${process.env.NEXT_PUBLIC_API_V}`;
+//     console.log(url, i);
+//     const fetchDetail = await fetch(`${url}info/${id}`);
+//     const detailJson: animeDetail = await fetchDetail.json();
+//     const episodes = detailJson.episodes?.map((ep) => ep.id);
 
-Then, id variable is created by mapping over the data array to extract the id field from each element.
+//     return episodes;
+//   });
+//   const animeDetail = await Promise.all(animeDetailPromises);
+//   const paths = animeDetail
+//     .join(",")
+//     .split(",")
+//     .map((path) => {
+//       return { params: { id: path } };
+//     });
 
-The animeDetailPromises variable is created by mapping over the id array to create a new array of promises that will resolve to the detail of each anime element in the data array.
+//   // console.log(paths.length);
+//   const filtredPaths = paths.filter((e) => !!e.params.id === true);
 
-Each promise in animeDetailPromises will fetch additional data from the API by concatenating the anime id to the API endpoint URL. The returned data is then parsed as JSON and stored in detailJson.
+//   console.log(filtredPaths.length, "where is me");
+//   return { paths: filtredPaths, fallback: "blocking" };
+// };
+//
+// export const getStaticProps = async (context: { params: { id: string } }) => {
+//   const { id } = context.params;
 
-episodes variable is created to extract the id field from each element in the episodes array of the detailJson object.
+//   const [req, reqComment] = await Promise.all([
+//     fetch(`https://animo-time-api.vercel.app/anime/gogoanime/servers/${id}`),
+//     fetch(`https://animotime.onrender.com/api/comments/${id}`),
+//   ]);
 
-Finally, the animeDetailPromises are resolved using Promise.all() and the returned data is stored in the animeDetail array.
+//   const res = await req.json();
+//   const resComment = await reqComment.json();
+//   const nextEpNum: string = id?.slice(id.lastIndexOf("-"));
+//   const title = id.slice(0, id.lastIndexOf("-")).split("-").join(" ");
+//   console.log(nextEpNum, title, id);
 
-The paths variable is created by mapping over the animeDetail array and returning an object with params field set to the anime id. The filtredPaths variable is created by filtering the paths array to remove any element where the id field is undefined.
-
-The function returns an object with two fields: paths which is an array of objects containing the anime id as a parameter, and fallback which is set to "blocking" indicating that any paths that are not included in the paths array will trigger a blocking fallback behavior.
-
-*/
+//   return {
+//     props: {
+//       data: { ...res },
+//       comments: resComment,
+//       titleBackup: title,
+//     },
+//     revalidate: 42000,
+//   };
+// };

@@ -18,7 +18,6 @@ function Episodes({ data }: { data: animeDetail }) {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [sortMode, setSortMode] = useState(true);
   const [episodes, setEpisodesArray] = useState(data.episodes);
-  console.log(sortMode, "before useEffect");
 
   useEffect(() => {
     setEpisodesArray(data.episodes.sort().reverse());

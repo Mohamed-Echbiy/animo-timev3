@@ -16,7 +16,7 @@ const TabSwitcher = dynamic(
 
 function index({ data }: { data: animeDetail }) {
   // console.log(data);
-  const title = !!data.title?.userPreferred
+  const title = data.title?.userPreferred
     ? data.title?.userPreferred
     : data.title?.english;
   const synonyms: string = !!data?.synonyms ? data.synonyms.join(",") : title;
@@ -65,75 +65,71 @@ function index({ data }: { data: animeDetail }) {
 
 export default index;
 
-// export const getServerSideProps = async (context: {
-//   req: { url: string };
-//   params: { id: string };
-// }) => {
-//   const cachedData = cache.get(context.req.url);
-//   if (cachedData) {
-//     console.log("cachedData");
-//     return {
-//       props: cachedData,
-//     };
-//   }
-//   const { params } = context;
-//   const req = await fetch(`${process.env.NEXT_PUBLIC_API_V}info/${params.id}`);
-//   const res = await req.json();
-//   cache.set(context.req.url, { data: res }, 86400 * 5);
-//   return {
-//     props: {
-//       data: res,
-//     },
-//   };
-// };
-
 export const getStaticPaths = async () => {
   //
-  const [reqPop, reqPop2, reqPop3, reqPop4, reqPop5] = await Promise.all([
-    fetch(
-      `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=49`
-    ),
-    fetch(
-      `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=49&page=2`
-    ),
-    fetch(
-      `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=49&page=3`
-    ),
-    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=49&page=4`),
-    fetch(
-      `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=49&page=5`
-    ),
-  ]);
+  const [reqPop, reqPop2, reqPop3, reqPop4, reqPop5, reqPop6, reqPop7] =
+    await Promise.all([
+      fetch(
+        `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100`
+      ),
+      fetch(
+        `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100&page=2`
+      ),
+      fetch(
+        `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100&page=3`
+      ),
+      fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=49&page=4`),
+      fetch(
+        `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100&page=4`
+      ),
+      fetch(
+        `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100&page=5`
+      ),
+      fetch(
+        `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100&page=6`
+      ),
+    ]);
   const resPop = await reqPop.json();
   const resPop2 = await reqPop2.json();
   const resPop3 = await reqPop3.json();
   const resPop4 = await reqPop4.json();
   const resPop5 = await reqPop5.json();
-
+  const resPop6 = await reqPop6.json();
+  const resPop7 = await reqPop7.json();
   const data = [
     ...resPop.results,
     ...resPop2.results,
     ...resPop3.results,
     ...resPop4.results,
-    // ...resPop5.results,
+    ...resPop5.results,
+    ...resPop6.results,
+    ...resPop7.results,
   ];
   const paths = data.map((animeId: { id: string }) => {
     return { params: { id: animeId.id } };
   });
   console.log(paths);
-  return { paths, fallback: true };
+  return { paths, fallback: "blocking" };
 };
 export async function getStaticProps({ params }: { params: { id: string } }) {
-  // console.log(params);
-  const url =
-    +params.id >= 200
-      ? Number.isInteger(+params.id / 2)
-        ? `${process.env.NEXT_PUBLIC_API_V2}`
-        : `${process.env.NEXT_PUBLIC_API_V3}`
-      : `${process.env.NEXT_PUBLIC_API_V}`;
+  const url = Number.isInteger(+params.id / 2)
+    ? `${process.env.NEXT_PUBLIC_API_V2}`
+    : `${process.env.NEXT_PUBLIC_API_V3}`;
+
+  async function backupFetch() {
+    console.error("########## the backupfc fired #######");
+
+    const req = await fetch(
+      `https://api.consumet.org/meta/anilist/info/${params.id}`
+    );
+    console.log(res.status, "fireeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee----->>>>");
+    const response = await req.json();
+    return response;
+  }
 
   const res = await fetch(`${url}info/${params.id}`);
-  const data = await res.json();
+  console.log(res.status);
+  const data = res.status === 200 ? await res.json() : await backupFetch();
 
   // Pass post data to the page via props
   return { props: { data }, revalidate: 86400 };

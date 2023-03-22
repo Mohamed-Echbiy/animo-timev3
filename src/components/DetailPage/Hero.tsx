@@ -7,7 +7,6 @@ import Link from "next/link";
 import ImageLoader from "../../common/ImageLoader";
 
 function Hero({ data }: { data: animeDetail }) {
-  console.log(data);
   const ep = !!data?.episodes
     ? data.episodes[0].id[data.episodes[0].id.length - 1]
     : 0;
