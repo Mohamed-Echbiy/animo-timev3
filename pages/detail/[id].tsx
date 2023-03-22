@@ -65,39 +65,39 @@ function index({ data }: { data: animeDetail }) {
 
 export default index;
 
-export const getStaticPaths = async () => {
-  //
-  const [reqPop, reqPop2, reqPop3] = await Promise.all([
-    fetch(
-      `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100`
-    ),
-    fetch(
-      `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100&page=2`
-    ),
-    fetch(
-      `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100&page=3`
-    ),
-  ]);
-  const resPop = await reqPop.json();
-  const resPop2 = await reqPop2.json();
-  const resPop3 = await reqPop3.json();
+// export const getStaticPaths = async () => {
+//   //
+//   const [reqPop, reqPop2, reqPop3] = await Promise.all([
+//     fetch(
+//       `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100`
+//     ),
+//     fetch(
+//       `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100&page=2`
+//     ),
+//     fetch(
+//       `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100&page=3`
+//     ),
+//   ]);
+//   const resPop = await reqPop.json();
+//   const resPop2 = await reqPop2.json();
+//   const resPop3 = await reqPop3.json();
 
-  const data = [...resPop.results, ...resPop2.results, ...resPop3.results];
-  const paths = data.map((animeId: { id: string }) => {
-    return { params: { id: animeId.id } };
-  });
-  console.log(paths);
-  return { paths, fallback: "blocking" };
-};
-export async function getStaticProps({ params }: { params: { id: string } }) {
+//   const data = [...resPop.results, ...resPop2.results, ...resPop3.results];
+//   const paths = data.map((animeId: { id: string }) => {
+//     return { params: { id: animeId.id } };
+//   });
+//   console.log(paths);
+//   return { paths, fallback: "blocking" };
+// };
+export async function getServerSideProps({
+  params,
+}: {
+  params: { id: string };
+}) {
   const url = Number.isInteger(+params.id / 2)
     ? `${process.env.NEXT_PUBLIC_API_V2}`
     : `${process.env.NEXT_PUBLIC_API_V3}`;
 
-  // const res = await fetch(`${url}info/${params.id}`);
-  // console.log(res.status);
-  // const data = await res.json();
-  // console.log(data.message ? data.message : data.id);
   try {
     const res = await fetch(`${url}info/${params.id}`);
     const data = await res.json();
