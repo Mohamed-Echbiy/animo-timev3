@@ -16,7 +16,7 @@ const TabSwitcher = dynamic(
 
 function index({ data }: { data: animeDetail }) {
   // console.log(data);
-  const title = data.title?.userPreferred
+  const title = !!data.title?.userPreferred
     ? data.title?.userPreferred
     : data.title?.english;
   const synonyms: string = !!data?.synonyms ? data.synonyms.join(",") : title;
@@ -121,7 +121,7 @@ export const getStaticPaths = async () => {
     return { params: { id: animeId.id } };
   });
   console.log(paths);
-  return { paths, fallback: "blocking" };
+  return { paths, fallback: true };
 };
 export async function getStaticProps({ params }: { params: { id: string } }) {
   // console.log(params);
