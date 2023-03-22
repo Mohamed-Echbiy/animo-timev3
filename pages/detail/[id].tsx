@@ -117,12 +117,12 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
     : `${process.env.NEXT_PUBLIC_API_V3}`;
 
   async function backupFetch() {
-    console.error("########## the backupfc fired #######");
+    // console.error("########## the backupfc fired #######");
 
     const req = await fetch(
       `https://api.consumet.org/meta/anilist/info/${params.id}`
     );
-    console.log(res.status, "fireeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee----->>>>");
+    // console.log(res.status, "fireeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee----->>>>");
     const response = await req.json();
     return response;
   }
