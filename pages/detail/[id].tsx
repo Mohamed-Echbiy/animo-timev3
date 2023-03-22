@@ -7,8 +7,8 @@ import React from "react";
 //
 
 import { animeDetail } from "../../types/animeDetail";
-// import Hero from "../../src/components/DetailPage/Hero";
-const Hero = dynamic(() => import("../../src/components/DetailPage/Hero"));
+import Hero from "../../src/components/DetailPage/Hero";
+// const Hero = dynamic(() => import("../../src/components/DetailPage/Hero"));
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 const TabSwitcher = dynamic(
   () => import("../../src/components/DetailPage/TabSwitcher")
@@ -67,44 +67,22 @@ export default index;
 
 export const getStaticPaths = async () => {
   //
-  const [reqPop, reqPop2, reqPop3, reqPop4, reqPop5, reqPop6, reqPop7] =
-    await Promise.all([
-      fetch(
-        `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100`
-      ),
-      fetch(
-        `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100&page=2`
-      ),
-      fetch(
-        `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100&page=3`
-      ),
-      fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=49&page=4`),
-      fetch(
-        `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100&page=4`
-      ),
-      fetch(
-        `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100&page=5`
-      ),
-      fetch(
-        `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100&page=6`
-      ),
-    ]);
+  const [reqPop, reqPop2, reqPop3] = await Promise.all([
+    fetch(
+      `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100`
+    ),
+    fetch(
+      `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100&page=2`
+    ),
+    fetch(
+      `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?perPage=100&page=3`
+    ),
+  ]);
   const resPop = await reqPop.json();
   const resPop2 = await reqPop2.json();
   const resPop3 = await reqPop3.json();
-  const resPop4 = await reqPop4.json();
-  const resPop5 = await reqPop5.json();
-  const resPop6 = await reqPop6.json();
-  const resPop7 = await reqPop7.json();
-  const data = [
-    ...resPop.results,
-    ...resPop2.results,
-    ...resPop3.results,
-    ...resPop4.results,
-    ...resPop5.results,
-    ...resPop6.results,
-    ...resPop7.results,
-  ];
+
+  const data = [...resPop.results, ...resPop2.results, ...resPop3.results];
   const paths = data.map((animeId: { id: string }) => {
     return { params: { id: animeId.id } };
   });
@@ -116,21 +94,25 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
     ? `${process.env.NEXT_PUBLIC_API_V2}`
     : `${process.env.NEXT_PUBLIC_API_V3}`;
 
-  async function backupFetch() {
-    // console.error("########## the backupfc fired #######");
-
-    const req = await fetch(
-      `https://api.consumet.org/meta/anilist/info/${params.id}`
-    );
-    // console.log(res.status, "fireeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee----->>>>");
-    const response = await req.json();
-    return response;
+  // const res = await fetch(`${url}info/${params.id}`);
+  // console.log(res.status);
+  // const data = await res.json();
+  // console.log(data.message ? data.message : data.id);
+  try {
+    const res = await fetch(`${url}info/${params.id}`);
+    const data = await res.json();
+    return { props: { data }, revalidate: 86400 };
+  } catch (error) {
+    console.log(error);
+    try {
+      const req = await fetch(
+        `https://api.consumet.org/meta/anilist/info/${params.id}`
+      );
+      const data = await req.json();
+      return { props: { data }, revalidate: 86400 };
+    } catch (error) {
+      console.log(error);
+    }
   }
-
-  const res = await fetch(`${url}info/${params.id}`);
-  console.log(res.status);
-  const data = res.status === 200 ? await res.json() : await backupFetch();
-
   // Pass post data to the page via props
-  return { props: { data }, revalidate: 86400 };
 }

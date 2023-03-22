@@ -7,9 +7,6 @@ import Link from "next/link";
 import ImageLoader from "../../common/ImageLoader";
 
 function Hero({ data }: { data: animeDetail }) {
-  const ep = !!data?.episodes
-    ? data.episodes[0].id[data.episodes[0].id.length - 1]
-    : 0;
   const title = data.title?.userPreferred
     ? data.title?.userPreferred
     : data.title?.romaji
