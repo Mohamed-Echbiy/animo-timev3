@@ -69,17 +69,11 @@ export default Home;
 export const getStaticProps = async () => {
   const [reqPop, req, reqEp, reqPastYear] = await Promise.all([
     fetch(
-      `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?status=NOT_YET_RELEASED`
+      `${process.env.NEXT_PUBLIC_API}advanced-search?status=NOT_YET_RELEASED`
     ),
-    fetch(
-      `https://animotime-api-3.vercel.app/meta/anilist/trending?perPage=10`
-    ),
-    fetch(
-      `https://animotime-api-3.vercel.app/meta/anilist/recent-episodes?perPage=10`
-    ),
-    fetch(
-      `https://animotime-api-3.vercel.app/meta/anilist/advanced-search?year=2020&perPage=8`
-    ),
+    fetch(`${process.env.NEXT_PUBLIC_API}trending?perPage=10`),
+    fetch(`${process.env.NEXT_PUBLIC_API}recent-episodes?perPage=10`),
+    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?year=2020&perPage=8`),
   ]);
 
   const res = await req.json();
