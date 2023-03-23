@@ -22,6 +22,7 @@ export const userContext = createContext<
 >(false);
 const queryClient = new QueryClient();
 //
+
 function MyApp({ Component, pageProps }: AppProps) {
   const [userIn, setIsUserIn] = useState<Boolean>(false);
   const [isSearchModel, setSearchModel] = useState<Boolean>(false);
@@ -47,6 +48,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         <SearchModel />
         <Toast />
         <Component {...pageProps} />
+
+        <Script
+          data-cfasync="false"
+          type="text/javascript"
+          data-adel="atag"
+          src="//achcdn.com/script/atg.js"
+          czid="ogytpswule"
+        />
         <Analytics />
         <Script
           async
