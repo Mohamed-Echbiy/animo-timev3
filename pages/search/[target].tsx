@@ -41,7 +41,7 @@ export const getServerSideProps = async (context: {
   const { params } = context;
   const searchedFor: string = params.target;
   const req = await fetch(
-    `${process.env.NEXT_PUBLIC_API}advanced-search?query=${params.target}&perPage=20`
+    `${process.env.NEXT_PUBLIC_API}advanced-search?query=${params.target}&perPage=10`
   );
   const data = await req.json();
 
