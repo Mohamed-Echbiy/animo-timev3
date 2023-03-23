@@ -33,8 +33,8 @@ function index({
   //keywords
   const keywords = `${title} episode ${
     nextEpNum - 1
-  } , Anime streaming , English subtitles , Arabic subtitles , Watch anime online , Anime ${title} , ${title} episode 
-  ${nextEpNum} online , Watch ${title} episode ${nextEpNum} on AnimoTime`;
+  } , Anime streaming , English subtitles , , Watch anime online , Anime ${title} , ${title} episode 
+  ${nextEpNum} online , Watch ${title} episode ${nextEpNum} on AnimoTime, anime`;
 
   const nextEp = id?.slice(0, id.length - 1);
   const [whatLanguage, setWhatLanguage] = useState("en");
@@ -43,14 +43,17 @@ function index({
     <div className="bg-slate-200">
       <Head>
         <title>
-          Watch {title} Episode {nextEpNum} Online | Free Streaming on AnimoTime
+          Watch {title} Episode {nextEpNum} Online | Free on AnimoTime
         </title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.png" />
         <meta
           name="description"
           content={`Stream ${title} Episode ${nextEpNum} for free on AnimoTime and Enjoy high-quality video with English & Arabic subtitles. Watch it now!`}
         />
-        <meta name="keywords" content={keywords} />
+        <meta
+          name="keywords"
+          content={`${keywords} , watch ${title} for free , `}
+        />
         <meta
           name="a.validate.02"
           content="b0SqRR2tjW5Ktz7IRUhKo0ha1q7dv2q2NhFN"
