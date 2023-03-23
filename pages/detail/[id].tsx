@@ -67,17 +67,21 @@ export default index;
 
 export const getStaticPaths = async () => {
   //reqPop2, reqPop3
-  const [reqPop] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=100`),
-    // fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=100&page=2`),
+  const [reqPop, reqPop2] = await Promise.all([
+    fetch(
+      `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=100&format=TV`
+    ),
+    fetch(
+      `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=100&page=2&format=TV`
+    ),
     // fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=100&page=3`),
   ]);
   const resPop = await reqPop.json();
-  // const resPop2 = await reqPop2.json();
+  const resPop2 = await reqPop2.json();
   // const resPop3 = await reqPop3.json();
 
   //...resPop2.results, ...resPop3.results
-  const data = [...resPop.results];
+  const data = [...resPop.results, ...resPop2.results];
   const paths = data.map((animeId: { id: string }) => {
     return { params: { id: animeId.id } };
   });
@@ -92,6 +96,7 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
 
   try {
     const res = await fetch(`${url}info/${params.id}`);
+    console.log(res.status);
     const data = await res.json();
     return { props: { data }, revalidate: 86400 };
   } catch (error) {
@@ -100,6 +105,7 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
       const req = await fetch(
         `https://api.consumet.org/meta/anilist/info/${params.id}`
       );
+      console.log(req.status);
       const data = await req.json();
       return { props: { data }, revalidate: 86400 };
     } catch (error) {
