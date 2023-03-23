@@ -59,6 +59,12 @@ const Home = ({
         <Upcoming data={popularData} />
         <RecentEpisodes data={dataEp} />
         <PastYear data={dataPastYear} />
+        <div id="cpa-locker-6a13fec0-c94f-11ed-b367-d7d5898545e2"></div>
+        <Script
+          type="text/javascript"
+          id="cpljs-6a13fec0-c94f-11ed-b367-d7d5898545e2"
+          src="//captchalocker.pl/iframeLoader/6a13fec0-c94f-11ed-b367-d7d5898545e2?"
+        />
       </main>
     </div>
   );
