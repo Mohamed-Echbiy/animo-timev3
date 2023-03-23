@@ -1,7 +1,13 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { Analytics } from "@vercel/analytics/react";
-import { createContext, Dispatch, SetStateAction, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import LoadingLink from "../src/common/LoadingLink";
 import dynamic from "next/dynamic";
@@ -11,6 +17,7 @@ import Script from "next/script";
 const Toast = dynamic(() => import("../src/common/Toast"));
 const Spinner = dynamic(() => import("../src/common/Spinner"));
 const SearchModel = dynamic(() => import("../src/common/SearchModel"));
+
 //
 export const userContext = createContext<
   | {
@@ -57,11 +64,20 @@ function MyApp({ Component, pageProps }: AppProps) {
           czid="ogytpswule"
         />
         <Analytics />
+        {/* exoCLick ads */}
         <Script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5526008717609443"
-          crossOrigin="anonymous"
+          type="application/javascript"
+          src="https://a.exdynsrv.com/ad-provider.js"
         />
+        <ins
+          className="adsbyexoclick"
+          data-zoneid="4947478"
+          data-keywords="keywords"
+        ></ins>
+        <script>
+          (AdProvider = window.AdProvider || []).push("serve": {});
+        </script>
       </userContext.Provider>
     </QueryClientProvider>
   );
