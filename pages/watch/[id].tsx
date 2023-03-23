@@ -10,6 +10,7 @@ import { commentSchema } from "../../types/commentSchema";
 import IframeContainer from "../../src/components/watchPage/IframeContainer";
 import { animeDetail } from "../../types/animeDetail";
 import Script from "next/script";
+import process from "process";
 
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 const Comments = dynamic(
@@ -125,75 +126,17 @@ function index({
 
 export default index;
 
-// export const getServerSideProps = async (context: {
-//   req: { url: string };
-//   params: { id: string };
-// }) => {
-//   const { id } = context.params;
-//   const [req, reqComment] = await Promise.all([
-//     fetch(`https://animo-time-api.vercel.app/anime/gogoanime/servers/${id}`),
-//     fetch(`https://animotime.onrender.com/api/comments/${id}`),
-//   ]);
-//   const res = await req.json();
-//   const resComment = await reqComment.json();
-//   const title = id.slice(0, id.lastIndexOf("-")).split("-").join(" ");
-
-//   return {
-//     props: {
-//       data: { ...res },
-//       comments: resComment,
-//       titleBackup: title,
-//     },
-//   };
-// };
-
-//reqPop2
-// export const getStaticPaths = async () => {
-//   const [reqPop, reqPop3] = await Promise.all([
-//     fetch(
-//       `${process.env.NEXT_PUBLIC_API_V2}advanced-search?perPage=50&status=FINISHED&format=TV`
-//     ),
-
-//     fetch(`${process.env.NEXT_PUBLIC_API}trending?perPage=20`),
-//   ]);
-//   const resPop = await reqPop.json();
-//   const resPop3 = await reqPop3.json();
-
-//   const data = [...resPop.results, ...resPop3.results];
-//   const id = data.map((animeId: animeDetail) => animeId.id);
-//   console.log(id.length, "ids");
-//   const animeDetailPromises = id.map(async (id, i) => {
-//     const url = Number.isInteger((i + 1) / 2)
-//       ? `${process.env.NEXT_PUBLIC_API}`
-//       : `${process.env.NEXT_PUBLIC_API_V}`;
-//     console.log(url, i);
-//     const fetchDetail = await fetch(`${url}info/${id}`);
-//     const detailJson: animeDetail = await fetchDetail.json();
-//     const episodes = detailJson.episodes?.map((ep) => ep.id);
-//     return episodes;
-//   });
-//   const animeDetail = await Promise.all(animeDetailPromises);
-//   const paths = animeDetail
-//     .join(",")
-//     .split(",")
-//     .map((path) => {
-//       return { params: { id: path } };
-//     });
-//   // console.log(paths.length);
-//   const filtredPaths = paths.filter((e) => !!e.params.id === true);
-//   console.log(filtredPaths.length, "where is me");
-//   return { paths: filtredPaths, fallback: "blocking" };
-// };
-
 export const getServerSideProps = async (context: {
   params: { id: string };
 }) => {
   const { id } = context.params;
   const [req, reqComment] = await Promise.all([
-    fetch(`https://animo-time-api.vercel.app/anime/gogoanime/servers/${id}`),
+    fetch(`https://api.consumet.org/anime/gogoanime/servers/${id}`),
     fetch(`https://animotime.onrender.com/api/comments/${id}`),
   ]);
+
   const res = await req.json();
+  console.log(req.status, reqComment.status, res);
   const resComment = await reqComment.json();
   const nextEpNum: string = id?.slice(id.lastIndexOf("-"));
   const title = id.slice(0, id.lastIndexOf("-")).split("-").join(" ");
@@ -204,6 +147,5 @@ export const getServerSideProps = async (context: {
       comments: resComment,
       titleBackup: title,
     },
-    // revalidate: 86000,
   };
 };

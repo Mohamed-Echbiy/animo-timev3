@@ -3,7 +3,7 @@ module.exports = {
   reactStrictMode: true,
   images: {
     disableStaticImages: true,
-    include: ["/"],
+
     domains: [
       "s4.anilist.co",
       "flagsapi.com",

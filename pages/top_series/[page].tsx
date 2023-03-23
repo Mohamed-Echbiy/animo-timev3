@@ -57,7 +57,7 @@ export const getStaticProps = async ({
   params: { page: string };
 }) => {
   const req = await fetch(
-    `${process.env.NEXT_PUBLIC_API}advanced-search?perPage=10&format=TV&sort=["SCORE_DESC"]&page=${params.page}`
+    `https://api.consumet.org/meta/anilist/advanced-search?perPage=10&format=TV&page=${params.page}`
   );
   const data = await req.json();
   console.log(data);

@@ -23,6 +23,7 @@
     "react-modal-video": "^2.0.0",
     "react-player": "^2.11.2",
     "react-query": "^3.39.3",
+    "sharp": "^0.31.3",
     "swiper": "^8.4.6",
     "tailwindcss-filters": "^3.0.0",
     "yet-another-react-lightbox": "^2.4.3"
