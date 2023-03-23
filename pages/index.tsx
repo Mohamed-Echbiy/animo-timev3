@@ -44,6 +44,10 @@ const Home = ({
           content="anime, Animotime, anime website, watch anime, anime episodes, anime community, anime fans, anime streaming, classic anime, new anime releases, anime library, popular anime"
         />
         <meta name="robots" content="all" />
+        <meta
+          name="a.validate.02"
+          content="IubGGNc1SxteGPGOOPOdFAmGP81l4iAgqeZF"
+        />
         <Script
           data-cfasync="false"
           src="//dlh8c15zw7vfn.cloudfront.net/?zchld=981396"
@@ -59,12 +63,6 @@ const Home = ({
         <Upcoming data={popularData} />
         <RecentEpisodes data={dataEp} />
         <PastYear data={dataPastYear} />
-        <div id="cpa-locker-6a13fec0-c94f-11ed-b367-d7d5898545e2"></div>
-        <Script
-          type="text/javascript"
-          id="cpljs-6a13fec0-c94f-11ed-b367-d7d5898545e2"
-          src="//captchalocker.pl/iframeLoader/6a13fec0-c94f-11ed-b367-d7d5898545e2?"
-        />
       </main>
     </div>
   );
