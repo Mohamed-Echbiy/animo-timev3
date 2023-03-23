@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <SearchModel />
         <Toast />
         <Component {...pageProps} />
-
+        {/* adCash */}
         <Script
           data-cfasync="false"
           type="text/javascript"
@@ -64,20 +64,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           czid="ogytpswule"
         />
         <Analytics />
-        {/* exoCLick ads */}
-        <Script
-          async
-          type="application/javascript"
-          src="https://a.exdynsrv.com/ad-provider.js"
-        />
-        <ins
-          className="adsbyexoclick"
-          data-zoneid="4947478"
-          data-keywords="keywords"
-        ></ins>
-        <script>
-          (AdProvider = window.AdProvider || []).push("serve": {});
-        </script>
       </userContext.Provider>
     </QueryClientProvider>
   );
