@@ -70,6 +70,9 @@ function Character({ data }: { data: animeDetail }) {
                     src={e.image}
                     alt={e.name.full || e.name.userPreferred}
                     fill
+                    sizes="56px, (min-width: 820px){
+                      76px
+                    }"
                     onClick={() => setShowModal(true)}
                     className="cursor-pointer"
                     quality={100}

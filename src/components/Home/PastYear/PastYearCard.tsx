@@ -39,8 +39,11 @@ function PastYearCard({ data }: { data: anime | recommndation }) {
       ) : (
         <></>
       )}
-      <section className=" relative group min-w-[150px] aspect-[.7] flex-grow text-xs lg:text-sm text-white ease-in duration-500 shadow-primary group-hover:shadow-gray-500 ">
-        <Link href={`/detail/${data.id}`} className="realtive w-full h-full">
+      <section className=" relative group  aspect-[.7] min-w-[150px] flex-grow text-xs lg:text-sm text-white ease-in duration-500 shadow-primary group-hover:shadow-gray-500 ">
+        <Link
+          href={`/detail/${data.id}`}
+          className=" relative w-full h-full  block"
+        >
           <Image
             src={data.image}
             quality={20}

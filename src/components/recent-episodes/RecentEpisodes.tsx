@@ -15,8 +15,11 @@ function RecentEpisodes({ data }: { data: [recent_episodes] }) {
               <NewEpIcon />
             </span>
           </h1>
-          {data.map((e) => (
-            <section className="flex-grow min-w-[150px] w-1/4 lg:w-1/5  max-w-[250px] lg:max-w-sm">
+          {data.map((e, i) => (
+            <section
+              className="flex-grow min-w-[150px] w-1/4 lg:w-1/5  max-w-[250px] lg:max-w-sm"
+              key={e.image + i + "iuuur"}
+            >
               <RecentEpCard data={e} />
             </section>
           ))}

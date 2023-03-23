@@ -10,12 +10,15 @@ function SidebarRealted({ data }: { data: animeDetail }) {
       p1.rating < p2.rating ? 1 : p1.rating > p2.rating ? -1 : 0
     );
   return (
-    <div className=" w-full flex gap-3 gap-y-5 overflow-hidden  justify-center items-center flex-wrap h-fit  p-2 rounded-xl">
+    <div className=" w-full flex gap-3 gap-y-5 overflow-hidden  justify-center items-center flex-wrap h-fit  p-2 rounded-xl mt-12">
       {!!excludeTypeManga.length ? (
         <>
           {excludeTypeManga.map((e, i) => (
-            <div className="flex-grow w-2/5 md:w-1/4 xl:w-[15%] max-w-[200px] md:max-w-[280px] min-w-[150px] text-xs">
-              <Card key={e.id + i + "ppppppp"} data={e} />
+            <div
+              className="flex-grow w-2/5 md:w-1/4 xl:w-[15%] max-w-[200px] md:max-w-[280px] min-w-[150px] text-xs"
+              key={e.id + i + "ppppppp8889862168478233310" + "fsdfsfskdfhsk"}
+            >
+              <Card data={e} />
             </div>
           ))}
         </>

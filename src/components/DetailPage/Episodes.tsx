@@ -2,12 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { animeDetail } from "../../../types/animeDetail";
-import {
-  PlayIcon,
-  SearchIcon,
-  ArrowUpIcon,
-  ArrowDownIcon,
-} from "../../common/Icons";
+import { PlayIcon, SearchIcon } from "../../common/Icons";
 import ImageLoader from "../../common/ImageLoader";
 
 function Episodes({ data }: { data: animeDetail }) {
@@ -60,26 +55,11 @@ function Episodes({ data }: { data: animeDetail }) {
                 episodes.map((ep, i) => (
                   <Link
                     href={`/watch/${ep.id}?animeData=${data.currentEpisode}&ids=${data.id}&title=${title}`}
-                    className="ep_container flex-grow min-w-[200px] aspect-video max-w-xs ease-in-out transition-all duration-300"
+                    className="ep_container flex-grow min-w-[68px] aspect-video  ease-in-out transition-all duration-300"
                     key={ep.id}
                   >
-                    <div className="w-full relative h-full overflow-hidden rounded-md hover:shadow-primary duration-500 ease-in-out">
-                      <Image
-                        src={ep.image}
-                        alt={ep.id}
-                        fill
-                        priority={true}
-                        className=" brightness-70 saturate-150 hover:brightness-100 hover:saturate-200"
-                        onLoad={() => setImgLoaded(true)}
-                      />
-
-                      {imgLoaded ? <></> : <ImageLoader />}
-                      <div className=" absolute top-1/2 left-1/2 w-6 h-6 p-[7px] rounded-full flex items-center justify-center   box-content text-primary-500 -translate-x-1/2 -translate-y-1/2 bg-black">
-                        <PlayIcon />
-                      </div>
-                      <div className="absolute bottom-0 py-2 px-2 text-xs uppercase bg-black text-slate-200 left-0 w-full">
-                        <span>episode {ep.number}</span>
-                      </div>
+                    <div className="w-full relative h-full flex items-center font-semibold justify-center bg-gray-900 text-slate-200 overflow-hidden rounded-md hover:shadow-primary duration-500 ease-in-out">
+                      <p className="text-xl">{ep.number}</p>
                     </div>
                   </Link>
                 ))
@@ -98,6 +78,7 @@ function Episodes({ data }: { data: animeDetail }) {
                             alt={ep.id}
                             fill
                             priority={true}
+                            sizes="200px"
                             className=" brightness-70 saturate-150 hover:brightness-100 hover:saturate-200"
                             onLoad={() => setImgLoaded(true)}
                           />

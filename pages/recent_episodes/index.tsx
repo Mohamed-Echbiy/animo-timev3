@@ -44,7 +44,7 @@ export const getStaticProps = async (context: { req: { url: string } }) => {
   return {
     props: {
       data,
-      revalidate: 2000 * 10,
+      revalidate: 86000,
     },
   };
 };

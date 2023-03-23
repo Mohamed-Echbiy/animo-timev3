@@ -14,6 +14,7 @@ function RelationCard({ data }: { data: relations }) {
         src={data.image}
         alt={"anime cover"}
         fill
+        sizes="250px"
         className=""
         quality={30}
       />

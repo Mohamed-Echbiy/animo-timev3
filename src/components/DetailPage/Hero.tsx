@@ -51,12 +51,13 @@ function Hero({ data }: { data: animeDetail }) {
         />
         {!imgLoad && <ImageLoader />}
         <div className="content my-6 sm:my-0 relative sm:flex items-center justify-center sm:justify-start h-full w-full gap-4 text-white">
-          <div className="image_container mx-auto sm:mx-0 aspect-[.7] w-2/6 min-w-[150px] max-w-[250px] relative border-8 border-solid border-white  rounded-md">
+          <div className="image_container mx-auto sm:mx-0 aspect-[.7] w-2/6 min-w-[150px] max-w-[270px] relative border-8 border-solid border-white  rounded-md">
             <Image
               src={data.image}
               alt={title}
               fill
               quality={20}
+              sizes="270px"
               priority={true}
               onLoad={() => setImgLoadSmall(true)}
             />
