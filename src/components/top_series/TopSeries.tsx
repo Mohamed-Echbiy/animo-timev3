@@ -62,14 +62,14 @@ function TopSeries({
         </>
       </FlexIt>
       <div className=" w-fit py-2 flex gap-3 items-center flex-row-reverse uppercase mt-10">
-        {currentPage >= 100 ? (
+        {currentPage >= 200 ? (
           <></>
         ) : (
           <Link href={`/top_series/${currentPage + 1}`}>Next</Link>
         )}
-        {currentPage <= 100 ? (
+        {currentPage <= 200 ? (
           <div className="flex flex-row-reverse gap-3">
-            {currentPage + 2 <= 100 ? (
+            {currentPage + 2 <= 200 ? (
               <Link href={`/top_series/${currentPage + 1}`}>
                 {currentPage + 1}
               </Link>
@@ -77,7 +77,7 @@ function TopSeries({
               <></>
             )}
 
-            {currentPage + 3 <= 100 ? (
+            {currentPage + 3 <= 200 ? (
               <Link href={`/top_series/${currentPage + 2}`}>
                 {currentPage + 2}
               </Link>
@@ -85,7 +85,7 @@ function TopSeries({
               <></>
             )}
 
-            {currentPage + 4 <= 100 ? (
+            {currentPage + 4 <= 200 ? (
               <Link href={`/top_series/${currentPage + 3}`}>
                 {currentPage + 3}
               </Link>
