@@ -51,6 +51,10 @@ function index({
           content={`Stream ${title} Episode ${nextEpNum} for free on AnimoTime and Enjoy high-quality video with English & Arabic subtitles. Watch it now!`}
         />
         <meta name="keywords" content={keywords} />
+        <meta
+          name="a.validate.02"
+          content="b0SqRR2tjW5Ktz7IRUhKo0ha1q7dv2q2NhFN"
+        />
       </Head>
       <Navbar />
       <main className=" max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative min-h-screen pb-4">
