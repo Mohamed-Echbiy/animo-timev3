@@ -130,7 +130,9 @@ export const getServerSideProps = async (context: {
 }) => {
   const { id } = context.params;
   const [req, reqComment] = await Promise.all([
-    fetch(`https://api.consumet.org/anime/gogoanime/servers/${id}`),
+    fetch(
+      `https://consumet-api-c1fs.onrender.com/anime/gogoanime/servers/${id}`
+    ),
     fetch(`https://animotime.onrender.com/api/comments/${id}`),
   ]);
 
