@@ -29,10 +29,10 @@ function index({
 
   const { id, animeData, title: titleis, ids }: any = router.query;
   const title = titleis ? titleis : titleBackup;
-  const nextEpNum: any = id?.slice(-1);
+  const nextEpNum: any = id?.slice(id.lastIndexOf("-"));
   //keywords
   const keywords = `${title} episode ${
-    nextEpNum - 1
+    +nextEpNum - 1
   } , Anime streaming , English subtitles , , Watch anime online , Anime ${title} , ${title} episode 
   ${nextEpNum} online , Watch ${title} episode ${nextEpNum} on AnimoTime, anime`;
 
@@ -61,8 +61,8 @@ function index({
       </Head>
       <Navbar />
       <main className=" max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative min-h-screen pb-4">
-        <article className="pt-[220px] md:pt-[220px] xl:pt-[125px] h-full flex gap-4 flex-wrap  mx-auto">
-          <h1 className="w-full uppercase my-2 text-lg lg:text-xl ">{title}</h1>
+        <article className="pt-[220px] md:pt-[220px] xl:pt-[125px] h-full flex gap-4 flex-wrap  mx-auto pb-5">
+          <h1 className="w-full uppercase my-2 text-lg lg:text-xl ">{id}</h1>
 
           <section className="w-full md:w-2/3 flex-wrap gap-2 md:min-w-[360px] mx-auto flex-grow justify-center">
             <div className=" w-full">
@@ -118,6 +118,38 @@ function index({
             <Comments data={comments} animeEpId={id} />
           </aside>
         </article>
+        <div id="awn-z6862394"></div>
+        <Script src="/ad.js" data-cfasync="false" type="text/javascript" />
+        <a
+          href="https://onclickalgo.com/al/visit.php?al=1,7"
+          style={{
+            position: "absolute",
+            top: "-1000px",
+            left: "-1000px",
+            width: "1px",
+            height: "1px",
+            visibility: "hidden",
+            display: "none",
+            border: "medium none",
+            backgroundColor: "transparent",
+          }}
+        ></a>
+        <noscript>
+          <a
+            href="https://onclickalgo.com/al/visit.php?al=1,6"
+            style={{
+              position: "absolute",
+              top: "-1000px",
+              left: "-1000px",
+              width: "1px",
+              height: "1px",
+              visibility: "hidden",
+              display: "none",
+              border: "medium none",
+              backgroundColor: "transparent",
+            }}
+          ></a>
+        </noscript>
       </main>
     </div>
   );

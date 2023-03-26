@@ -1,0 +1,269 @@
+{
+  "quiz": [
+    {
+      "question": "What is the name of the sword carried by Guts in the anime/manga series Berserk?",
+      "options": [
+        "Dragon Slayer",
+        "Soul Reaver",
+        "Demon Cleaver",
+        "Shadow Fang"
+      ],
+      "answer": "Dragon Slayer"
+    },
+    {
+      "question": "What is the name of the virtual reality world in the anime/manga series Sword Art Online?",
+      "options": [
+        "The World",
+        "Alfheim Online",
+        "New Aincrad",
+        "Soul Translator"
+      ],
+      "answer": "New Aincrad"
+    },
+    {
+      "question": "What is the name of the ancient race that created the Titans in the anime/manga series Attack on Titan?",
+      "options": ["Eldians", "Marleyans", "Ackermans", "Azumabito"],
+      "answer": "Eldians"
+    },
+    {
+      "question": "What is the name of the protagonist in the anime/manga series Fullmetal Alchemist?",
+      "options": [
+        "Edward Elric",
+        "Alphonse Elric",
+        "Roy Mustang",
+        "Winry Rockbell"
+      ],
+      "answer": "Edward Elric"
+    },
+    {
+      "question": "What is the name of the organization that employs the characters in the anime/manga series Ghost in the Shell?",
+      "options": [
+        "Public Security Section 9",
+        "Ministry of Internal Affairs and Communications",
+        "Special Assault Team",
+        "Defense Intelligence Headquarters"
+      ],
+      "answer": "Public Security Section 9"
+    },
+    {
+      "question": "What is the name of the ability used by the characters in the anime/manga series JoJo's Bizarre Adventure?",
+      "options": ["Hamon", "Stand", "Ripple", "Spin"],
+      "answer": "Stand"
+    },
+    {
+      "question": "What is the name of the character who pilots the Evangelion Unit-02 in the anime/manga series Neon Genesis Evangelion?",
+      "options": [
+        "Asuka Langley Soryu",
+        "Rei Ayanami",
+        "Shinji Ikari",
+        "Mari Illustrious Makinami"
+      ],
+      "answer": "Asuka Langley Soryu"
+    },
+    {
+      "question": "What is the name of the organization that opposes the Black Knights in the anime/manga series Code Geass?",
+      "options": [
+        "Holy Britannian Empire",
+        "Order of the Black Knights",
+        "Europia United",
+        "Chinese Federation"
+      ],
+      "answer": "Holy Britannian Empire"
+    },
+    {
+      "question": "What is the name of the assassin organization in the anime/manga series Akame ga Kill!?",
+      "options": [
+        "Jaegers",
+        "Night Raid",
+        "Path of Peace",
+        "Empire's Assassins"
+      ],
+      "answer": "Night Raid"
+    },
+    {
+      "question": "What is the name of the academy attended by the characters in the anime/manga series Assassination Classroom?",
+      "options": [
+        "Kunugigaoka Junior High School",
+        "Shujin Academy",
+        "Hachimitsu Academy",
+        "Suzaku High School"
+      ],
+      "answer": "Kunugigaoka"
+    },
+    {
+      "question": "What is the name of the sword carried by Guts in the anime/manga series Berserk?",
+      "options": [
+        "Dragon Slayer",
+        "Soul Reaver",
+        "Demon Cleaver",
+        "Shadow Fang"
+      ],
+      "answer": "Dragon Slayer"
+    },
+    {
+      "question": "What is the name of the virtual reality world in the anime/manga series Sword Art Online?",
+      "options": [
+        "The World",
+        "Alfheim Online",
+        "New Aincrad",
+        "Soul Translator"
+      ],
+      "answer": "New Aincrad"
+    },
+    {
+      "question": "What is the name of the ancient race that created the Titans in the anime/manga series Attack on Titan?",
+      "options": ["Eldians", "Marleyans", "Ackermans", "Azumabito"],
+      "answer": "Eldians"
+    },
+    {
+      "question": "What is the name of the protagonist in the anime/manga series Fullmetal Alchemist?",
+      "options": [
+        "Edward Elric",
+        "Alphonse Elric",
+        "Roy Mustang",
+        "Winry Rockbell"
+      ],
+      "answer": "Edward Elric"
+    },
+    {
+      "question": "What is the name of the organization that employs the characters in the anime/manga series Ghost in the Shell?",
+      "options": [
+        "Public Security Section 9",
+        "Ministry of Internal Affairs and Communications",
+        "Special Assault Team",
+        "Defense Intelligence Headquarters"
+      ],
+      "answer": "Public Security Section 9"
+    },
+    {
+      "question": "What is the name of the ability used by the characters in the anime/manga series JoJo's Bizarre Adventure?",
+      "options": ["Hamon", "Stand", "Ripple", "Spin"],
+      "answer": "Stand"
+    },
+    {
+      "question": "What is the name of the character who pilots the Evangelion Unit-02 in the anime/manga series Neon Genesis Evangelion?",
+      "options": [
+        "Asuka Langley Soryu",
+        "Rei Ayanami",
+        "Shinji Ikari",
+        "Mari Illustrious Makinami"
+      ],
+      "answer": "Asuka Langley Soryu"
+    },
+    {
+      "question": "What is the name of the organization that opposes the Black Knights in the anime/manga series Code Geass?",
+      "options": [
+        "Holy Britannian Empire",
+        "Order of the Black Knights",
+        "Europia United",
+        "Chinese Federation"
+      ],
+      "answer": "Holy Britannian Empire"
+    },
+    {
+      "question": "What is the name of the assassin organization in the anime/manga series Akame ga Kill!?",
+      "options": [
+        "Jaegers",
+        "Night Raid",
+        "Path of Peace",
+        "Empire's Assassins"
+      ],
+      "answer": "Night Raid"
+    },
+    {
+      "question": "What is the name of the academy attended by the characters in the anime/manga series Assassination Classroom?",
+      "options": [
+        "Kunugigaoka Junior High School",
+        "Shujin Academy",
+        "Hachimitsu Academy",
+        "Suzaku High School"
+      ],
+      "answer": "Kunugigaoka Junior High School"
+    },
+    {
+      "question": "What is the name of the main character in the anime/manga series Death Note?",
+      "options": ["Light Yagami", "L Lawliet", "Ryuk", "Misa Amane"],
+      "answer": "Light Yagami"
+    },
+    {
+      "question": "What is the name of the organization that manages the world of witches in the anime/manga series Puella Magi Madoka Magica?",
+      "options": ["Incubators", "Kyubey", "Witch's Labyrinth", "Magical Girls"],
+      "answer": "Incubators"
+    },
+    {
+      "question": "What is the name of the cursed weapon that Guts used to wield in the anime/manga series Berserk?",
+      "options": ["Soul Reaver", "Dragon Slayer", "Beherit", "Apostle Killer"],
+      "answer": "Beherit"
+    },
+    {
+      "question": "What is the name of the organization that the main characters belong to in the anime/manga series Black Butler?",
+      "options": [
+        "Phantomhive Family",
+        "Noah's Ark Circus",
+        "Trancy Family",
+        "Reaper Association"
+      ],
+      "answer": "Phantomhive Family"
+    },
+    {
+      "question": "What is the name of the technique that the main character uses in the anime/manga series Naruto?",
+      "options": [
+        "Chidori",
+        "Rasengan",
+        "Shadow Clone Jutsu",
+        "Summoning Jutsu"
+      ],
+      "answer": "Rasengan"
+    },
+    {
+      "question": "What is the name of the group of humans who possess superpowers in the anime/manga series My Hero Academia?",
+      "options": [
+        "The League of Villains",
+        "The Heroes Association",
+        "The Power Group",
+        "The Quirk Users"
+      ],
+      "answer": "The Quirk Users"
+    },
+    {
+      "question": "What is the name of the space vessel that the main characters in the anime/manga series Cowboy Bebop travel on?",
+      "options": [
+        "The Swordfish",
+        "The Bebop",
+        "The Hammerhead",
+        "The Redtail"
+      ],
+      "answer": "The Bebop"
+    },
+    {
+      "question": "What is the name of the powerful pirate crew that the main character joins in the anime/manga series One Piece?",
+      "options": [
+        "Whitebeard Pirates",
+        "Blackbeard Pirates",
+        "Straw Hat Pirates",
+        "Heart Pirates"
+      ],
+      "answer": "Straw Hat Pirates"
+    },
+    {
+      "question": "What is the name of the virtual reality world that the main characters enter in the anime/manga series Log Horizon?",
+      "options": [
+        "Elder Tale",
+        "World of Warcraft",
+        "New Aincrad",
+        "Soul Society"
+      ],
+      "answer": "Elder Tale"
+    },
+    {
+      "question": "What is the name of the organization that the main characters in the anime/manga series Death Parade work for?",
+      "options": [
+        "Judgment Bureau",
+        "Heavenly Host",
+        "Quindecim",
+        "Netherworld Arbiters"
+      ],
+      "answer": "Quindecim"
+    }
+  ]
+}
