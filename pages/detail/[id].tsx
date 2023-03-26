@@ -22,9 +22,9 @@ function index({ data }: { data: animeDetail }) {
   const synonyms: string = !!data?.synonyms ? data.synonyms.join(",") : title;
 
   return (
-    <div className=" min-h-screen bg-slate-200 ">
+    <div className=" min-h-screen bg-slate-200 dark:bg-black">
       <Head>
-        <title>{(title || "animotime") + ` --animotime`}</title>
+        <title>{(title || "Animotime") + ` Animotime`}</title>
         <meta
           name="description"
           content={`watch ${title} with Arabic and English subtitles: Catch up on ${title} on Animotime. Follow the characters, as they continue their journey in this epic anime. Discover recommended anime to watch and join our anime community to share your thoughts on ${title}.`}

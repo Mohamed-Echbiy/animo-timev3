@@ -11,9 +11,9 @@ function page({
 }) {
   console.log(data.currentPage, data);
   return (
-    <div className="min-h-screen bg-slate-200">
+    <div className="min-h-screen bg-slate-200 dark:bg-black">
       <Head>
-        <title>Top Movies [animotime]</title>
+        <title>Top Movies on Animotime</title>
         <meta
           name="description"
           content="Discover the latest and greatest anime movies on Animotime. From action-packed adventures to heartwarming dramas, we've got it all. Watch the top movies with both Arabic and English subtitles and immerse yourself in the world of anime."

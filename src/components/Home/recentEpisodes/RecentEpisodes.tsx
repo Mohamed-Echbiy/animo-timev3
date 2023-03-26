@@ -7,21 +7,13 @@ function RecentEpisodes({ data }: { data: [recent_episodes] }) {
   return (
     <main className="recent_episodes_container">
       <div className="flex justify-between items-center mb-4 mt-section">
-        <h2 className="recent_episodes_title text-lg  md:text-subHead  uppercase flex items-center gap-3">
+        <h2 className="recent_episodes_title text-lg  md:text-subHead  uppercase flex items-center gap-3 dark:text-purple-500">
           Recent Episodes
-          <img
-            src="/new.gif"
-            alt="new gif image"
-            height={50}
-            width={50}
-            loading="lazy"
-            className="w-4 h-4 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-12 lg:h-12 hidden lg:block"
-          />
         </h2>
 
         <Link
           href={"/recent_episodes"}
-          className="text-gray-600 text-xs md:text-sm"
+          className="text-gray-600 dark:text-slate-300 text-xs md:text-sm"
         >
           show more {`->>`}
         </Link>

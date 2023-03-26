@@ -20,7 +20,7 @@ function index({
   const AllData = [...results, ...results1];
   // console.log(AllData);
   return (
-    <div className="min-h-screen bg-slate-200">
+    <div className="min-h-screen bg-slate-200 dark:bg-black">
       <Head>
         <title>AnimoTime</title>
         <meta

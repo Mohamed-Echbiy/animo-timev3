@@ -9,9 +9,9 @@ const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 function index({ data }: { data: favorite[] }) {
   console.log(data);
   return (
-    <div className=" min-h-screen bg-slate-200 ">
+    <div className=" min-h-screen bg-slate-200 dark:bg-black">
       <Head>
-        <title>AnimoTime</title>
+        <title>AnimoTime </title>
         <meta
           name="description"
           content="animo time a website to watch your favorite anime online without any ads"

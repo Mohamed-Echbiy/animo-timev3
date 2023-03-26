@@ -9,7 +9,7 @@ function RecentEpisodes({ data }: { data: [recent_episodes] }) {
     <main>
       <FlexIt warp="wrap" className=" gap-y-12 pt-[220px]" gap="4">
         <>
-          <h1 className="w-full text-subHead mb-4 uppercase flex items-center gap-3">
+          <h1 className="w-full text-subHead mb-4 uppercase flex items-center gap-3 dark:text-primary-500">
             Recent Episodes
             <span className="h-6 w-6">
               <NewEpIcon />

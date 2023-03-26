@@ -13,9 +13,9 @@ function index({
   const { results } = data;
 
   return (
-    <div className="min-h-screen bg-slate-200">
+    <div className="min-h-screen bg-slate-200 dark:bg-black">
       <Head>
-        <title>Recent Episodes [animotime]</title>
+        <title>Recent Episodes on animotime</title>
         <meta
           name="description"
           content="Stay up-to-date with the latest anime episodes on Animotime. We update our library regularly with new episodes, so you never miss a beat. Watch recent episodes with both Arabic and English subtitles and be the first to know what happens next."

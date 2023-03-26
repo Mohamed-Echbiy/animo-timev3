@@ -7,11 +7,13 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
         primary: colors.yellow,
         secondary: colors.red,
+        black: "#121212",
       },
       maxWidth: {
         "8xl": "1520px",
@@ -29,6 +31,9 @@ module.exports = {
       },
       boxShadow: {
         primary: "0 8px 8px 0px ",
+      },
+      backgroundColor: {
+        black: "#121219",
       },
     },
   },

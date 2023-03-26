@@ -15,7 +15,7 @@ function HeroSection({ data }: { data: [trending] }) {
         transition={{ delay: 0.4 }}
       >
         <section className="w-full mb-4 flex justify-between items-center">
-          <h1 className="text-lg md:text-subHead uppercase flex items-center gap-3">
+          <h1 className="text-lg md:text-subHead uppercase flex items-center gap-3 dark:text-lime-500">
             Trending{" "}
             <span className="">
               <TredningUp />

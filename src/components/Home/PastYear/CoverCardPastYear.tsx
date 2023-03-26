@@ -9,7 +9,7 @@ export const CoverCardPastYear = ({ anime1 }: { anime1: anime }) => {
   const cover = anime1 ? (anime1.cover ? anime1.cover : anime1.image) : "";
   return (
     <>
-      <section className="pastYear-cover-anime group overflow-hidden w-full aspect-[9/6] sm:aspect-[9/5] lg:aspect-[9/3] shadow-primary shadow-gray-700 rounded-lg relative">
+      <section className="pastYear-cover-anime group overflow-hidden w-full aspect-[9/6] sm:aspect-[9/5] lg:aspect-[9/3] shadow-primary shadow-gray-700 dark:shadow-transparent dark:shadow-none rounded-lg relative">
         <Image
           src={cover}
           alt={anime1.title.userPreferred}

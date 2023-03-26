@@ -21,7 +21,7 @@ function Episodes({ data }: { data: animeDetail }) {
   return (
     <>
       {data.episodes.length ? (
-        <div className="episodes flex flex-wrap justify-center items-center mt-10 gap-3 ">
+        <div className="episodes flex flex-wrap justify-start items-center mt-10 gap-3 ">
           <div className="w-full flex items-center gap-2 gap-y-4 mb-3 flex-wrap">
             <input
               type="number"
@@ -38,7 +38,7 @@ function Episodes({ data }: { data: animeDetail }) {
               <div className="ml-5 uppercase text-xs md:text-sm xl:text-base flex items-center w-fit">
                 <span>sort by </span>
                 <select
-                  className=" ml-2 cursor-pointer p-1 rounded-md ease-in-out transition-all duration-300 bg-white uppercase"
+                  className=" ml-2 cursor-pointer p-1 rounded-md ease-in-out transition-all duration-300 bg-white dark:bg-gray-900 py-2 uppercase"
                   onChange={(e) => setSortMode(!!e.target.value)}
                 >
                   <option value="recent">recent</option>
@@ -55,10 +55,10 @@ function Episodes({ data }: { data: animeDetail }) {
                 episodes.map((ep, i) => (
                   <Link
                     href={`/watch/${ep.id}?animeData=${data.currentEpisode}&ids=${data.id}&title=${title}`}
-                    className="ep_container flex-grow min-w-[68px] aspect-video  ease-in-out transition-all duration-300"
+                    className="ep_container flex-grow min-w-[68px] max-w-[280px]  aspect-video  ease-in-out transition-all duration-300"
                     key={ep.id}
                   >
-                    <div className="w-full relative h-full flex items-center font-semibold justify-center bg-gray-900 text-slate-200 overflow-hidden rounded-md hover:shadow-primary duration-500 ease-in-out">
+                    <div className="w-full relative h-full flex items-center font-semibold justify-center bg-gray-900 text-slate-200 overflow-hidden rounded-md hover:dark:shadow-none hover:shadow-primary duration-500 ease-in-out">
                       <p className="text-xl">{ep.number}</p>
                     </div>
                   </Link>
@@ -72,7 +72,7 @@ function Episodes({ data }: { data: animeDetail }) {
                         className="ep_container flex-grow min-w-[200px] aspect-video max-w-xs "
                         key={ep.id}
                       >
-                        <div className="w-full relative h-full overflow-hidden rounded-md hover:shadow-primary duration-500 ease-in-out">
+                        <div className="w-full relative h-full overflow-hidden rounded-md hover:shadow-primary hover:dark:shadow-none duration-500 ease-in-out">
                           <Image
                             src={ep.image}
                             alt={ep.id}

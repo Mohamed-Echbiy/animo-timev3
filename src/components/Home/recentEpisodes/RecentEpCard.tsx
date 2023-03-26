@@ -12,7 +12,7 @@ function RecentEpCard({ data }: { data: recent_episodes }) {
   const [loadImage, setLoadImage] = useState(false);
 
   return (
-    <article className="recentCard aspect-[.7] relative min-w-[140px]  rounded-xl text-white shadow-primary shadow-gray-800">
+    <article className="recentCard aspect-[.7] relative min-w-[140px]  rounded-xl text-white shadow-primary shadow-gray-800 dark:shadow-none">
       <Link
         href={`/detail/${data.id}`}
         title={`watch ${data.title.userPreferred}`}

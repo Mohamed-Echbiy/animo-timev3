@@ -25,27 +25,29 @@ function TopSeries({
     <main>
       <FlexIt warp="wrap" className=" gap-y-12 pt-[220px] gap-x-2 lg:gap-x-2">
         <>
-          <h1 className="w-full text-subHead mb-4 uppercase">Top Series</h1>
+          <h1 className="w-full text-subHead mb-4 uppercase dark:text-blue-500">
+            Top Series
+          </h1>
           <section className="w-full mt-2 mb-5 flex items-center gap-4">
             <p
               onClick={() => setBigCard((pre) => !pre)}
-              className={`h-12 w-12 p-4 rounded-md cursor-pointer ${
-                bigCard && "bg-gray-300"
+              className={`h-12 w-12 p-4 rounded-md cursor-pointer dark:text-white ${
+                bigCard && "bg-gray-300 dark:text-black"
               } text-black`}
             >
               <ListCardIcon />
             </p>
             <p
               onClick={() => setBigCard((pre) => !pre)}
-              className={`w-12 h-12 p-4 rounded-md cursor-pointer text-black ${
-                !bigCard && "bg-gray-300"
+              className={`w-12 h-12 p-4 rounded-md cursor-pointer text-black dark:text-white ${
+                !bigCard && "bg-gray-300 dark:text-black "
               }`}
             >
               <GridCardsIcon />
             </p>
           </section>
 
-          {bigCard
+          {data.length > 0 && bigCard
             ? data.map((e) => (
                 <div className="w-full">
                   <CoverCardPastYear anime1={e} />
@@ -65,12 +67,20 @@ function TopSeries({
         {currentPage >= 200 ? (
           <></>
         ) : (
-          <Link href={`/top_series/${currentPage + 1}`}>Next</Link>
+          <Link
+            href={`/top_series/${currentPage + 1}`}
+            className="p-4 dark:bg-white text-white bg-black rounded-md dark:text-black"
+          >
+            Next
+          </Link>
         )}
         {currentPage <= 200 ? (
           <div className="flex flex-row-reverse gap-3">
             {currentPage + 2 <= 200 ? (
-              <Link href={`/top_series/${currentPage + 1}`}>
+              <Link
+                href={`/top_series/${currentPage + 1}`}
+                className="p-4 dark:bg-white text-white bg-black rounded-md dark:text-black"
+              >
                 {currentPage + 1}
               </Link>
             ) : (
@@ -78,7 +88,10 @@ function TopSeries({
             )}
 
             {currentPage + 3 <= 200 ? (
-              <Link href={`/top_series/${currentPage + 2}`}>
+              <Link
+                href={`/top_series/${currentPage + 2}`}
+                className="p-4 dark:bg-white text-white bg-black rounded-md dark:text-black"
+              >
                 {currentPage + 2}
               </Link>
             ) : (
@@ -86,7 +99,10 @@ function TopSeries({
             )}
 
             {currentPage + 4 <= 200 ? (
-              <Link href={`/top_series/${currentPage + 3}`}>
+              <Link
+                href={`/top_series/${currentPage + 3}`}
+                className="p-4 dark:bg-white text-white bg-black rounded-md dark:text-black"
+              >
                 {currentPage + 3}
               </Link>
             ) : (
@@ -99,6 +115,7 @@ function TopSeries({
         {currentPage !== 1 ? (
           <Link
             href={`/top_series/${currentPage - 1 === 1 ? "" : currentPage - 1}`}
+            className="p-4 dark:bg-white text-white bg-black rounded-md dark:text-black"
           >
             prev
           </Link>

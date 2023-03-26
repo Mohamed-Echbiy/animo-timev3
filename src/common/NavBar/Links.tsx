@@ -5,7 +5,7 @@ import { HomeIcon, TvIcon, MovieIcon, RandomIcon } from "../Icons";
 
 // tailwindcss variable
 const after =
-  " relative after:absolute after:left-1/2 after:bottom-0 after:w-full after:-translate-x-1/2 after:h-[2px] after:bg-secondary-600 text-black";
+  " relative after:absolute after:left-1/2 after:bottom-0 after:w-full after:-translate-x-1/2 after:h-[2px] after:bg-secondary-600 text-black dark:text-white";
 function Links() {
   const { pathname } = useRouter();
   const [randomId, setRandomId] = useState(0);
@@ -14,7 +14,7 @@ function Links() {
     setRandomId(id);
   }, []);
   return (
-    <ul className="navbar_links flex items-center gap-5 md:gap-10  justify-center text-gray-500">
+    <ul className="navbar_links flex items-center gap-5 md:gap-10  justify-center text-gray-500 dark:text-slate-400">
       <li className="home_link ">
         <Link
           href="/"

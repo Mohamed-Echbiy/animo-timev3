@@ -1,3 +1,4 @@
+import { clear } from "console";
 import Head from "next/head";
 import React from "react";
 import Navbar from "../../src/common/NavBar/Navbar";
@@ -10,9 +11,9 @@ function Page({
   data: { currentPage: number; results: [anime]; hasNextPage: boolean };
 }) {
   return (
-    <div className="min-h-screen bg-slate-200">
+    <div className="min-h-screen bg-slate-200 dark:bg-black">
       <Head>
-        <title>Top Series [animotime]</title>
+        <title>Top Series on Animotime</title>
         <meta
           name="description"
           content="Follow your favorite anime series on Animotime. We offer a wide range of series with both Arabic and English subtitles, so you can enjoy the latest episodes as soon as they're released. Join our anime community and discuss the top series with other fans."

@@ -38,7 +38,7 @@ function Card({ data }: { data: trending | anime | relations }) {
   // image loading
   const [imgLoad, setImageLoad] = useState(false);
   return (
-    <section className=" relative group min-w-[150px]  aspect-[.7]  flex-grow overflow-hidden rounded-xl text-xs lg:text-sm text-white shadow-primary shadow-gray-500">
+    <section className=" relative group min-w-[150px]  aspect-[.7]  flex-grow overflow-hidden rounded-xl text-xs lg:text-sm text-white shadow-primary dark:shadow-transparent dark:shadow-none   shadow-gray-500">
       <Link href={`/detail/${data.id}`} title={data.title.userPreferred}>
         <Image
           src={data.image}

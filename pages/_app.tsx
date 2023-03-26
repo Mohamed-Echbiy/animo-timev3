@@ -12,6 +12,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import LoadingLink from "../src/common/LoadingLink";
 import dynamic from "next/dynamic";
 import Script from "next/script";
+import { ThemeProvider } from "next-themes";
 
 //
 const Toast = dynamic(() => import("../src/common/Toast"));
@@ -50,11 +51,13 @@ function MyApp({ Component, pageProps }: AppProps) {
           setToast,
         }}
       >
-        <LoadingLink />
-        <Spinner />
-        <SearchModel />
-        <Toast />
-        <Component {...pageProps} />
+        <ThemeProvider attribute="class">
+          <LoadingLink />
+          <Spinner />
+          <SearchModel />
+          <Toast />
+          <Component {...pageProps} />
+        </ThemeProvider>
         {/* adCash */}
         <Script
           data-cfasync="false"

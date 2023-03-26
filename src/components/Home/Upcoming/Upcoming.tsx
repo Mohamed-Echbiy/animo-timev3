@@ -10,7 +10,9 @@ function Upcoming({ data }: { data: [anime] }) {
 
   return (
     <main className="upcoming_anime mt-section">
-      <h3 className="uppercase text-subHead">Upcomming</h3>
+      <h3 className="uppercase text-subHead dark:text-secondary-500">
+        Upcomming
+      </h3>
       <Swiper
         className="Swiper-Container"
         modules={[Navigation, Autoplay]}

@@ -40,7 +40,7 @@ function index({
   const [whatLanguage, setWhatLanguage] = useState("en");
 
   return (
-    <div className="bg-slate-200">
+    <div className="bg-slate-200 dark:bg-black">
       <Head>
         <title>
           Watch {title} Episode {nextEpNum} Online | Free on AnimoTime

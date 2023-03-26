@@ -17,9 +17,9 @@ function index({
   const { results } = data;
 
   return (
-    <div className="min-h-screen bg-slate-200">
+    <div className="min-h-screen bg-slate-200 dark:bg-black">
       <Head>
-        <title>AnimoTime</title>
+        <title>AnimoTime search anime</title>
         <meta
           name="description"
           content="animo time a website to watch your favorite anime online without any ads"
