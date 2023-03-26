@@ -30,7 +30,7 @@ function TopMovies({
     <main>
       <FlexIt warp="wrap" className=" gap-y-12 pt-[220px]" gap="4">
         <>
-          <h1 className="w-full text-subHead mb-4 uppercase flex items-center gap-3">
+          <h1 className="w-full text-subHead mb-4 uppercase flex items-center gap-3 dark:text-green-500">
             Top Movies
             <span className="w-6 h-6">
               <MoviesIconV2 />
@@ -39,16 +39,16 @@ function TopMovies({
           <section className="w-full mt-2 mb-5 flex items-center gap-4">
             <p
               onClick={() => setBigCard((pre) => !pre)}
-              className={`h-12 w-12 p-4 rounded-md cursor-pointer ${
-                bigCard && "bg-gray-300"
+              className={`h-12 w-12 p-4 rounded-md cursor-pointer dark:text-white ${
+                bigCard && "bg-gray-300 dark:text-black"
               } text-black`}
             >
               <ListCardIcon />
             </p>
             <p
               onClick={() => setBigCard((pre) => !pre)}
-              className={`w-12 h-12 p-4 rounded-md cursor-pointer text-black ${
-                !bigCard && "bg-gray-300"
+              className={`w-12 h-12 p-4 rounded-md cursor-pointer text-black dark:text-white ${
+                !bigCard && "bg-gray-300 dark:text-black "
               }`}
             >
               <GridCardsIcon />
@@ -75,12 +75,20 @@ function TopMovies({
         {currentPage >= 60 ? (
           <></>
         ) : (
-          <Link href={`/top_movies/${currentPage + 1}`}>Next</Link>
+          <Link
+            href={`/top_movies/${currentPage + 1}`}
+            className="p-4 dark:bg-white text-white bg-black rounded-md dark:text-black"
+          >
+            Next
+          </Link>
         )}
         {currentPage <= 60 ? (
           <div className="flex flex-row-reverse gap-3">
             {currentPage + 2 <= 60 ? (
-              <Link href={`/top_movies/${currentPage + 1}`}>
+              <Link
+                href={`/top_movies/${currentPage + 1}`}
+                className="p-4 dark:bg-white text-white bg-black rounded-md dark:text-black"
+              >
                 {currentPage + 1}
               </Link>
             ) : (
@@ -88,7 +96,10 @@ function TopMovies({
             )}
 
             {currentPage + 3 <= 60 ? (
-              <Link href={`/top_movies/${currentPage + 2}`}>
+              <Link
+                href={`/top_movies/${currentPage + 2}`}
+                className="p-4 dark:bg-white text-white bg-black rounded-md dark:text-black"
+              >
                 {currentPage + 2}
               </Link>
             ) : (
@@ -96,7 +107,10 @@ function TopMovies({
             )}
 
             {currentPage + 4 <= 60 ? (
-              <Link href={`/top_movies/${currentPage + 3}`}>
+              <Link
+                href={`/top_movies/${currentPage + 3}`}
+                className="p-4 dark:bg-white text-white bg-black rounded-md dark:text-black"
+              >
                 {currentPage + 3}
               </Link>
             ) : (
@@ -109,6 +123,7 @@ function TopMovies({
         {currentPage !== 1 ? (
           <Link
             href={`/top_movies/${currentPage - 1 === 1 ? "" : currentPage - 1}`}
+            className="p-4 dark:bg-white text-white bg-black rounded-md dark:text-black"
           >
             prev
           </Link>
