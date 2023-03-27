@@ -8,18 +8,15 @@ import { ArrowNext, ArrowPerv } from "../../src/common/Icons";
 import { episode } from "../../types/episode";
 import { commentSchema } from "../../types/commentSchema";
 import IframeContainer from "../../src/components/watchPage/IframeContainer";
-import { animeDetail } from "../../types/animeDetail";
-import Script from "next/script";
-import process from "process";
 
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 const Comments = dynamic(
   () => import("../../src/components/watchPage/comments/Comments")
 );
+const Script = dynamic(() => import("next/script"));
 function index({
   data,
   comments,
-  titleBackup,
 }: {
   data: episode[];
   comments: { data: commentSchema[] };
@@ -28,7 +25,7 @@ function index({
   const router = useRouter();
 
   const { id, animeData, title: titleis, ids }: any = router.query;
-  const title = titleis ? titleis : titleBackup;
+  const title = id.slice(0, id.lastIndexOf("-")).split("-").join(" ");
   const nextEpNum: any = id?.slice(id.lastIndexOf("-"));
   //keywords
   const keywords = `${title} episode ${
@@ -37,7 +34,6 @@ function index({
   ${nextEpNum} online , Watch ${title} episode ${nextEpNum} on AnimoTime, anime`;
 
   const nextEp = id?.slice(0, id.length - 1);
-  const [whatLanguage, setWhatLanguage] = useState("en");
 
   return (
     <div className="bg-slate-200 dark:bg-black">
@@ -66,21 +62,7 @@ function index({
 
           <section className="w-full md:w-2/3 flex-wrap gap-2 md:min-w-[360px] mx-auto flex-grow justify-center">
             <div className=" w-full">
-              {/* quality */}
-              {/* <Quality setWhatLanguage={setWhatLanguage} /> */}
-              {/* {ifram} */}
-              {whatLanguage === "ar" ? (
-                <>
-                  {/* <IframeContainerArabic
-                    // data={dataAr1}
-                    id={id}
-                    setWhatLanguage={setWhatLanguage}
-                    nextEpNum={nextEpNum}
-                  /> */}
-                </>
-              ) : (
-                <IframeContainer data={data} />
-              )}
+              <IframeContainer data={data} />
             </div>
             <nav className="mt-5 uppercase gap-2 w-fit flex flex-row-reverse">
               {+animeData > 1 && (
@@ -169,16 +151,12 @@ export const getServerSideProps = async (context: {
   ]);
 
   const res = await req.json();
-  console.log(req.status, reqComment.status, res);
   const resComment = await reqComment.json();
-  const nextEpNum: string = id?.slice(id.lastIndexOf("-"));
-  const title = id.slice(0, id.lastIndexOf("-")).split("-").join(" ");
-  console.log(nextEpNum, title, id);
+
   return {
     props: {
       data: { ...res },
       comments: resComment,
-      titleBackup: title,
     },
   };
 };
