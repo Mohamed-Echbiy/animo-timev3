@@ -35,7 +35,7 @@ const Home = ({
     <div className=" min-h-screen bg-slate-200 dark:bg-black ">
       <Head>
         <title>AnimoTime - watch anime episodes</title>
-        <link rel="icon" href="//logo.png" />
+        <link rel="icon" href="/logo.png" />
         <meta
           name="description"
           content="Welcome to Animotime, your go-to destination for the latest anime content. Explore our vast library of anime with English subtitles. From classic shows to the hottest new releases, we've got you covered. Watch your favorite episodes and connect with other anime fans from around the world. Start your anime journey today with Animotime."
