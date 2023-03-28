@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { ArrowNext, ArrowPerv } from "../../src/common/Icons";
 import { episode } from "../../types/episode";
 import { commentSchema } from "../../types/commentSchema";
@@ -13,7 +12,7 @@ const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 const Comments = dynamic(
   () => import("../../src/components/watchPage/comments/Comments")
 );
-const Script = dynamic(() => import("next/script"));
+
 function index({
   data,
   comments,
@@ -100,38 +99,6 @@ function index({
             <Comments data={comments} animeEpId={id} />
           </aside>
         </article>
-        <div id="awn-z6862394"></div>
-        <Script src="/ad.js" data-cfasync="false" type="text/javascript" />
-        <a
-          href="https://onclickalgo.com/al/visit.php?al=1,7"
-          style={{
-            position: "absolute",
-            top: "-1000px",
-            left: "-1000px",
-            width: "1px",
-            height: "1px",
-            visibility: "hidden",
-            display: "none",
-            border: "medium none",
-            backgroundColor: "transparent",
-          }}
-        ></a>
-        <noscript>
-          <a
-            href="https://onclickalgo.com/al/visit.php?al=1,6"
-            style={{
-              position: "absolute",
-              top: "-1000px",
-              left: "-1000px",
-              width: "1px",
-              height: "1px",
-              visibility: "hidden",
-              display: "none",
-              border: "medium none",
-              backgroundColor: "transparent",
-            }}
-          ></a>
-        </noscript>
       </main>
     </div>
   );

@@ -11,13 +11,14 @@ import {
 import { QueryClient, QueryClientProvider } from "react-query";
 import LoadingLink from "../src/common/LoadingLink";
 import dynamic from "next/dynamic";
-import Script from "next/script";
+
 import { ThemeProvider } from "next-themes";
 
 //
 const Toast = dynamic(() => import("../src/common/Toast"));
 const Spinner = dynamic(() => import("../src/common/Spinner"));
 const SearchModel = dynamic(() => import("../src/common/SearchModel"));
+const Script = dynamic(() => import("next/script"));
 
 //
 export const userContext = createContext<
@@ -58,14 +59,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Toast />
           <Component {...pageProps} />
         </ThemeProvider>
-        {/* adCash */}
-        <Script
-          data-cfasync="false"
-          type="text/javascript"
-          data-adel="atag"
-          src="//achcdn.com/script/atg.js"
-          czid="ogytpswule"
-        />
+
         <Analytics />
       </userContext.Provider>
     </QueryClientProvider>

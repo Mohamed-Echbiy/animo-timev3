@@ -31,12 +31,22 @@ function Navbar() {
               src="/logo.png"
               alt="animotime logo"
               className="rounded-xl  xl:mr-20 w-14 md:w-24 xl:w-32"
+              width={"auto"}
+              height={"auto"}
+              sizes="56px , (min-width: 720px){
+               width:  96px
+              }"
             />
           ) : (
             <img
               src="/logoDark.png"
               alt="animotime logo"
+              width={"auto"}
+              height={"auto"}
               className="rounded-xl  xl:mr-20 w-14 md:w-24 xl:w-32"
+              sizes="56px , (min-width: 720px){
+               width:  96px
+              }"
             />
           )}
           <div className="navbar_logo items-center flex-grow  hidden xl:flex">
