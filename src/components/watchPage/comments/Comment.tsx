@@ -65,7 +65,9 @@ function Comment({ data }: { data: commentSchema }) {
   };
   return (
     <>
-      <div className={`flex flex-col gap-y-4 rounded-lg bg-white py-4 px-5 `}>
+      <div
+        className={`flex flex-col gap-y-4 rounded-lg bg-white dark:bg-gray-900 dark:text-white  shadow-primary shadow-gray-100 dark:shadow-black py-4 px-5 `}
+      >
         <div className="name_avatar flex items-center gap-3">
           <AvatarIcon />
           <p>{data.by.userName}</p>

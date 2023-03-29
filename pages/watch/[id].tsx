@@ -12,7 +12,9 @@ const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 const Comments = dynamic(
   () => import("../../src/components/watchPage/comments/Comments")
 );
-
+const BreadcrumbsContainer = dynamic(
+  () => import("../../src/common/BreadcrumbsContainer")
+);
 function index({
   data,
   comments,
@@ -23,10 +25,11 @@ function index({
 }) {
   const router = useRouter();
 
-  const { id, animeData, title: titleis, ids }: any = router.query;
+  const { id, animeData, ids }: any = router.query;
   const title = id.slice(0, id.lastIndexOf("-")).split("-").join(" ");
-  const nextEpNum: any = id?.slice(id.lastIndexOf("-"));
+  const nextEpNum: any = id?.slice(id.lastIndexOf("-") + 1);
   //keywords
+  console.log(nextEpNum);
   const keywords = `${title} episode ${
     +nextEpNum - 1
   } , Anime streaming , English subtitles , , Watch anime online , Anime ${title} , ${title} episode 
@@ -57,8 +60,12 @@ function index({
       <Navbar />
       <main className=" max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative min-h-screen pb-4">
         <article className="pt-[220px] md:pt-[220px] xl:pt-[125px] h-full flex gap-4 flex-wrap  mx-auto pb-5">
-          <h1 className="w-full uppercase my-2 text-lg lg:text-xl ">{id}</h1>
-
+          <h1 className="w-full uppercase my-2 text-lg lg:text-xl pb-4 border-2 border-solid border-transparent dark:border-b-violet-500 border-b-violet-900">
+            {id}
+          </h1>
+          <div className="w-full">
+            <BreadcrumbsContainer />
+          </div>
           <section className="w-full md:w-2/3 flex-wrap gap-2 md:min-w-[360px] mx-auto flex-grow justify-center">
             <div className=" w-full">
               <IframeContainer data={data} />

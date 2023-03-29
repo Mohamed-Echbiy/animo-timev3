@@ -13,6 +13,7 @@ import LoadingLink from "../src/common/LoadingLink";
 import dynamic from "next/dynamic";
 
 import { ThemeProvider } from "next-themes";
+import Footer from "../src/common/Footer";
 
 //
 const Toast = dynamic(() => import("../src/common/Toast"));
@@ -53,11 +54,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       >
         <ThemeProvider attribute="class">
-          <LoadingLink />
-          <Spinner />
-          <SearchModel />
-          <Toast />
-          <Component {...pageProps} />
+          <main className=" bg-slate-200 dark:bg-black">
+            <LoadingLink />
+            <Spinner />
+            <SearchModel />
+            <Toast />
+            <Component {...pageProps} />
+            <Footer />
+          </main>
         </ThemeProvider>
 
         <Analytics />

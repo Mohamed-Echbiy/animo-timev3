@@ -8,6 +8,7 @@ import React from "react";
 
 import { animeDetail } from "../../types/animeDetail";
 import Hero from "../../src/components/DetailPage/Hero";
+import BreadcrumbsContainer from "../../src/common/BreadcrumbsContainer";
 // const Hero = dynamic(() => import("../../src/components/DetailPage/Hero"));
 const Navbar = dynamic(() => import("../../src/common/NavBar/Navbar"));
 const TabSwitcher = dynamic(
@@ -46,6 +47,7 @@ function index({ data }: { data: animeDetail }) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
           >
+            <BreadcrumbsContainer />
             <Hero data={data} />
             <TabSwitcher data={data} />
           </m.main>

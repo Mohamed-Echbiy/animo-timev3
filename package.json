@@ -8,12 +8,15 @@
     "sitemap": "next-sitemap"
   },
   "dependencies": {
+    "@sanity/client": "^5.4.0",
+    "@sanity/image-url": "^1.0.2",
     "@vercel/analytics": "^0.1.11",
     "firebase": "^9.16.0",
     "framer-motion": "^8.5.4",
     "next": "latest",
     "next-sitemap": "^4.0.6",
     "next-themes": "^0.2.1",
+    "nextjs-breadcrumbs2": "^2.0.4",
     "nextjs-progressbar": "^0.0.16",
     "node-cache": "^5.1.2",
     "react": "18.2.0",

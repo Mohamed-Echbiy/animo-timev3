@@ -5,6 +5,11 @@ import { anime } from "../types/anime";
 import { recent_episodes } from "../types/recent_episodes";
 import { trending } from "../types/trending";
 import dynamic from "next/dynamic";
+import { client } from "../lib/client";
+import DownloadEpContainer from "../src/components/Home/DownloadEp/DownloadEpContainer";
+import { downloadLinks } from "../types/downloadData";
+import Breadcrumbs from "../src/common/BreadcrumbsContainer";
+import BreadcrumbsContainer from "../src/common/BreadcrumbsContainer";
 
 // import PastYear from "../src/components/Home/PastYear/PastYear";
 
@@ -24,13 +29,24 @@ const Home = ({
   dataEp,
   dataPastYear,
   popularData,
+  dData,
 }: {
   data: [trending];
   dataEp: [recent_episodes];
   dataPastYear: [anime];
   popularData: [anime];
+  dData: { allPromo: downloadLinks[] };
 }) => {
-  console.log(popularData);
+  // useEffect(() => {
+  //   const asynCFecth = async () => {
+  //     const req = await client.fetch(`*[_type == "promo" ]{allPromo}[0]`);
+  //     const res = await req;
+  //     console.log(res, "from the client");
+  //   };
+  //   asynCFecth();
+  // }, []);
+  const { allPromo } = dData;
+  // console.log(allPromo, "bananaannanananan");
   return (
     <div className=" min-h-screen bg-slate-200 dark:bg-black ">
       <Head>
@@ -50,12 +66,13 @@ const Home = ({
           content="IubGGNc1SxteGPGOOPOdFAmGP81l4iAgqeZF"
         />
       </Head>
-      <main className=" max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative">
+      <main className=" max-w-8xl m-auto  px-2 md:px-5 lg:px-7 xl:px-9 relative">
         <Navbar />
         <HeroSection data={data} />
         <Upcoming data={popularData} />
         <RecentEpisodes data={dataEp} />
         <PastYear data={dataPastYear} />
+        <DownloadEpContainer data={allPromo} />
       </main>
     </div>
   );
@@ -64,13 +81,14 @@ const Home = ({
 export default Home;
 
 export const getStaticProps = async () => {
-  const [reqPop, req, reqEp, reqPastYear] = await Promise.all([
+  const [reqPop, req, reqEp, reqPastYear, reqClient] = await Promise.all([
     fetch(
       `${process.env.NEXT_PUBLIC_API}advanced-search?status=NOT_YET_RELEASED`
     ),
     fetch(`${process.env.NEXT_PUBLIC_API}trending?perPage=10`),
     fetch(`${process.env.NEXT_PUBLIC_API}recent-episodes?perPage=10`),
     fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?year=2020&perPage=8`),
+    client.fetch(`*[_type == "promo" ]{allPromo}[0]`),
   ]);
 
   const res = await req.json();
@@ -84,6 +102,8 @@ export const getStaticProps = async () => {
   //
   const resPop = await reqPop.json();
   const popularData = await resPop.results;
+  const resDown = await reqClient;
+  console.log(reqClient);
   //
 
   return {
@@ -92,6 +112,7 @@ export const getStaticProps = async () => {
       dataEp,
       dataPastYear,
       popularData,
+      dData: resDown,
     },
     revalidate: 10000,
   };

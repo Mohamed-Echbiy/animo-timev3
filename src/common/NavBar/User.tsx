@@ -51,7 +51,7 @@ function User() {
     router.push("/");
   };
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <>
