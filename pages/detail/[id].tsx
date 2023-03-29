@@ -75,7 +75,7 @@ export const getStaticPaths = async () => {
   // const resPop3 = await reqPop3.json();
 
   //...resPop2.results, ...resPop3.results
-  const slliceData = resPop2.results;
+  const slliceData = resPop2.results.slice(40);
   const data = [...resPop.results, ...slliceData];
   const paths = data.map((animeId: { id: string }) => {
     return { params: { id: animeId.id } };

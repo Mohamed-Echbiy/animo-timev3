@@ -58,9 +58,12 @@ export const getStaticProps = async ({
   params: { page: string };
 }) => {
   const req = await fetch(
-    `https://api.consumet.org/meta/anilist/advanced-search?perPage=10&format=MOVIE&page=${params.page}`
+    `${process.env.NEXT_PUBLIC_API_V3}advanced-search?perPage=10&format=MOVIE&page=${params.page}`
   );
+  console.log(req.status, req.statusText);
+
   const data = await req.json();
+  console.log(data.results.length);
   return {
     props: {
       data,
