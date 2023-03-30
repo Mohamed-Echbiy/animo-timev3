@@ -1,10 +1,11 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { animeDetail } from "../../../types/animeDetail";
 import { m, LazyMotion, domAnimation, AnimatePresence } from "framer-motion";
 import { PlayIcon } from "../../common/Icons";
 import Link from "next/link";
 import ImageLoader from "../../common/ImageLoader";
+import { userContext } from "../../../pages/_app";
 
 function Hero({ data }: { data: animeDetail }) {
   const title = data.title?.userPreferred
@@ -13,32 +14,12 @@ function Hero({ data }: { data: animeDetail }) {
     ? data.title?.romaji
     : data.title?.english;
 
-  const [isModal, setIsModal] = useState(false);
+  const { setModal } = useContext(userContext);
   const [imgLoad, setImgLoad] = useState(false);
   const [imgLoadSmall, setImgLoadSmall] = useState(false);
 
   return (
     <>
-      <AnimatePresence>
-        {isModal && (
-          <LazyMotion features={domAnimation}>
-            <m.div
-              initial={{ scale: 0, y: 0 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ y: "100vh" }}
-              className="modal_text absolute top-0 left-0 w-full h-screen justify-center items-center z-50 hidden sm:flex"
-            >
-              <div
-                className="backdrop top-0 w-full left-0 h-full absolute cursor-pointer bg-slate-200 opacity-20"
-                onClick={() => setIsModal(false)}
-              ></div>
-              <div className="box_text text-sm md:text-base bg-black text-white rounded-t p-8 max-w-3xl z-50">
-                {data.description}
-              </div>
-            </m.div>
-          </LazyMotion>
-        )}
-      </AnimatePresence>
       <main className="hero_section relative w-full sm:aspect-[9/6.3] mt-10 md:aspect-[9/5.5] lg:aspect-[9/4] rounded-lg p-6 mb-10">
         <Image
           src={data.cover || data.image}
@@ -186,7 +167,7 @@ function Hero({ data }: { data: animeDetail }) {
                 <span className="hidden sm:inline ">...</span>
                 <span
                   className=" text-secondary-700 font-bold cursor-pointer hidden sm:inline"
-                  onClick={() => setIsModal(true)}
+                  onClick={() => setModal(data.description)}
                 >
                   more
                 </span>
