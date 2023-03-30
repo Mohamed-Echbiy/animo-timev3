@@ -30,10 +30,9 @@ function DownloadEpContainer({ data }: { data: downloadLinks[] }) {
           }}
           slidesPerView={1}
           grabCursor={true}
-          spaceBetween={5}
+          spaceBetween={10}
           navigation={true}
-          // autoplay={true}
-          centeredSlides
+          autoplay={true}
         >
           {data.map((e, i: number) => (
             <SwiperSlide
