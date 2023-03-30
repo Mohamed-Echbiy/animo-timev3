@@ -34,12 +34,20 @@ function TabSwitcher({ data }: { data: animeDetail }) {
           recommanded
         </p>
         <p
-          onClick={() => setShow("realted")}
+          onClick={() => setShow("related")}
           className={` cursor-pointer ${
-            show === "realted" && "text-secondary-600 font-semibold"
+            show === "related" && "text-secondary-600 font-semibold"
           }`}
         >
           related
+        </p>
+        <p
+          onClick={() => setShow("reviews")}
+          className={` cursor-pointer ${
+            show === "reviews" && "text-secondary-600 font-semibold"
+          }`}
+        >
+          reviews
         </p>
       </div>
       <Section data={data} show={show} />

@@ -38,6 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [isSearchModel, setSearchModel] = useState<Boolean>(false);
   const [isSpinner, setSpinner] = useState<Boolean>(false);
   const [isToast, setToast] = useState<Boolean>(false);
+  const [modal, setModal] = useState<String>("");
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -51,15 +52,30 @@ function MyApp({ Component, pageProps }: AppProps) {
           isSpinner,
           isToast,
           setToast,
+          setModal,
+          modal,
         }}
       >
         <ThemeProvider attribute="class">
-          <main className=" bg-slate-200 dark:bg-black">
+          <main className=" bg-slate-200 dark:bg-black relative">
             <LoadingLink />
             <Spinner />
             <SearchModel />
             <Toast />
             <Component {...pageProps} />
+            {!!modal ? (
+              <div className="top-0 left-0 fixed z-[100] w-screen h-screen flex items-center justify-center p-4 ">
+                <div
+                  className="top-0 left-0 absolute w-full h-full bg-black opacity-70 cursor-pointer"
+                  onClick={() => setModal("")}
+                ></div>
+                <div className="min-w-[260px] md:min-w-[320px] lg:min-w-[700px] w-2/3 max-h-[700px] overflow-y-scroll z-[239023] bg-black text-white">
+                  <p className="px-8 py-12 ">{modal}</p>
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
             <Footer />
           </main>
         </ThemeProvider>

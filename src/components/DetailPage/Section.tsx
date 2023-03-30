@@ -1,10 +1,7 @@
 import dynamic from "next/dynamic";
 import React from "react";
 import { animeDetail } from "../../../types/animeDetail";
-// import Character from "./Character";
-// import Episodes from "./Episodes";
-// import Recommended from "./Recommended";
-// import SidebarRealted from "./SidebarRealted";
+import Reviews from "./reviews/Reviews";
 const Character = dynamic(() => import("./Character"));
 const Episodes = dynamic(() => import("./Episodes"));
 const Recommended = dynamic(() => import("./Recommended"));
@@ -20,8 +17,10 @@ function Section({ show, data }: { show: string; data: animeDetail }) {
           <Recommended data={data} />
         ) : show === "characters" ? (
           <Character data={data} />
-        ) : (
+        ) : show === "related" ? (
           <SidebarRealted data={data} />
+        ) : (
+          <Reviews malId={data.malId} />
         )}
       </section>
     </>
