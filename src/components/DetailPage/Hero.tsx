@@ -173,36 +173,16 @@ function Hero({ data }: { data: animeDetail }) {
                 </span>
               </p>
             </div>
-            {data.episodes?.length ? (
-              <div className="flex items-center gap-2 flex-wrap mt-5 mb-7 md:mb-0">
-                <Link
-                  href={`/watch/${data?.episodes[0]?.id}?animeData=${data.currentEpisode}&ids=${data.id}&title=${title}`}
-                  className="    rounded-sm flex max-w-fit px-2 py-1 gap-2 border border-solid md:border-white items-center"
-                >
-                  <span>watch </span>
-                  <span className="h-5 w-5">
-                    <PlayIcon />
-                  </span>
-                </Link>
-
-                {data.nextAiringEpisode && (
-                  <div className=" rounded-sm flex max-w-fit px-2 py-1 gap-2 border border-solid md:border-white items-center uppercase ">
-                    <span>next ep in </span>
-                    {data.status === "Ongoing" ? (
-                      Math.floor(
-                        data.nextAiringEpisode?.timeUntilAiring / 86000
-                      )
-                    ) : (
-                      <></>
-                    )}
-                    <span> days</span>
-                  </div>
+            {data.nextAiringEpisode && (
+              <div className=" rounded-sm flex max-w-fit px-2 py-1 gap-2 border border-solid md:border-white items-center uppercase ">
+                <span>next ep in </span>
+                {data.status === "Ongoing" ? (
+                  Math.floor(data.nextAiringEpisode?.timeUntilAiring / 86000)
+                ) : (
+                  <></>
                 )}
+                <span> days</span>
               </div>
-            ) : (
-              <p className="text-secondary-700 font-bold capitalize p-2 bg-slate-200 w-fit mt-4 rounded-sm">
-                there is no episode available
-              </p>
             )}
           </div>
         </div>
