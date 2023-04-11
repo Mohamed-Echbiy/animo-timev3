@@ -2,7 +2,6 @@
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import Script from "next/script";
 import React from "react";
 //
 
