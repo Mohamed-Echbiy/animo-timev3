@@ -11,19 +11,19 @@ function page({
 }) {
   console.log(data.currentPage, data);
   return (
-    <div className="min-h-screen bg-slate-200 dark:bg-black">
+    <div className='min-h-screen bg-slate-200 dark:bg-black'>
       <Head>
         <title>Top Movies on Animotime</title>
         <meta
-          name="description"
+          name='description'
           content="Discover the latest and greatest anime movies on Animotime. From action-packed adventures to heartwarming dramas, we've got it all. Watch the top movies with both Arabic and English subtitles and immerse yourself in the world of anime."
         />
         <meta
-          name="keywords"
-          content="anime movies, top anime movies, Arabic subtitles, English subtitles, action anime movies, drama anime movies"
+          name='keywords'
+          content='anime movies, top anime movies, Arabic subtitles, English subtitles, action anime movies, drama anime movies'
         />
       </Head>
-      <main className="max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative py-2">
+      <main className='max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative py-2'>
         <Navbar />
         <TopMovies
           data={data.results}
@@ -45,9 +45,6 @@ export const getStaticPaths = async () => {
     { params: { page: "5" } },
     { params: { page: "6" } },
     { params: { page: "7" } },
-    { params: { page: "8" } },
-    { params: { page: "9" } },
-    { params: { page: "10" } },
   ];
   return { paths, fallback: "blocking" };
 };
