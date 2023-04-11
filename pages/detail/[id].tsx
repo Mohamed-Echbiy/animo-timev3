@@ -65,10 +65,10 @@ export const getStaticPaths = async () => {
   }, 10000);
   const [reqPop, reqPop2] = await Promise.all([
     fetch(
-      `${process.env.NEXT_PUBLIC_API_V3}advanced-search?perPage=100&format=TV`
+      `${process.env.NEXT_PUBLIC_API_V3}advanced-search?perPage=35&format=TV`
     ),
     fetch(
-      `${process.env.NEXT_PUBLIC_API_V2}advanced-search?perPage=100&page=2&format=TV`
+      `${process.env.NEXT_PUBLIC_API_V2}advanced-search?perPage=35&page=2&format=TV`
     ),
     // fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=100&page=3`),
   ]);
@@ -78,7 +78,7 @@ export const getStaticPaths = async () => {
   // const resPop3 = await reqPop3.json();
 
   //...resPop2.results, ...resPop3.results
-  const slliceData = resPop2?.results?.slice(40);
+  const slliceData = resPop2?.results;
   const result = resPop.results;
   console.log(result, slliceData);
   const data = [...result, ...slliceData];
