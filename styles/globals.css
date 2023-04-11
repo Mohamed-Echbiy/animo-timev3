@@ -19,7 +19,10 @@
   }
 }
 .inputSugss input {
+  padding: 4px;
+  border-radius: 2px;
   background-color: #fff !important;
+  color: black;
 }
 .Swiper-Container .swiper-button-next,
 .Swiper-Container .swiper-button-prev {

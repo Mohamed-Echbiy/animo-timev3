@@ -23,26 +23,26 @@ function index({ data }: { data: animeDetail }) {
   const synonyms: string = !!data?.synonyms ? data.synonyms.join(",") : title;
 
   return (
-    <div className=" min-h-screen bg-slate-200 dark:bg-black">
+    <div className=' min-h-screen bg-slate-200 dark:bg-black'>
       <Head>
         <title>{(title || "Animotime") + ` Animotime`}</title>
         <meta
-          name="description"
+          name='description'
           content={`watch ${title} with Arabic and English subtitles: Catch up on ${title} on Animotime. Follow the characters, as they continue their journey in this epic anime. Discover recommended anime to watch and join our anime community to share your thoughts on ${title}.`}
         />
         <meta
-          name="keywords"
+          name='keywords'
           content={
             synonyms +
             ` watch ${title} , animotime ${title}, discuss ${title} on animotime`
           }
         />
       </Head>
-      <main className="max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative overflow-hidden min-h-screen">
+      <main className='max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative overflow-hidden min-h-screen'>
         <Navbar />
         <LazyMotion features={domAnimation}>
           <m.main
-            className=" heroSection pt-[220px] md:pt-[178px] gap-2 flex-wrap flex items-center justify-center md:justify-start"
+            className=' heroSection pt-[220px] md:pt-[208px] gap-2 flex-wrap flex items-center justify-center md:justify-start'
             initial={{ opacity: 0, x: "-100wv" }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
+import Loading from "../../../common/Loading";
 import ReviewCard from "./ReviewCard";
 
 export interface reviewDetail {
@@ -33,11 +34,11 @@ function Reviews({ malId }: { malId: number }) {
   const { data, isLoading } = useQuery(["fetchReviews", malId], fetchReviews);
 
   if (isLoading) {
-    return <></>;
+    return <Loading />;
   }
   console.log(data);
   return (
-    <section className="flex flex-wrap items-center gap-2 gap-y-4 mt-12">
+    <section className='flex flex-wrap items-center gap-2 gap-y-4 mt-12'>
       {data.map((e: reviewDetail) => {
         if (e.type === "anime") {
           return <ReviewCard data={e} key={e.is_preliminary + e.review} />;

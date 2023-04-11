@@ -1,3 +1,9 @@
 {
-  "cSpell.words": ["favourite", "tailwindcss"]
+  "cSpell.words": ["favourite", "tailwindcss"],
+  "files.watcherExclude": {
+    "**/animotime-content/**": true,
+    "**/firebase/**": true,
+    "**/lib/**": true,
+    "**/src/functions/**": true
+  }
 }

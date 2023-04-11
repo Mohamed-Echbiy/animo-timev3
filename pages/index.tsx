@@ -48,25 +48,25 @@ const Home = ({
   const { allPromo } = dData;
   // console.log(allPromo, "bananaannanananan");
   return (
-    <div className=" min-h-screen bg-slate-200 dark:bg-black ">
+    <div className=' min-h-screen bg-slate-200 dark:bg-black '>
       <Head>
         <title>AnimoTime - watch anime episodes</title>
-        <link rel="icon" href="./logo.png" />
+        <link rel='icon' href='./logo.png' />
         <meta
-          name="description"
+          name='description'
           content="Welcome to Animotime, your go-to destination for the latest anime content. Explore our vast library of anime with English subtitles. From classic shows to the hottest new releases, we've got you covered. Watch your favorite episodes and connect with other anime fans from around the world. Start your anime journey today with Animotime."
         />
         <meta
-          name="keywords"
-          content="anime, Animotime, anime website, watch anime, free anime watching website ,anime episodes, 9 anime , gogo anime ,anime community, anime fans, naruto , one piece , pokemon ,anime streaming, classic anime, new anime releases, anime library, popular anime, animotime"
+          name='keywords'
+          content='anime, Animotime, anime website, watch anime, free anime watching website ,anime episodes, 9 anime , gogo anime ,anime community, anime fans, naruto , one piece , pokemon ,anime streaming, classic anime, new anime releases, anime library, popular anime, animotime'
         />
-        <meta name="robots" content="all" />
+        <meta name='robots' content='all' />
         <meta
-          name="a.validate.02"
-          content="IubGGNc1SxteGPGOOPOdFAmGP81l4iAgqeZF"
+          name='a.validate.02'
+          content='IubGGNc1SxteGPGOOPOdFAmGP81l4iAgqeZF'
         />
       </Head>
-      <main className=" max-w-8xl m-auto  px-2 md:px-5 lg:px-7 xl:px-9 relative">
+      <main className=' max-w-8xl m-auto  px-2 md:px-5 lg:px-7 xl:px-9 relative'>
         <Navbar />
         <HeroSection data={data} />
         <Upcoming data={popularData} />
@@ -114,6 +114,6 @@ export const getStaticProps = async () => {
       popularData,
       dData: resDown,
     },
-    revalidate: 10000,
+    revalidate: 5000,
   };
 };
