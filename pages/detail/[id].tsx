@@ -60,9 +60,7 @@ export default index;
 
 export const getStaticPaths = async () => {
   //reqPop2, reqPop3
-  setTimeout(() => {
-    console.log("wait");
-  }, 10000);
+
   const [reqPop, reqPop2] = await Promise.all([
     fetch(
       `${process.env.NEXT_PUBLIC_API_V3}advanced-search?perPage=35&format=TV`
@@ -82,9 +80,7 @@ export const getStaticPaths = async () => {
   const result = resPop.results;
   console.log(result, slliceData);
   const data = [...result, ...slliceData];
-  setTimeout(() => {
-    console.log("wait");
-  }, 10000);
+
   const paths = data.map((animeId: { id: string }) => {
     return { params: { id: animeId.id } };
   });
