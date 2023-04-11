@@ -3,7 +3,6 @@ import React from "react";
 
 function DarkModeSwitcher() {
   const { systemTheme, theme, setTheme } = useTheme();
-  const currentTheme = theme === "system" ? systemTheme : theme;
 
   return (
     <>

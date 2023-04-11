@@ -50,7 +50,7 @@ function Card({ data }: { data: trending | anime | relations }) {
           priority={true}
           quality={20}
           onLoad={() => setImageLoad(true)}
-          className='hover:scale-110 rotate-1 transition-transform duration-500 ease-linear'
+          className='hover:scale-110 hover:rotate-2 transition-transform duration-500 ease-linear'
         />
         {!imgLoad ? <ImageLoader /> : <></>}
       </Link>
