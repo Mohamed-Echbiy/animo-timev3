@@ -21,7 +21,7 @@ function FavoriteCard({ data }: { data: favorite }) {
       {show && (
         <div className='flex-grow min-w-[150px] w-1/4 md:w-1/5 sm:flex-grow max-w-[204px] md:max-w-[242px] lg:max-w-[261px] xl:max-w-[356px]'>
           <div
-            className={`relative group min-w-[150px]  aspect-[.7] overflow-hidden rounded-xl text-xs lg:text-sm text-white shadow-primary shadow-gray-500`}
+            className={`relative group min-w-[150px]  aspect-[.7] overflow-hidden rounded-xl text-xs lg:text-sm text-white shadow-primary shadow-gray-500 dark:shadow-none`}
           >
             <Link href={`/detail/${data.id}`} title={`${title}`}>
               <Image

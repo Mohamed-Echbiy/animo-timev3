@@ -6,10 +6,7 @@ import { recent_episodes } from "../types/recent_episodes";
 import { trending } from "../types/trending";
 import dynamic from "next/dynamic";
 import { client } from "../lib/client";
-import DownloadEpContainer from "../src/components/Home/DownloadEp/DownloadEpContainer";
 import { downloadLinks } from "../types/downloadData";
-import Breadcrumbs from "../src/common/BreadcrumbsContainer";
-import BreadcrumbsContainer from "../src/common/BreadcrumbsContainer";
 
 // import PastYear from "../src/components/Home/PastYear/PastYear";
 
@@ -23,6 +20,9 @@ const Upcoming = dynamic(
 );
 const PastYear = dynamic(
   () => import("../src/components/Home/PastYear/PastYear")
+);
+const DownloadEpContainer = dynamic(
+  () => import("../src/components/Home/DownloadEp/DownloadEpContainer")
 );
 const Home = ({
   data,
