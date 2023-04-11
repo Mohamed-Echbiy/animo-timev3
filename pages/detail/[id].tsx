@@ -79,7 +79,9 @@ export const getStaticPaths = async () => {
 
   //...resPop2.results, ...resPop3.results
   const slliceData = resPop2?.results?.slice(40);
-  const data = [...resPop.results, ...slliceData];
+  const result = resPop.results;
+  console.log(result, slliceData);
+  const data = [...result, ...slliceData];
   setTimeout(() => {
     console.log("wait");
   }, 10000);
