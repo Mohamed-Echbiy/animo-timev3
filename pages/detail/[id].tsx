@@ -62,11 +62,9 @@ export const getStaticPaths = async () => {
   //reqPop2, reqPop3
 
   const [reqPop, reqPop2] = await Promise.all([
+    fetch(`${process.env.NEXT_PUBLIC_API}advanced-search?perPage=35&format=TV`),
     fetch(
-      `${process.env.NEXT_PUBLIC_API_V3}advanced-search?perPage=35&format=TV`
-    ),
-    fetch(
-      `${process.env.NEXT_PUBLIC_API_V2}advanced-search?perPage=35&page=2&format=TV`
+      `${process.env.NEXT_PUBLIC_API}advanced-search?perPage=35&page=2&format=TV`
     ),
     // fetch(`${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=100&page=3`),
   ]);
