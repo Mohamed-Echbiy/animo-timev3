@@ -43,7 +43,7 @@ export default index;
 export const getStaticProps = async () => {
   const [req] = await Promise.all([
     fetch(
-      `${process.env.NEXT_PUBLIC_API_V3}advanced-search?perPage=20&format=MOVIE&sort=["SCORE_DESC"]`
+      `${process.env.NEXT_PUBLIC_API_V}advanced-search?perPage=20&format=MOVIE&sort=["SCORE_DESC"]`
     ),
   ]);
   const data = await req.json();
