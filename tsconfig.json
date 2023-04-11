@@ -19,7 +19,9 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/common/DarkModeSwitcher.tsx"
+    "src/common/DarkModeSwitcher.tsx",
+    "animotime-content/sanity.config.js",
+    "animotime-content/sanity.cli.js"
   ],
   "exclude": ["node_modules"]
 }

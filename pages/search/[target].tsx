@@ -42,7 +42,7 @@ export const getServerSideProps = async (context: {
   const searchedFor: string = params.target;
   console.log(searchedFor);
   const req = await fetch(
-    `${process.env.NEXT_PUBLIC_API_V}advanced-search?query=${searchedFor}&perPage=10`
+    `https://api.consumet.org/meta/anilist/advanced-search?query="${searchedFor}"&perPage=10`
   );
   const data = await req.json();
 
