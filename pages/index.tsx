@@ -8,9 +8,6 @@ import dynamic from "next/dynamic";
 import { client } from "../lib/client";
 import { downloadLinks } from "../types/downloadData";
 
-// import PastYear from "../src/components/Home/PastYear/PastYear";
-
-// import Upcoming from "../src/components/Home/Upcoming/Upcoming";
 const RecentEpisodes = dynamic(
   () => import("../src/components/Home/recentEpisodes/RecentEpisodes")
 );

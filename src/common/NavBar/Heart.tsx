@@ -107,7 +107,8 @@ function Heart({ data, setShow }: data) {
     }
     if (!isItFill) {
       setSpinner(true);
-      await addToFavorites(info);
+      addToFavorites(info);
+
       if (pathname === "/favorites/[id]") {
         setShow ? setShow(false) : null;
       } else {

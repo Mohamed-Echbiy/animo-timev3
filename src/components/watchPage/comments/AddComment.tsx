@@ -45,27 +45,27 @@ function AddComment({ animeEpId }: { animeEpId: string }) {
   return (
     <>
       {user ? (
-        <div className="flex  items-center justify-center shadow-lg  mb-4 max-w-lg">
-          <div className="w-full bg-white dark:bg-gray-900 rounded-lg px-4 pt-6 pb-4">
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <h2 className="px-4 pt-3 pb-2 text-gray-800 dark:text-slate-200 shadow-sm shadow-gray-300 dark:shadow-black text-lg">
+        <div className='flex  items-center justify-center shadow-lg  mb-4 max-w-lg'>
+          <div className='w-full bg-white dark:bg-gray-900 rounded-lg px-4 pt-6 pb-4'>
+            <div className='flex flex-wrap -mx-3 mb-6'>
+              <h2 className='px-4 pt-3 pb-2 text-gray-800 dark:text-slate-200 shadow-sm shadow-gray-300 dark:shadow-black text-lg'>
                 Add a new comment
               </h2>
-              <div className="w-full md:w-full px-3 mb-2 mt-2">
+              <div className='w-full md:w-full px-3 mb-2 mt-2'>
                 <textarea
-                  className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none "
-                  name="body"
-                  placeholder="Type Your Comment"
+                  className='bg-gray-100 dark:text-black rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none '
+                  name='body'
+                  placeholder='Type Your Comment'
                   required
                   onChange={(e) => setComment(e.target.value)}
                 />
               </div>
             </div>
-            <div className="w-full  flex items-start  px-3">
-              <div className="w-full justify-end flex">
+            <div className='w-full  flex items-start  px-3'>
+              <div className='w-full justify-end flex'>
                 <button
                   onClick={handelSubmit}
-                  className="bg-blue-500 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-blue-800 hover:rotate-1 mb-2 cursor-pointer"
+                  className='bg-blue-500 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-blue-800 hover:rotate-1 mb-2 cursor-pointer'
                 >
                   post comment
                 </button>

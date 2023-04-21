@@ -48,7 +48,7 @@ function User() {
     await auth.signOut();
     localStorage.clear();
     setIsUserIn(false);
-    router.push("/");
+    window.location.reload();
   };
 
   // console.log(user);
@@ -56,52 +56,52 @@ function User() {
   return (
     <>
       {userIn ? (
-        <div className="user flex items-center justify-center gap-4 p-2  bg-white dark:bg-gray-900 rounded-md relative">
-          <div className="user_avatar cursor-pointer text-primary-700 dark:text-primary-400 text-xs flex items-center h-full">
+        <div className='user flex items-center justify-center gap-4 p-2  bg-white dark:bg-gray-900 rounded-md relative'>
+          <div className='user_avatar cursor-pointer text-primary-700 dark:text-primary-400 text-xs flex items-center h-full'>
             <AvatarIcon />
           </div>
           <div
-            className="user_name cursor-pointer "
+            className='user_name cursor-pointer '
             onClick={() => setBar((pre) => !pre)}
           >
             {user ? user.name : "anonymous"}
           </div>
           <div
-            className="icon cursor-pointer  hover:text-secondary-700"
+            className='icon cursor-pointer  hover:text-secondary-700'
             onClick={() => setBar((pre) => !pre)}
           >
             {isBarOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
           </div>
           {isBarOpen && (
-            <div className=" dark:bg-black setting absolute z-50 bottom-[0%] translate-y-full py-3 px-2 left-0 w-full text-center flex flex-col gap-3 rounded items-start justify-center ">
+            <div className=' dark:bg-black setting absolute z-50 bottom-[0%] translate-y-full py-3 px-2 left-0 w-full text-center flex flex-col gap-3 rounded items-start justify-center '>
               <Link
                 href={`/favorites/${user.id}`}
-                className="mt-2 flex items-center gap-2"
+                className='mt-2 flex items-center gap-2'
               >
-                <span className="h-5 w-5">
+                <span className='h-5 w-5'>
                   <HeartIcon />
                 </span>
                 <span>My favourite</span>
               </Link>
-              <li className="flex items-center gap-2">
+              {/* <li className="flex items-center gap-2">
                 <span className="h-5 w-5">
                   <SettingIcon />
                 </span>
                 <span>Setting</span>
-              </li>
-              <li className="flex items-center gap-2 justify-center">
-                <span className=" block h-5 w-5">
+              </li> */}
+              <li className='flex items-center gap-2 justify-center'>
+                <span className=' block h-5 w-5'>
                   <GetHelpIcon />
                 </span>
                 <span>
-                  <Link href="/help">Help</Link>
+                  <Link href='/help'>Help</Link>
                 </span>
               </li>
               <li
-                className="signOut flex items-center gap-2 justify-center cursor-pointer"
+                className='signOut flex items-center gap-2 justify-center cursor-pointer'
                 onClick={signOut}
               >
-                <span className="block h-5 w-5">
+                <span className='block h-5 w-5'>
                   <SignOutIcon />
                 </span>
                 <span>SignOut</span>
@@ -111,10 +111,10 @@ function User() {
         </div>
       ) : (
         <button
-          className="signIn py-2 px-4 rounded-lg bg-primary-500 dark:bg-primary-300 flex items-center gap-2"
+          className='signIn py-2 px-4 rounded-lg bg-primary-500 dark:bg-primary-300 dark:text-black flex items-center gap-2'
           onClick={signIn}
         >
-          <span className="block h-5 w-5">
+          <span className='block h-5 w-5'>
             <SignInIcon />
           </span>
           <span>SignIn</span>
