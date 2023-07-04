@@ -26,9 +26,9 @@ function page({
       <main className='max-w-8xl m-auto px-2 md:px-5 lg:px-7 xl:px-9 relative py-2'>
         <Navbar />
         <TopMovies
-          data={data.results}
-          currentPage={data.currentPage}
-          hasNextPage={data.hasNextPage}
+          data={data?.results}
+          currentPage={data?.currentPage}
+          hasNextPage={data?.hasNextPage}
         />
       </main>
     </div>
