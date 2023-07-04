@@ -80,7 +80,7 @@ export default Home;
 export const getStaticProps = async () => {
   const [reqPop, req, reqEp, reqPastYear, reqClient] = await Promise.all([
     fetch(
-      `${process.env.NEXT_PUBLIC_API}advanced-search?status=NOT_YET_RELEASED`
+      `${process.env.NEXT_PUBLIC_API_V2}advanced-search?status=NOT_YET_RELEASED`
     ),
     fetch(`${process.env.NEXT_PUBLIC_API}trending?perPage=10`),
     fetch(`${process.env.NEXT_PUBLIC_API}recent-episodes?perPage=10`),
